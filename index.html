@@ -33,23 +33,15 @@
 </head>
 <body class="bg-obsidian text-travertine font-sans antialiased selection:bg-bronze selection:text-obsidian flex flex-col min-h-screen">
 
-    <!-- TOP BAR COM DADOS DE APIS EM TEMPO REAL (CLIMA SAJ & COTAÇÕES) -->
-    <aside aria-label="Informações do portal" class="bg-card border-b border-white/5 py-2 px-6 text-xs text-white/60 flex flex-wrap gap-2 justify-between items-center">
+    <!-- TOP BAR -->
+    <aside aria-label="Informações do portal" class="bg-card border-b border-white/5 py-2 px-6 text-xs text-white/60 flex justify-between items-center">
         <div class="flex items-center space-x-4">
             <span class="flex items-center space-x-1.5">
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span>Plataforma WebXR Oficial</span>
+                <span>Portal Imobiliário Imersivo</span>
             </span>
-            <!-- Widget Clima SAJ (API Open-Meteo) -->
-            <span class="text-white/20">|</span>
-            <span id="weather-widget" class="flex items-center space-x-1 text-white/80 font-medium">
-                <span>🌤️ SAJ: Carregando clima...</span>
-            </span>
-            <!-- Widget Cotação Moedas (API AwesomeAPI) -->
-            <span class="hidden lg:inline text-white/20">|</span>
-            <span id="currency-widget" class="hidden lg:flex items-center space-x-2 text-white/70">
-                <span>Câmbio: USD/BRL ...</span>
-            </span>
+            <span class="text-white/20">•</span>
+            <span>Santo Antônio de Jesus - Bahia</span>
         </div>
         <div class="flex items-center space-x-4">
             <span>Plantão VIP: <strong class="text-white/80">(75) 99812-4500</strong></span>
@@ -207,29 +199,10 @@
         </div>
     </footer>
 
-    <!-- Dados Globais e Integrações de APIs -->
     <script src="assets/data.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            // 1. Carregar Clima ao Vivo de SAJ (API Open-Meteo)
-            try {
-                const weather = await fetchSAJWeather();
-                document.getElementById('weather-widget').innerHTML = `
-                    <span>☀️ SAJ Agora: <strong>${weather.temperature.toFixed(1)}°C</strong> • Vento: ${weather.windspeed} km/h</span>
-                `;
-            } catch(e){}
-
-            // 2. Carregar Cotações de Moedas ao Vivo (AwesomeAPI)
-            try {
-                const cur = await fetchCurrencies();
-                document.getElementById('currency-widget').innerHTML = `
-                    <span>USD: <strong>R$ ${cur.usd.toFixed(2)}</strong></span>
-                    <span class="text-white/20">•</span>
-                    <span>EUR: <strong>R$ ${cur.eur.toFixed(2)}</strong></span>
-                `;
-            } catch(e){}
-
-            // 3. Renderizar Imóveis
+        document.addEventListener('DOMContentLoaded', () => {
+            // Renderizar Imóveis
             const grid = document.getElementById('home-properties-grid');
             const props = getProperties();
 
