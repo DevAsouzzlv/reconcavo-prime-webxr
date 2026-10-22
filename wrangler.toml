@@ -1,7 +1,5 @@
 name = "reconcavo-prime-webxr"
-main = "worker.js"
 compatibility_date = "2024-04-01"
 
-[site]
-bucket = "."
-include = ["*.html", "assets/**"]
+# Cloudflare Workers Static Assets (Novo formato nativo)
+assets = { directory = "." }
