@@ -254,17 +254,26 @@ const defaultProperties = [
     }
 ];
 
-// Gerenciamento LocalStorage
+// Gerenciamento LocalStorage com Resiliência de Cota
 function getProperties() {
     const saved = localStorage.getItem('reconcavo_properties');
     if (saved) {
-        try { return JSON.parse(saved); } catch(e) {}
+        try { return JSON.parse(saved); } catch(e) { console.error('Erro ao ler propriedades:', e); }
     }
     return defaultProperties;
 }
 
 function saveProperties(props) {
-    localStorage.setItem('reconcavo_properties', JSON.stringify(props));
+    try {
+        localStorage.setItem('reconcavo_properties', JSON.stringify(props));
+        return true;
+    } catch (e) {
+        console.error('Erro de persistência no LocalStorage:', e);
+        if (typeof showToast === 'function') {
+            showToast('⚠️ Limite de armazenamento local excedido. Não foi possível persistir.', 'warning');
+        }
+        return false;
+    }
 }
 
 function getPropertyById(id) {
@@ -274,14 +283,26 @@ function getPropertyById(id) {
 
 function generateWhatsAppUrl(property, customMsg) {
     const phone = property?.broker?.phone || '5575998124500';
-    const text = customMsg || `Olá ${property.broker.name}! Gostaria de agendar uma visita presencial exclusiva na *${property.title}* (${property.price}) em Santo Antônio de Jesus, que conheci através do Tour Virtual 360º.`;
+    const text = customMsg || `Olá ${property?.broker?.name || 'Corretor'}! Gostaria de agendar uma visita presencial exclusiva na *${property?.title || 'Propriedade'}* (${property?.price || ''}) em Santo Antônio de Jesus, que conheci através do Tour Virtual 360º.`;
     return `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
 }
 
+// Resiliência de Rede: Geocodificação OpenStreetMap Nominatim com Timeout & AbortController
 async function geocodeSAJAddress(address) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 6000);
+
     try {
         const query = encodeURIComponent(`${address}, Santo Antônio de Jesus, Bahia, Brasil`);
-        const resp = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${query}&limit=1`);
+        const resp = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${query}&limit=1`, {
+            signal: controller.signal,
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+        clearTimeout(timeoutId);
+
+        if (!resp.ok) throw new Error(`HTTP error ${resp.status}`);
         const data = await resp.json();
         if (data && data.length > 0) {
             return {
@@ -291,20 +312,34 @@ async function geocodeSAJAddress(address) {
             };
         }
     } catch (e) {
-        console.warn('Erro no geocoding:', e);
+        clearTimeout(timeoutId);
+        console.warn('Geocodificação Nominatim falhou ou sofreu timeout:', e);
     }
-    return null;
+    // Fallback gracioso: Centro de Santo Antônio de Jesus
+    return {
+        lat: -12.9700,
+        lng: -39.2620,
+        isFallback: true
+    };
 }
 
+// Resiliência de Rede: ViaCEP com Validação e Timeout
 async function fetchViaCEP(cep) {
+    if (!cep) return null;
     const cleanCEP = cep.replace(/\D/g, '');
     if (cleanCEP.length !== 8) return null;
+
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
+
     try {
-        const resp = await fetch(`https://viacep.com.br/ws/${cleanCEP}/json/`);
+        const resp = await fetch(`https://viacep.com.br/ws/${cleanCEP}/json/`, { signal: controller.signal });
+        clearTimeout(timeoutId);
         const data = await resp.json();
         if (!data.erro) return data;
     } catch (e) {
-        console.warn('Erro ViaCEP:', e);
+        clearTimeout(timeoutId);
+        console.warn('Consulta ViaCEP falhou ou sofreu timeout:', e);
     }
     return null;
 }

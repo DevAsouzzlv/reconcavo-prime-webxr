@@ -103,6 +103,13 @@
 
     <script src="assets/ui-helpers.js"></script>
     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('unauthorized') === '1') {
+                showToast('🔒 Acesso restrito! Autentique-se com seu CRECI para acessar o Broker Studio.', 'warning');
+            }
+        });
+
         function handleForgotPass() {
             showModal({
                 title: 'Recuperação de Acesso',

@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel Administrativo do Corretor — Broker Studio | Recôncavo Prime</title>
+    <!-- AUTH GUARD (OWASP A01: Broken Access Control) -->
+    <script>
+        if (sessionStorage.getItem('broker_logged') !== 'true') {
+            window.location.replace('login.html?unauthorized=1');
+        }
+    </script>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -295,12 +301,12 @@
                 item.className = 'p-3 bg-obsidian rounded-2xl border border-white/5 flex items-center justify-between text-xs';
                 item.innerHTML = `
                     <div class="pr-2">
-                        <strong class="text-white block font-medium">${p.title}</strong>
-                        <span class="text-white/40">${p.bairro} • ${p.price}</span>
+                        <strong class="text-white block font-medium">${escapeHTML(p.title)}</strong>
+                        <span class="text-white/40">${escapeHTML(p.bairro)} • ${escapeHTML(p.price)}</span>
                     </div>
                     <div class="flex space-x-1 flex-shrink-0">
-                        <a href="detalhes.html?id=${p.id}" class="px-2 py-1 bg-white/10 hover:bg-white/20 text-white rounded-lg text-[10px]">Ficha</a>
-                        <a href="tour360.html?id=${p.id}" class="px-2 py-1 bg-bronze text-obsidian font-bold rounded-lg text-[10px]">360º</a>
+                        <a href="detalhes.html?id=${encodeURIComponent(p.id)}" class="px-2 py-1 bg-white/10 hover:bg-white/20 text-white rounded-lg text-[10px]">Ficha</a>
+                        <a href="tour360.html?id=${encodeURIComponent(p.id)}" class="px-2 py-1 bg-bronze text-obsidian font-bold rounded-lg text-[10px]">360º</a>
                     </div>
                 `;
                 container.appendChild(item);
@@ -309,27 +315,35 @@
 
         function saveNewProperty(e) {
             e.preventDefault();
-            const title = document.getElementById('form-title').value;
-            const price = document.getElementById('form-price').value;
+            const rawTitle = document.getElementById('form-title').value.trim();
+            const rawPrice = document.getElementById('form-price').value.trim();
             const bairro = document.getElementById('form-bairro').value;
             const tipo = document.getElementById('form-tipo').value;
-            const area = document.getElementById('form-area').value + ' m²';
-            const suites = parseInt(document.getElementById('form-suites').value);
-            const vagas = parseInt(document.getElementById('form-vagas').value);
-            const condo = document.getElementById('form-condo').value || 'R$ 800';
-            const iptu = document.getElementById('form-iptu').value || 'R$ 2.500';
-            const desc = document.getElementById('form-desc').value || 'Residência exclusiva com acabamento de alto padrão cadastrada pelo corretor Carlos Mendes.';
+            const area = parseInt(document.getElementById('form-area').value, 10) + ' m²';
+            const suites = parseInt(document.getElementById('form-suites').value, 10);
+            const vagas = parseInt(document.getElementById('form-vagas').value, 10);
+            const condo = document.getElementById('form-condo').value.trim() || 'R$ 800';
+            const iptu = document.getElementById('form-iptu').value.trim() || 'R$ 2.500';
+            const desc = document.getElementById('form-desc').value.trim() || 'Residência exclusiva com acabamento de alto padrão cadastrada pelo corretor Carlos Mendes.';
             const lat = parseFloat(document.getElementById('form-lat').value);
             const lng = parseFloat(document.getElementById('form-lng').value);
 
+            // Correção BUG-003: Cálculo dinâmico do priceNum e formatação consistente
+            const priceCleanNum = parseInt(rawPrice.replace(/\D/g, ''), 10) || 0;
+            const formattedPrice = rawPrice.startsWith('R$') ? rawPrice : `R$ ${rawPrice}`;
+
+            // Correção BUG-002: Sanitização XSS
+            const safeTitle = escapeHTML(rawTitle);
+            const safeDesc = escapeHTML(desc);
+
             const newProp = {
                 id: 'imovel-' + Date.now(),
-                title: title,
-                price: price,
-                priceNum: 3000000,
-                condo: condo,
-                iptu: iptu,
-                bairro: bairro,
+                title: safeTitle,
+                price: formattedPrice,
+                priceNum: priceCleanNum,
+                condo: escapeHTML(condo),
+                iptu: escapeHTML(iptu),
+                bairro: escapeHTML(bairro),
                 bairroKey: bairro.toLowerCase().includes('busca') ? 'busca-vida' : (bairro.toLowerCase().includes('jardins') ? 'jardins' : (bairro.toLowerCase().includes('maria') ? 'maria-preta' : 'centro')),
                 tipo: tipo,
                 tipoLabel: tipo === 'mansao' ? 'Mansão em Condomínio' : (tipo === 'cobertura' ? 'Cobertura Duplex' : 'Casa Contemporânea'),
@@ -347,7 +361,7 @@
                     'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
                     'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80'
                 ],
-                desc: desc,
+                desc: safeDesc,
                 features: ['Acabamento de Alto Padrão', 'Área de Lazer Integrada', 'Garagem Coberta', 'Tour 360º WebXR Habilitado'],
                 broker: {
                     name: 'Carlos Eduardo Mendes',

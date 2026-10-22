@@ -81,17 +81,17 @@
         <!-- CONTROLES IMERSIVOS DE TOPO -->
         <div class="flex items-center space-x-3">
             <!-- Botão Giroscópio (Mobile) -->
-            <button id="btn-gyro" onclick="toggleGyroscope()" class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-bronze hover:text-obsidian text-white text-xs font-semibold flex items-center space-x-1.5 transition">
+            <button id="btn-gyro" onclick="toggleGyroscope()" aria-label="Ativar controle de orientação por giroscópio no celular" class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-bronze hover:text-obsidian text-white text-xs font-semibold flex items-center space-x-1.5 transition">
                 <span>🧭</span><span class="hidden sm:inline">Giroscópio Mobile</span>
             </button>
 
             <!-- Botão VR Box (Lente Dupla Estereoscópica) -->
-            <button id="btn-vr-toggle" onclick="toggleVREyeMode()" class="px-4 py-1.5 rounded-full bg-bronze hover:bg-bronze-hover text-obsidian text-xs font-bold flex items-center space-x-1.5 shadow-lg transition">
+            <button id="btn-vr-toggle" onclick="toggleVREyeMode()" aria-label="Alternar modo de lente dupla estereoscópica para óculos VR Box" class="px-4 py-1.5 rounded-full bg-bronze hover:bg-bronze-hover text-obsidian text-xs font-bold flex items-center space-x-1.5 shadow-lg transition">
                 <span>🥽</span><span>Modo VR Box (Estéreo)</span>
             </button>
 
             <!-- Contato Rápido WhatsApp -->
-            <a id="btn-header-wa" href="#" target="_blank" class="px-3 py-1.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold flex items-center space-x-1.5 transition">
+            <a id="btn-header-wa" href="#" target="_blank" aria-label="Iniciar conversa com corretor responsável via WhatsApp" class="px-3 py-1.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold flex items-center space-x-1.5 transition">
                 <span>💬</span><span class="hidden sm:inline">WhatsApp</span>
             </a>
         </div>

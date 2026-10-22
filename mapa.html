@@ -123,7 +123,7 @@
 
             <!-- Card flutuante sobreposto com pré-visualização rápida -->
             <div id="floating-preview" class="hidden absolute bottom-6 left-6 right-6 md:left-auto md:right-6 md:w-96 z-[600] bg-card/95 backdrop-blur-xl border border-bronze/40 p-4 rounded-3xl shadow-2xl transition-all duration-300">
-                <button onclick="closePreview()" class="absolute top-3 right-3 text-white/40 hover:text-white text-xs">✕</button>
+                <button onclick="closePreview()" aria-label="Fechar pré-visualização rápida" class="absolute top-3 right-3 text-white/40 hover:text-white text-xs">✕</button>
                 <div class="flex space-x-3">
                     <img id="prev-img" src="" class="w-28 h-24 rounded-2xl object-cover">
                     <div class="flex-grow flex flex-col justify-between">
@@ -146,7 +146,7 @@
         </div>
 
         <!-- BOTÃO FLUTUANTE TOGGLE MOBILE: MAPA / LISTA -->
-        <button id="mobile-toggle-btn" onclick="toggleMobileView()" class="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-5 py-3 rounded-full bg-bronze text-obsidian font-bold text-xs shadow-2xl flex items-center space-x-2 border border-white/20 active:scale-95 transition">
+        <button id="mobile-toggle-btn" onclick="toggleMobileView()" aria-label="Alternar entre lista e mapa no celular" class="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-5 py-3 rounded-full bg-bronze text-obsidian font-bold text-xs shadow-2xl flex items-center space-x-2 border border-white/20 active:scale-95 transition">
             <span id="mobile-toggle-icon">🗺️</span>
             <span id="mobile-toggle-label">Ver Mapa</span>
         </button>
@@ -240,26 +240,32 @@
             }
 
             list.forEach(p => {
+                const safeTitle = escapeHTML(p.title);
+                const safeBairro = escapeHTML(p.bairro);
+                const safePrice = escapeHTML(p.price);
+                const safeArea = escapeHTML(p.area);
+                const safeId = encodeURIComponent(p.id);
+
                 const card = document.createElement('div');
-                card.id = `card-${p.id}`;
+                card.id = `card-${safeId}`;
                 card.className = 'p-4 rounded-3xl bg-card border border-white/10 hover:border-bronze transition cursor-pointer flex gap-4';
                 card.onclick = () => focusProperty(p.id);
 
                 card.innerHTML = `
-                    <img src="${p.image}" class="w-32 h-28 object-cover rounded-2xl flex-shrink-0">
+                    <img src="${escapeHTML(p.image)}" alt="${safeTitle}" class="w-32 h-28 object-cover rounded-2xl flex-shrink-0">
                     <div class="flex flex-col justify-between flex-grow">
                         <div>
                             <div class="flex justify-between items-start">
-                                <span class="text-[10px] text-bronze uppercase tracking-wider font-semibold">${p.bairro}</span>
-                                <span class="text-xs font-bold text-white">${p.price}</span>
+                                <span class="text-[10px] text-bronze uppercase tracking-wider font-semibold">${safeBairro}</span>
+                                <span class="text-xs font-bold text-white">${safePrice}</span>
                             </div>
-                            <h4 class="font-serif text-base text-white font-bold leading-snug mt-1">${p.title}</h4>
-                            <p class="text-[11px] text-white/50 mt-1">${p.area} • ${p.suites} Suítes • ${p.vagas} Vagas</p>
+                            <h4 class="font-serif text-base text-white font-bold leading-snug mt-1">${safeTitle}</h4>
+                            <p class="text-[11px] text-white/50 mt-1">${safeArea} • ${Number(p.suites) || 0} Suítes • ${Number(p.vagas) || 0} Vagas</p>
                         </div>
                         <div class="flex space-x-2 mt-2 pt-2 border-t border-white/5">
-                            <a href="detalhes.html?id=${p.id}" class="text-xs text-white/70 hover:text-white underline">Ficha Técnica</a>
+                            <a href="detalhes.html?id=${safeId}" class="text-xs text-white/70 hover:text-white underline">Ficha Técnica</a>
                             <span class="text-white/20">|</span>
-                            <a href="tour360.html?id=${p.id}" class="text-xs text-bronze font-semibold hover:underline">🥽 Tour 360º</a>
+                            <a href="tour360.html?id=${safeId}" class="text-xs text-bronze font-semibold hover:underline">🥽 Tour 360º</a>
                         </div>
                     </div>
                 `;
@@ -272,9 +278,12 @@
             markers = [];
 
             list.forEach(p => {
+                const safePrice = escapeHTML(p.price);
+                const safeId = encodeURIComponent(p.id);
+
                 const icon = L.divIcon({
                     className: 'custom-pin-wrap',
-                    html: `<div class="custom-pin" id="pin-${p.id}">${p.price} 🥽</div>`,
+                    html: `<div class="custom-pin" id="pin-${safeId}">${safePrice} 🥽</div>`,
                     iconSize: [110, 30],
                     iconAnchor: [55, 15]
                 });
@@ -300,17 +309,18 @@
 
             // Ativar pin
             document.querySelectorAll('.custom-pin').forEach(el => el.classList.remove('active'));
-            const pinEl = document.getElementById(`pin-${p.id}`);
+            const pinEl = document.getElementById(`pin-${encodeURIComponent(p.id)}`);
             if (pinEl) pinEl.classList.add('active');
 
-            // Abrir pré-visualização flutuante
+            // Abrir pré-visualização flutuante com escape e textContent
             const prev = document.getElementById('floating-preview');
             document.getElementById('prev-img').src = p.image;
+            document.getElementById('prev-img').alt = p.title;
             document.getElementById('prev-bairro').innerText = p.bairro;
             document.getElementById('prev-title').innerText = p.title;
             document.getElementById('prev-price').innerText = p.price;
-            document.getElementById('prev-btn-dossier').href = `detalhes.html?id=${p.id}`;
-            document.getElementById('prev-btn-vr').href = `tour360.html?id=${p.id}`;
+            document.getElementById('prev-btn-dossier').href = `detalhes.html?id=${encodeURIComponent(p.id)}`;
+            document.getElementById('prev-btn-vr').href = `tour360.html?id=${encodeURIComponent(p.id)}`;
             prev.classList.remove('hidden');
         }
 

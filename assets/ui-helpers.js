@@ -1,4 +1,23 @@
-// UI Helper: Toasts e Modais elegantes (substitutos de alert() e prompt())
+// UI Helper: Toasts, Modais elegantes e Sanitização XSS (OWASP A03)
+function escapeHTML(str) {
+    if (str === null || str === undefined) return '';
+    return String(str).replace(/[&<>'"]/g, tag => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        "'": '&#39;',
+        '"': '&quot;'
+    }[tag] || tag));
+}
+window.escapeHTML = escapeHTML;
+
+// Fecha modal com a tecla ESC (WCAG 2.1 Acessibilidade)
+window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeLuxuryModal();
+    }
+});
+
 function showToast(message, type = 'success') {
     let container = document.getElementById('toast-container');
     if (!container) {
@@ -42,11 +61,14 @@ function showModal({ title, subtitle, contentHtml, onConfirm, confirmText = 'Con
 
     modalOverlay = document.createElement('div');
     modalOverlay.id = 'luxury-modal-overlay';
+    modalOverlay.setAttribute('role', 'dialog');
+    modalOverlay.setAttribute('aria-modal', 'true');
+    modalOverlay.setAttribute('aria-label', title || 'Janela de Diálogo');
     modalOverlay.className = 'fixed inset-0 z-[9999] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 opacity-0 transition-opacity duration-300';
 
     modalOverlay.innerHTML = `
         <div class="bg-card border border-bronze/40 rounded-3xl p-6 sm:p-8 max-w-lg w-full shadow-2xl transform scale-95 transition-transform duration-300 relative text-left">
-            <button onclick="closeLuxuryModal()" class="absolute top-5 right-5 text-white/40 hover:text-white text-lg">✕</button>
+            <button onclick="closeLuxuryModal()" aria-label="Fechar janela" class="absolute top-5 right-5 text-white/40 hover:text-white text-lg">✕</button>
             <span class="text-[10px] uppercase tracking-widest text-bronze font-bold block mb-1">Recôncavo Prime Exclusive</span>
             <h3 class="font-serif text-2xl sm:text-3xl font-bold text-white mb-1">${title}</h3>
             ${subtitle ? `<p class="text-xs text-white/60 mb-6">${subtitle}</p>` : ''}
