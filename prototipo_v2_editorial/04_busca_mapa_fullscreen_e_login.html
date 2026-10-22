@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Recôncavo Prime - Busca em Tela Cheia no Mapa & Login do Corretor</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@100..900&family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-tertiary-fixed": "#191c20",
+            "surface-container-high": "#292a2d",
+            "error": "#ffb4ab",
+            "on-secondary": "#402d0f",
+            "inverse-on-surface": "#2f3034",
+            "inverse-primary": "#725b38",
+            "surface-bright": "#38393c",
+            "outline-variant": "#4d463c",
+            "inverse-surface": "#e3e2e6",
+            "on-error": "#690005",
+            "tertiary-container": "#9ea0a5",
+            "on-surface-variant": "#d0c5b8",
+            "surface-variant": "#343538",
+            "surface-container-lowest": "#0d0e11",
+            "on-primary": "#402d0e",
+            "on-primary-fixed": "#281800",
+            "primary-fixed-dim": "#e0c297",
+            "tertiary-fixed": "#e1e2e8",
+            "on-secondary-fixed-variant": "#584323",
+            "surface": "#121316",
+            "on-tertiary": "#2e3135",
+            "on-secondary-fixed": "#281800",
+            "surface-container-highest": "#343538",
+            "on-background": "#e3e2e6",
+            "on-surface": "#e3e2e6",
+            "secondary-fixed": "#fedeb2",
+            "secondary": "#e0c298",
+            "surface-container": "#1f1f23",
+            "on-secondary-container": "#ceb188",
+            "on-error-container": "#ffdad6",
+            "tertiary": "#c5c6cc",
+            "surface-tint": "#e0c297",
+            "error-container": "#93000a",
+            "on-tertiary-container": "#34373b",
+            "secondary-fixed-dim": "#e0c298",
+            "primary": "#e0c297",
+            "on-primary-container": "#473414",
+            "outline": "#998f83",
+            "on-tertiary-fixed-variant": "#44474b",
+            "surface-dim": "#121316",
+            "primary-container": "#b89c74",
+            "tertiary-fixed-dim": "#c5c6cc",
+            "on-primary-fixed-variant": "#584323",
+            "surface-container-low": "#1b1b1f",
+            "primary-fixed": "#fedeb1",
+            "secondary-container": "#584323",
+            "background": "#121316"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "space-md": "1rem",
+            "space-xs": "0.25rem",
+            "gutter": "1.5rem",
+            "margin": "2rem",
+            "space-sm": "0.5rem",
+            "space-xl": "3rem",
+            "space-lg": "1.5rem"
+          },
+          "fontFamily": {
+            "headline-xl-mobile": ["Bodoni Moda"],
+            "headline-sm": ["Bodoni Moda"],
+            "headline-md": ["Bodoni Moda"],
+            "body-md": ["Inter"],
+            "label-sm": ["Inter"],
+            "label-md": ["Inter"],
+            "headline-xl": ["Bodoni Moda"],
+            "body-lg": ["Inter"],
+            "headline-lg": ["Bodoni Moda"],
+            "body-sm": ["Inter"],
+            "headline-lg-mobile": ["Bodoni Moda"]
+          },
+          "fontSize": {
+            "headline-xl-mobile": ["32px", { "lineHeight": "38px", "fontWeight": "500" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "400" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "label-sm": ["10px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "500" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+            "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "500" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "headline-lg-mobile": ["26px", { "lineHeight": "32px", "fontWeight": "500" }]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen flex flex-col selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-surface border-b border-outline-variant/20 sticky top-0 z-50">
+<div class="flex justify-between items-center w-full px-8 py-4 max-w-7xl mx-auto">
+<div class="text-headline-md font-headline-md font-medium text-primary dark:text-inverse-primary tracking-tight">
+        Recôncavo Prime
+      </div>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="text-headline-sm font-headline-sm text-on-surface-variant hover:text-on-surface hover:text-primary transition-colors duration-200" href="#portfolio">Portfolio</a>
+<a class="text-headline-sm font-headline-sm text-on-surface-variant hover:text-on-surface hover:text-primary transition-colors duration-200" href="#registry">Registry</a>
+<a class="text-headline-sm font-headline-sm text-on-surface-variant hover:text-on-surface hover:text-primary transition-colors duration-200" href="#analytics">Analytics</a>
+<a class="text-headline-sm font-headline-sm text-on-surface-variant hover:text-on-surface hover:text-primary transition-colors duration-200" href="#vault">Secure Vault</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button class="hidden lg:flex items-center space-x-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">shield</span>
+<span class="material-symbols-outlined text-sm">verified</span>
+</button>
+<a class="bg-primary-container text-on-primary-container px-5 py-2.5 rounded-lg text-label-md font-label-md hover:opacity-90 active:scale-[0.98] transition-all duration-200 font-medium" href="#broker-login">
+          Authorize Session
+        </a>
+</div>
+</div>
+</header>
+<main class="flex-grow">
+<!-- Hero / Map Search Section -->
+<section class="relative h-[calc(100vh-80px)] min-h-[700px] flex flex-col bg-surface-container-lowest overflow-hidden">
+<!-- Top Filter Bar -->
+<div class="z-20 bg-surface/80 backdrop-blur-md border-b border-outline-variant/20 px-8 py-3 flex items-center justify-between overflow-x-auto gap-4">
+<div class="flex items-center space-x-2 flex-shrink-0">
+<button class="px-4 py-2 rounded-full bg-primary-container text-on-primary-container text-label-md font-label-md transition-all">Todos os Condomínios</button>
+<button class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface text-label-md font-label-md transition-all border border-outline-variant/30">Condomínio Busca Vida</button>
+<button class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface text-label-md font-label-md transition-all border border-outline-variant/30">Condomínio Jardins</button>
+<button class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface text-label-md font-label-md transition-all border border-outline-variant/30">Centro</button>
+<button class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface text-label-md font-label-md transition-all border border-outline-variant/30 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm" data-weight="fill">view_in_ar</span>
+            Com Tour 360° VR
+          </button>
+</div>
+<div class="flex items-center space-x-3 flex-shrink-0">
+<div class="relative">
+<select class="bg-surface-container border border-outline-variant/30 rounded-lg px-3 py-1.5 text-label-md text-on-surface focus:outline-none focus:border-primary">
+<option>Filtrar por Valor</option>
+<option>R$ 2M - R$ 3M</option>
+<option>R$ 3M - R$ 5M</option>
+<option>Acima de R$ 5M</option>
+</select>
+</div>
+<div class="relative">
+<select class="bg-surface-container border border-outline-variant/30 rounded-lg px-3 py-1.5 text-label-md text-on-surface focus:outline-none focus:border-primary">
+<option>Métricas de Área</option>
+<option>Acima de 500m²</option>
+<option>Acima de 1.000m²</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Split View Layout -->
+<div class="flex-grow grid grid-cols-1 lg:grid-cols-12 relative overflow-hidden">
+<!-- Left Column: Scrollable Luxury Property Cards -->
+<div class="lg:col-span-5 xl:col-span-4 h-full overflow-y-auto p-6 space-y-6 z-10 bg-surface/40 backdrop-blur-xl border-r border-outline-variant/20">
+<div class="flex justify-between items-center mb-2">
+<div>
+<h2 class="text-headline-sm font-headline-sm text-on-surface">Santo Antônio de Jesus</h2>
+<p class="text-body-sm text-on-surface-variant">3 Imóveis Exclusivos em Destaque</p>
+</div>
+<span class="text-label-sm font-label-sm px-2.5 py-1 rounded bg-primary-container/20 text-primary border border-primary/30">Live Map View</span>
+</div>
+<!-- Property Card 1 -->
+<div class="bg-surface-container rounded-xl overflow-hidden border border-outline-variant/20 hover:border-primary/50 transition-all duration-300 group">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A striking architectural digest high-end luxury editorial photography of a contemporary minimalist brutalist villa mansion in Santo Antônio de Jesus Bahia Brazil at twilight hour with warm travertine limestone walls, dark board-formed concrete, floor-to-ceiling glass pavilions glowing warmly from inside, and a sleek black reflective infinity swimming pool reflecting twilight purple and golden sky." src="https://lh3.googleusercontent.com/aida/AEtjO1WzSAiiQ0NLBXOE7ZjkMRmZr-3Grpg_YG9d08c-WsQM1pr3Lsxg6F5UYDzmaVzUEWF62SOa4U8KzqlJSnrP2tNF-U9RfT2m5cC352XdmyvUT4y-VfbqT-GH5c1SmKDuyU8Ig9lWRHjRag5KTOB95UGWr0Y6SaEJ9RJa2Dru3zZP5aGpr9wNQ1hqdmlOrAzxGKC8ohMf-_KDyyh8ugHiez9pKmj7ndr461qQMeYGh0xWvEm4PR5L41FB9Mzj"/>
+<div class="absolute top-3 left-3 bg-surface/90 backdrop-blur-md px-3 py-1 rounded text-label-sm font-label-sm text-primary font-medium border border-outline-variant/30">
+                R$ 3.850.000
+              </div>
+<div class="absolute bottom-3 right-3 bg-surface-container/90 backdrop-blur-md px-2.5 py-1 rounded flex items-center gap-1 text-label-sm text-on-surface">
+<span class="material-symbols-outlined text-xs text-primary" data-weight="fill">verified</span>
+<span>Busca Vida</span>
+</div>
+</div>
+<div class="p-5">
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-1">Villa das Palmeiras</h3>
+<p class="text-body-sm text-on-surface-variant mb-4">Residência de alto padrão com projeto paisagístico integrado e acabamento em mármore travertino.</p>
+<div class="grid grid-cols-2 gap-2 py-3 border-t border-b border-outline-variant/20 mb-4 text-body-sm text-on-surface-variant">
+<div><strong class="text-on-surface font-medium">650m²</strong> Área Bruta</div>
+<div><strong class="text-on-surface font-medium">4 Suítes</strong> Master Suites</div>
+</div>
+<div class="flex items-center justify-between">
+<button class="text-primary hover:text-primary-fixed text-label-md font-label-md flex items-center gap-1.5 font-medium transition-colors">
+<span class="material-symbols-outlined text-base">visibility</span>
+                  Abrir Tour 360°
+                </button>
+<button class="bg-surface-container-high hover:bg-surface-bright text-on-surface px-4 py-2 rounded-lg text-label-md transition-all border border-outline-variant/30">
+                  Detalhes
+                </button>
+</div>
+</div>
+</div>
+<!-- Property Card 2 -->
+<div class="bg-surface-container rounded-xl overflow-hidden border border-outline-variant/20 hover:border-primary/50 transition-all duration-300 group">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Architectural photograph of a modern luxury estate in an exclusive gated community in Santo Antônio de Jesus Bahia, cantilevered concrete terrace, warm sunset lighting, minimalist landscaping, floor to ceiling glass facade, ultra-luxury aesthetic with warm ambient illumination." src="https://lh3.googleusercontent.com/aida/AEtjO1XiAnMCupCFy4BEX-pjEjiJELn1043ZX-NaK7qdiVccOlkD48K5uLES6ULJ8PDpwPwV9a_0Kh7BNR9gbUngNAd_MyhXplsF1vCef4uYXqG239YtYBuwT7lnkrvEJ4fxQZS3RsQZE0awKjX86kbXgPlW47ZgW1zPq7CrkAUiN-hBsCznE6Hfyw4h_3qcUEzIMNKg2AjmAYktaQXBnljBv65UAAdo1uRzjDTSh5fKr26Xuxup-jclrMtqwsDq"/>
+<div class="absolute top-3 left-3 bg-surface/90 backdrop-blur-md px-3 py-1 rounded text-label-sm font-label-sm text-primary font-medium border border-outline-variant/30">
+                R$ 2.980.000
+              </div>
+<div class="absolute bottom-3 right-3 bg-surface-container/90 backdrop-blur-md px-2.5 py-1 rounded flex items-center gap-1 text-label-sm text-on-surface">
+<span class="material-symbols-outlined text-xs text-primary" data-weight="fill">verified</span>
+<span>Condomínio Jardins</span>
+</div>
+</div>
+<div class="p-5">
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-1">Pavilhão Jacarandá</h3>
+<p class="text-body-sm text-on-surface-variant mb-4">Estrutura cantilever em concreto aparente e amplos vãos livres com iluminação natural zenital.</p>
+<div class="grid grid-cols-2 gap-2 py-3 border-t border-b border-outline-variant/20 mb-4 text-body-sm text-on-surface-variant">
+<div><strong class="text-on-surface font-medium">520m²</strong> Área Bruta</div>
+<div><strong class="text-on-surface font-medium">3 Suítes</strong> Master Suites</div>
+</div>
+<div class="flex items-center justify-between">
+<button class="text-primary hover:text-primary-fixed text-label-md font-label-md flex items-center gap-1.5 font-medium transition-colors">
+<span class="material-symbols-outlined text-base">visibility</span>
+                  Abrir Tour 360°
+                </button>
+<button class="bg-surface-container-high hover:bg-surface-bright text-on-surface px-4 py-2 rounded-lg text-label-md transition-all border border-outline-variant/30">
+                  Detalhes
+                </button>
+</div>
+</div>
+</div>
+<!-- Property Card 3 -->
+<div class="bg-surface-container rounded-xl overflow-hidden border border-outline-variant/20 hover:border-primary/50 transition-all duration-300 group">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Architectural Digest interior photography of an ultra-luxury modern living room pavilion in Bahia Brazil, double-height ceiling, warm travertine stone, minimalist bespoke designer furniture in linen and dark wood, floor-to-ceiling glass overlooking private tropical garden and lap pool." src="https://lh3.googleusercontent.com/aida/AEtjO1XODpHBvQE_D2RjiPYJvHQ3C8lPsi4BzMLq9rc-OFgQaVlzSS-OmmZOX7E82mOBt5x4A28fb4HpDh8l-VU41t2dHj-u2BUSt5FF7aFJDiyBU5ohXoZDyoL3YYX7Yz1oOUTyt9UFCM7FPBBoWZWlFvAlYVkPsDruTtOBnDyDbJuSuFcYBfGje4R7hLXk50XnM6jzitrhBMnr76X-AHYwEdfIPihYANZ3A6KEg4lyxTgSmyfSnH-4FAQuoQZD"/>
+<div class="absolute top-3 left-3 bg-surface/90 backdrop-blur-md px-3 py-1 rounded text-label-sm font-label-sm text-primary font-medium border border-outline-variant/30">
+                R$ 4.200.000
+              </div>
+<div class="absolute bottom-3 right-3 bg-surface-container/90 backdrop-blur-md px-2.5 py-1 rounded flex items-center gap-1 text-label-sm text-on-surface">
+<span class="material-symbols-outlined text-xs text-primary" data-weight="fill">verified</span>
+<span>Centro / Exclusivo</span>
+</div>
+</div>
+<div class="p-5">
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-1">Residencia Brutalista</h3>
+<p class="text-body-sm text-on-surface-variant mb-4">Design contemporáneo com pé-direito duplo, alinhamento térmico avançado e piscina com borda infinita.</p>
+<div class="grid grid-cols-2 gap-2 py-3 border-t border-b border-outline-variant/20 mb-4 text-body-sm text-on-surface-variant">
+<div><strong class="text-on-surface font-medium">810m²</strong> Área Bruta</div>
+<div><strong class="text-on-surface font-medium">5 Suítes</strong> Master Suites</div>
+</div>
+<div class="flex items-center justify-between">
+<button class="text-primary hover:text-primary-fixed text-label-md font-label-md flex items-center gap-1.5 font-medium transition-colors">
+<span class="material-symbols-outlined text-base">visibility</span>
+                  Abrir Tour 360°
+                </button>
+<button class="bg-surface-container-high hover:bg-surface-bright text-on-surface px-4 py-2 rounded-lg text-label-md transition-all border border-outline-variant/30">
+                  Detalhes
+                </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Area: Custom Dark Architectural Vector Map -->
+<div class="lg:col-span-7 xl:col-span-8 relative bg-surface-container-lowest flex items-center justify-center overflow-hidden" data-location="Santo Antônio de Jesus, Bahia" style="">
+<!-- Abstract Architectural Vector Map background grid & contours -->
+<div class="absolute inset-0 opacity-20 bg-[radial-gradient(#b89c74_1px,transparent_1px)] [background-size:32px_32px]"></div>
+<svg class="absolute inset-0 w-full h-full stroke-outline-variant/20 fill-none" xmlns="http://www.w3.org/2000/svg">
+<path d="M-100 100 Q 300 200, 600 50 T 1200 300" stroke-width="1.5"></path>
+<path d="M50 800 Q 400 400, 900 700 T 1500 200" stroke-width="1"></path>
+<path d="M200 -50 Q 500 500, 300 900" stroke-width="2"></path>
+<circle cx="35%" cy="40%" r="180" stroke-dasharray="4 4" stroke-width="1"></circle>
+<circle cx="65%" cy="60%" r="220" stroke-dasharray="4 4" stroke-width="1"></circle>
+</svg>
+<!-- Glowing Bronze Price Pins on Map -->
+<!-- Pin 1 -->
+<div class="absolute top-[35%] left-[30%] transform -translate-x-1/2 -translate-y-1/2 group cursor-pointer z-20">
+<div class="bg-primary text-on-primary font-bold px-3 py-1.5 rounded-full shadow-2xl flex items-center gap-1.5 text-label-md border border-inverse-primary animate-pulse">
+<span class="material-symbols-outlined text-xs">pin_drop</span>
+              $ 3.85M
+            </div>
+<div class="w-3 h-3 bg-primary rounded-full absolute left-1/2 -translate-x-1/2 -mt-0.5 shadow-[0_0_15px_#b89c74]"></div>
+</div>
+<!-- Pin 2 -->
+<div class="absolute top-[60%] left-[65%] transform -translate-x-1/2 -translate-y-1/2 group cursor-pointer z-10">
+<div class="bg-surface-container border border-primary/50 text-on-surface px-3 py-1.5 rounded-full shadow-xl flex items-center gap-1.5 text-label-md hover:bg-primary-container hover:text-on-primary-container transition-all">
+<span class="material-symbols-outlined text-xs">pin_drop</span>
+              $ 2.98M
+            </div>
+</div>
+<!-- Pin 3 (Active selected mansion with expanded popup card) -->
+<div class="absolute top-[42%] left-[60%] transform -translate-x-1/2 -translate-y-1/2 z-30">
+<div class="bg-primary text-on-primary font-bold px-3.5 py-1.5 rounded-full shadow-2xl flex items-center gap-1.5 text-label-md border-2 border-surface scale-110">
+<span class="material-symbols-outlined text-xs" data-weight="fill">star</span>
+              $ 4.2M
+            </div>
+<div class="w-4 h-4 bg-primary rounded-full absolute left-1/2 -translate-x-1/2 -mt-0.5 shadow-[0_0_20px_#b89c74]"></div>
+<!-- Expanded Active Popup Card Over Selected Mansion -->
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-72 bg-surface-container-high/95 backdrop-blur-xl border border-primary/40 rounded-xl p-4 shadow-2xl z-40 text-left">
+<div class="relative h-32 rounded-lg overflow-hidden mb-3">
+<img class="w-full h-full object-cover" data-alt="A striking architectural digest interior photography of an ultra-luxury modern living room pavilion in Bahia Brazil, double-height ceiling, warm travertine stone, minimalist bespoke designer furniture in linen and dark wood, floor-to-ceiling glass overlooking private tropical garden and lap pool, serene quiet luxury atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBs0Za7KZSyLFQ5DPSWEgiP1IC0riBwyRSU1D05DnFR7RSdhXS7HV5d96FCNp00Jx88Ie8G6-CwcAiHr0eC-64dy8S3eNDT5s0ts4ooYazNz-99u8WaSwbwnUfTj58lsDKHyg1OtY7WGUALE6UaxIBz8dc82kOYaUTJwArIpaOvzgdLHjh3_dSm5Qva5Y-VWWWkDACIalePVNpUcDm33QMcyRwZmxYoUKusrhElhfn0Hcyg3Tl5jVUkTMxfalqlVOiYkoYb9CRxIJoC"/>
+<div class="absolute top-2 right-2 bg-primary text-on-primary text-[10px] font-bold px-2 py-0.5 rounded">Destaque</div>
+</div>
+<h4 class="text-headline-sm font-headline-sm text-on-surface mb-0.5">Residencia Brutalista</h4>
+<p class="text-body-sm text-on-surface-variant mb-3">Santo Antônio de Jesus, BA</p>
+<div class="flex items-center gap-2 mb-3">
+<button class="flex-grow bg-primary-container text-on-primary-container py-2 rounded-lg text-label-md font-label-md flex items-center justify-center gap-1 hover:opacity-90 transition-all font-medium">
+<span class="material-symbols-outlined text-sm" data-weight="fill">view_in_ar</span>
+                  Tour 360°
+                </button>
+<a class="bg-[#25D366] text-white p-2 rounded-lg flex items-center justify-center hover:opacity-90 transition-opacity" href="#whatsapp" title="WhatsApp Chat Badge">
+<span class="material-symbols-outlined text-sm">chat</span>
+</a>
+</div>
+<div class="text-[10px] text-on-surface-variant text-center border-t border-outline-variant/20 pt-2">
+                Coordenadas Geodésicas • Confidencial
+              </div>
+</div>
+</div>
+<!-- Map Controls HUD -->
+<div class="absolute bottom-6 right-6 flex flex-col gap-2 z-20">
+<button class="bg-surface-container border border-outline-variant/30 text-on-surface p-3 rounded-lg hover:bg-surface-bright transition-colors shadow-lg">
+<span class="material-symbols-outlined text-base">add</span>
+</button>
+<button class="bg-surface-container border border-outline-variant/30 text-on-surface p-3 rounded-lg hover:bg-surface-bright transition-colors shadow-lg">
+<span class="material-symbols-outlined text-base">remove</span>
+</button>
+<button class="bg-surface-container border border-outline-variant/30 text-primary p-3 rounded-lg hover:bg-surface-bright transition-colors shadow-lg mt-2">
+<span class="material-symbols-outlined text-base" data-weight="fill">my_location</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Broker Studio Login Section ("Área Restrita do Corretor") -->
+<section class="py-24 px-8 bg-surface-container-low border-t border-outline-variant/20 relative" id="broker-login">
+<div class="max-w-6xl mx-auto">
+<div class="text-center mb-16">
+<span class="text-label-sm font-label-sm text-primary uppercase tracking-widest mb-2 block">Acesso Exclusivo</span>
+<h2 class="text-headline-lg font-headline-lg text-on-surface">Área Restrita do Corretor</h2>
+<p class="text-body-lg text-on-surface-variant mt-2 max-w-xl mx-auto">Plataforma segura para negociações de altíssimo padrão e due diligence imobiliária.</p>
+</div>
+<div class="bg-surface-container rounded-2xl border border-outline-variant/20 overflow-hidden shadow-2xl grid grid-cols-1 lg:grid-cols-12">
+<!-- Left Column: Architectural Twilight Photography & Branding Overlay -->
+<div class="lg:col-span-6 relative min-h-[450px] flex flex-col justify-end p-10 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Architectural photograph of a modern luxury estate in an exclusive gated community in Santo Antônio de Jesus Bahia, cantilevered concrete terrace, warm sunset lighting, minimalist landscaping, floor to ceiling glass facade, ultra-luxury twilight aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAt4cQKHlqxxpbMmsSofPpDQ3C5zqm4MsL_LbNdHkaN9LdpbRXa6uxVWnGIbFxxoGbRN1Xn7n37iwAPSYXIMClM-3KUW3i-kt9Wmlfc0dm6ndAJSk1-AaWJXW47TsCz_MJvWR9MEUSAPZqkn39exe1Ko2NmRv6xGw5QwxKU23VkplTGWA-OF0gvQqQT5VDWVU4427TB10KtGDiA0WunW2LIF4eDJ7Kqm1LoIfBsLZQ-grPDKzAsyD2-YW6Gh1nMpdNq2EQ_Pz1g92pV')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent"></div>
+<div class="relative z-10">
+<span class="text-label-sm font-label-sm px-3 py-1 rounded bg-primary-container/30 text-primary border border-primary/30 inline-block mb-3">Recôncavo Prime Secure Protocol</span>
+<h3 class="text-headline-md font-headline-md text-on-surface mb-2">Parceria Imobiliária de Elite</h3>
+<p class="text-body-md text-on-surface-variant">Acesse portfólios confidenciais, relatórios de valoração de ativos e agendamento privativo de visitas para clientes high-net-worth.</p>
+</div>
+</div>
+<!-- Right Column: Secure Login Form -->
+<div class="lg:col-span-6 p-10 lg:p-14 flex flex-col justify-center bg-surface-container">
+<form class="space-y-6" onsubmit="event.preventDefault();">
+<div>
+<label class="block text-label-md font-label-md text-on-surface-variant mb-2">CRECI / E-mail Corporativo</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">badge</span>
+</span>
+<input class="w-full bg-surface-dim border border-outline-variant/30 rounded-lg pl-11 pr-4 py-3 text-body-md text-on-surface focus:outline-none focus:border-primary transition-colors" placeholder="Ex: CRECI-BA 24.890 ou nome@reconcavoprime.com" type="text"/>
+</div>
+</div>
+<div>
+<label class="block text-label-md font-label-md text-on-surface-variant mb-2">Senha Segura</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">lock</span>
+</span>
+<input class="w-full bg-surface-dim border border-outline-variant/30 rounded-lg pl-11 pr-4 py-3 text-body-md text-on-surface focus:outline-none focus:border-primary transition-colors" placeholder="••••••••••••" type="password"/>
+</div>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<label class="flex items-center gap-2 cursor-pointer text-on-surface-variant">
+<input class="rounded bg-surface-dim border-outline-variant text-primary focus:ring-0" type="checkbox"/>
+<span>Lembrar dispositivo seguro</span>
+</label>
+<a class="text-primary hover:underline" href="#recover">Recuperar credenciais</a>
+</div>
+<!-- Biometric passkey option -->
+<div class="pt-2">
+<button class="w-full bg-surface-dim hover:bg-surface-bright border border-outline-variant/30 text-on-surface py-3 px-4 rounded-lg text-label-md font-label-md flex items-center justify-center gap-2 transition-all" type="button">
+<span class="material-symbols-outlined text-base text-primary" data-weight="fill">fingerprint</span>
+                  Autenticar com Biometria Passkey
+                </button>
+</div>
+<!-- Authorize Session Primary Gold Button -->
+<div class="pt-2">
+<button class="w-full bg-primary-container hover:opacity-90 text-on-primary-container font-medium py-3.5 px-6 rounded-lg text-label-md font-label-md transition-all active:scale-[0.98] shadow-lg flex items-center justify-center gap-2" type="submit">
+<span class="material-symbols-outlined text-base">verified_user</span>
+                  Autorizar Acesso
+                </button>
+</div>
+<!-- Strict NDA Compliance Notice -->
+<p class="text-body-sm text-on-surface-variant/70 text-center mt-4">
+                Aviso de Conformidade: Todas as transações e acessos são monitorados sob rigorosos padrões internacionais de sigilo e acordos de NDA (Non-Disclosure Agreement).
+              </p>
+</form>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container dark:bg-surface-container border-t border-outline-variant/20">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-8 py-6 max-w-7xl mx-auto gap-4">
+<div class="text-headline-sm font-headline-sm text-primary">
+        Recôncavo Prime
+      </div>
+<div class="flex flex-wrap justify-center gap-6 text-label-sm font-label-sm text-on-surface-variant">
+<a class="hover:text-primary transition-colors duration-200" href="#legal">Legal Registry</a>
+<a class="hover:text-primary transition-colors duration-200" href="#privacy">Privacy Policy</a>
+<a class="hover:text-primary transition-colors duration-200" href="#compliance">Compliance</a>
+<a class="hover:text-primary transition-colors duration-200" href="#secure">Secure Data Protocol</a>
+</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant text-center md:text-right max-w-sm">
+        © Recôncavo Prime. All rights reserved. Strict confidentiality protocols apply under international real estate registry standards.
+      </div>
+</div>
+</footer>
+</body></html>

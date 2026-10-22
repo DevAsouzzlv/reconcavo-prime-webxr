@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acesso Restrito — Broker Studio | Recôncavo Prime</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#0f1115',
+                        travertine: '#f6f4ee',
+                        bronze: '#b89c74',
+                        surface: '#16191f',
+                        card: '#1b1f27'
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-obsidian text-travertine font-sans antialiased min-h-screen flex items-center justify-center p-6 selection:bg-bronze selection:text-obsidian">
+
+    <div class="max-w-4xl w-full bg-card rounded-3xl border border-white/10 shadow-2xl overflow-hidden grid grid-cols-1 md:grid-cols-2">
+        <!-- Lado Esquerdo Visual & Institucional -->
+        <div class="relative p-8 md:p-12 flex flex-col justify-between overflow-hidden bg-surface">
+            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1000&q=80" class="absolute inset-0 w-full h-full object-cover filter brightness-[0.25]">
+            
+            <div class="relative z-10">
+                <a href="index.html" class="flex flex-col">
+                    <span class="font-serif text-2xl tracking-[0.2em] font-bold text-white">RECÔNCAVO PRIME</span>
+                    <span class="text-[9px] tracking-[0.3em] uppercase text-bronze font-sans">Broker Studio • SAJ</span>
+                </a>
+            </div>
+
+            <div class="relative z-10 my-8">
+                <span class="text-xs uppercase tracking-widest text-bronze font-bold block mb-2">Ambiente do Consultor</span>
+                <p class="font-serif text-2xl text-white font-medium leading-relaxed">
+                    "Publique tours virtuais 360º e gerencie clientes de alto padrão com tecnologia WebXR."
+                </p>
+                <div class="mt-4 flex items-center space-x-3">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=120&q=80" class="w-10 h-10 rounded-full object-cover border border-bronze">
+                    <div>
+                        <strong class="text-xs text-white block">Carlos Eduardo Mendes</strong>
+                        <span class="text-[10px] text-bronze">CRECI-BA 24.890</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative z-10 text-[10px] text-white/40">
+                🔒 Ambiente restrito e auditado • Criptografia de ponta a ponta
+            </div>
+        </div>
+
+        <!-- Lado Direito: Formulário de Autenticação -->
+        <div class="p-8 md:p-12 flex flex-col justify-between">
+            <div>
+                <span class="text-[10px] uppercase tracking-widest text-bronze font-bold block">Autenticação Segura</span>
+                <h2 class="font-serif text-3xl text-white font-bold mt-1 mb-2">Entrar no Studio</h2>
+                <p class="text-xs text-white/50 mb-8">Digite suas credenciais credenciadas no CRECI-BA.</p>
+
+                <form onsubmit="handleLogin(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-white/70 mb-2 font-semibold">Registro CRECI ou E-mail</label>
+                        <input type="text" id="login-creci" value="CRECI-BA 24.890" required class="w-full bg-obsidian border border-white/15 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-bronze">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-white/70 mb-2 font-semibold">Senha de Acesso</label>
+                        <input type="password" id="login-pass" value="••••••••" required class="w-full bg-obsidian border border-white/15 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-bronze">
+                    </div>
+
+                    <div class="flex items-center justify-between text-xs pt-1">
+                        <label class="inline-flex items-center space-x-2 text-white/70 cursor-pointer">
+                            <input type="checkbox" checked class="rounded bg-white/10 border-white/20 text-bronze accent-bronze">
+                            <span>Manter conectado</span>
+                        </label>
+                        <a href="#" onclick="alert('Instruções de recuperação enviadas ao e-mail corporativo cadastrado no CRECI-BA.')" class="text-bronze hover:underline">Esqueceu a senha?</a>
+                    </div>
+
+                    <button type="submit" class="w-full mt-4 py-4 bg-bronze hover:bg-bronze-hover text-obsidian font-bold text-xs uppercase tracking-widest rounded-2xl shadow-xl transition flex items-center justify-center space-x-2">
+                        <span>Acessar Painel do Corretor</span>
+                        <span>→</span>
+                    </button>
+                </form>
+            </div>
+
+            <div class="pt-6 border-t border-white/10 mt-6 text-center">
+                <a href="index.html" class="text-xs text-white/50 hover:text-white">← Voltar ao portal público</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function handleLogin(e) {
+            e.preventDefault();
+            sessionStorage.setItem('broker_logged', 'true');
+            window.location.href = 'admin.html';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Recôncavo Prime | Busca no Mapa &amp; Broker Studio SAJ</title>
+<!-- Google Fonts & Material Symbols -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container-high": "#ebe8e2",
+            "outline-variant": "#c3c7cd",
+            "on-tertiary-fixed-variant": "#2b4962",
+            "surface": "#fcf9f3",
+            "on-secondary-fixed": "#281800",
+            "on-primary": "#ffffff",
+            "on-tertiary": "#ffffff",
+            "on-background": "#1c1c18",
+            "tertiary-fixed": "#cde5ff",
+            "surface-bright": "#fcf9f3",
+            "secondary-fixed": "#ffddb0",
+            "inverse-surface": "#31312d",
+            "surface-tint": "#4c6075",
+            "inverse-on-surface": "#f3f0ea",
+            "surface-container-lowest": "#ffffff",
+            "on-error-container": "#93000a",
+            "error": "#ba1a1a",
+            "on-primary-container": "#788da3",
+            "on-surface-variant": "#43474c",
+            "surface-container-low": "#f6f3ed",
+            "outline": "#74777d",
+            "on-secondary-container": "#785a2a",
+            "on-error": "#ffffff",
+            "on-tertiary-fixed": "#001d31",
+            "tertiary-fixed-dim": "#abcae8",
+            "surface-variant": "#e5e2dc",
+            "secondary-fixed-dim": "#e9c086",
+            "surface-container": "#f0eee8",
+            "secondary": "#775929",
+            "on-secondary-fixed-variant": "#5d4214",
+            "on-primary-fixed-variant": "#34495c",
+            "on-secondary": "#ffffff",
+            "primary-fixed": "#cfe5fd",
+            "primary-container": "#0f2537",
+            "primary": "#000f1d",
+            "error-container": "#ffdad6",
+            "tertiary": "#000f1d",
+            "on-primary-fixed": "#061d2f",
+            "background": "#fcf9f3",
+            "primary-fixed-dim": "#b3c9e0",
+            "tertiary-container": "#01263d",
+            "surface-container-highest": "#e5e2dc",
+            "on-surface": "#1c1c18",
+            "surface-dim": "#dcdad4",
+            "inverse-primary": "#b3c9e0",
+            "secondary-container": "#fdd398",
+            "on-tertiary-container": "#708eaa"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin": "1.5rem",
+            "gutter-sm": "1rem",
+            "space-xl": "2.5rem",
+            "margin-md": "3rem",
+            "space-sm": "0.5rem",
+            "space-xs": "0.25rem",
+            "space-md": "1rem",
+            "margin-lg": "5rem",
+            "gutter": "1.5rem",
+            "space-lg": "1.5rem",
+            "gutter-lg": "2rem"
+          },
+          "fontFamily": {
+            "body-lg": ["Plus Jakarta Sans"],
+            "label-sm": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "headline-md": ["Playfair Display"],
+            "label-md": ["Plus Jakarta Sans"],
+            "headline-lg": ["Playfair Display"],
+            "display-mobile": ["Playfair Display"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "display": ["Playfair Display"],
+            "title-lg": ["Plus Jakarta Sans"],
+            "title-md": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"],
+            "headline-lg-mobile": ["Playfair Display"]
+          },
+          "fontSize": {
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "600" }],
+            "body-md": ["15px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-md": ["28px", { "lineHeight": "36px", "fontWeight": "500" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "600" }],
+            "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "display-mobile": ["38px", { "lineHeight": "46px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-sm": ["22px", { "lineHeight": "30px", "fontWeight": "600" }],
+            "display": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "title-lg": ["18px", { "lineHeight": "26px", "fontWeight": "600" }],
+            "title-md": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "body-sm": ["13px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-lg-mobile": ["30px", { "lineHeight": "38px", "letterSpacing": "0em", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 350, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    
+    @keyframes subtlePulse {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(200, 162, 107, 0.45), 0 8px 24px -4px rgba(15, 37, 55, 0.2);
+      }
+      50% {
+        box-shadow: 0 0 0 7px rgba(200, 162, 107, 0), 0 12px 28px -4px rgba(15, 37, 55, 0.3);
+      }
+    }
+
+    .pulse-glow-gold {
+      animation: subtlePulse 2.8s infinite ease-in-out;
+    }
+
+    /* Custom Map Graphic Grid pattern */
+    .saj-map-grid {
+      background-color: #f6f3ed;
+      background-image: 
+        radial-gradient(circle at 50% 50%, rgba(200, 162, 107, 0.08) 0%, transparent 80%),
+        linear-gradient(to right, rgba(15, 37, 55, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(15, 37, 55, 0.04) 1px, transparent 1px);
+      background-size: 100% 100%, 48px 48px, 48px 48px;
+    }
+
+    /* Custom Scrollbar for Luxury List */
+    .custom-scroll::-webkit-scrollbar {
+      width: 5px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: #f0eee8;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #c8a26b;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased font-body-md selection:bg-secondary-container selection:text-on-secondary-fixed">
+<!-- ================= TOP NAVIGATION BAR (SHARED COMPONENT) ================= -->
+<header class="bg-surface/90 dark:bg-primary/95 backdrop-blur-md border-b border-outline-variant/30 dark:border-outline/20 shadow-sm dark:shadow-none docked full-width top-0 z-50 sticky transition-all duration-300 ease-in-out">
+<div class="max-w-[1360px] mx-auto px-6 md:px-12 flex items-center justify-between h-20">
+<!-- Brand Logo -->
+<a class="flex items-center gap-3 group" href="#">
+<div class="w-10 h-10 rounded-lg bg-primary-container text-secondary-fixed flex items-center justify-center border border-secondary/40 shadow-sm transition-transform duration-300 group-hover:scale-105">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">villa</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md tracking-tight text-primary dark:text-surface-bright font-bold">Recôncavo Prime</span>
+<span class="font-label-sm text-label-sm text-secondary tracking-widest uppercase">Imóveis Exclusivos • SAJ</span>
+</div>
+</a>
+<!-- Navigation Links -->
+<nav class="hidden lg:flex items-center gap-8">
+<a class="text-on-surface-variant dark:text-surface-variant font-body-md transition-colors hover:text-secondary dark:hover:text-secondary-fixed" href="#imoveis">Imóveis Exclusivos</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-body-md transition-colors hover:text-secondary dark:hover:text-secondary-fixed" href="#lancamentos">Lançamentos</a>
+<a class="text-secondary font-title-md dark:text-secondary-fixed border-b-2 border-secondary pb-1 flex items-center gap-1.5" href="#mapa-saj">
+<span class="material-symbols-outlined text-[18px]">explore</span>
+          Bairros Nobres
+        </a>
+<a class="text-on-surface-variant dark:text-surface-variant font-body-md transition-colors hover:text-secondary dark:hover:text-secondary-fixed flex items-center gap-1.5" href="#vr-tour">
+<span class="material-symbols-outlined text-secondary text-[18px]" style="font-variation-settings: 'FILL' 1;">view_in_ar</span>
+          Experiência VR 360º
+        </a>
+<a class="text-on-surface-variant dark:text-surface-variant font-body-md transition-colors hover:text-secondary dark:hover:text-secondary-fixed" href="#sobre">Sobre Nós</a>
+</nav>
+<!-- Trailing Actions Cluster -->
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:text-secondary transition-colors duration-200 rounded-full hover:bg-surface-container" title="Favoritos">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+<a class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container border border-secondary/30 text-secondary hover:bg-primary-container hover:text-secondary-fixed transition-all duration-300 font-label-md text-label-md" href="#broker-login">
+<span class="material-symbols-outlined text-[18px]">lock_person</span>
+<span>Área do Corretor</span>
+</a>
+<a class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-primary-container text-surface-bright font-title-md text-title-md border border-secondary/30 hover:bg-tertiary-container hover:shadow-md transition-all duration-300" href="#agendar-visita">
+          Agendar Visita
+        </a>
+</div>
+</div>
+</header>
+<!-- ================= SUB-NAV FILTERS (STICKY TACTILE BAR) ================= -->
+<section class="bg-surface-container-lowest border-b border-outline-variant/20 sticky top-20 z-40 shadow-xs">
+<div class="max-w-[1360px] mx-auto px-6 md:px-12 py-3.5 flex flex-wrap items-center justify-between gap-4">
+<!-- Filter Chips Row -->
+<div class="flex items-center gap-2.5 overflow-x-auto no-scrollbar py-0.5 max-w-full">
+<!-- Active Filter -->
+<button class="px-4 py-2 rounded-full bg-primary-container text-secondary-fixed border border-secondary/40 font-title-md text-body-sm flex items-center gap-2 shadow-xs whitespace-nowrap">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed animate-ping"></span>
+          Todos em SAJ (28)
+        </button>
+<button class="px-4 py-2 rounded-full bg-surface-container-lowest text-on-surface border border-primary/10 hover:border-secondary hover:text-secondary transition-colors font-body-sm text-body-sm whitespace-nowrap">
+          Condomínio Busca Vida
+        </button>
+<button class="px-4 py-2 rounded-full bg-surface-container-lowest text-on-surface border border-primary/10 hover:border-secondary hover:text-secondary transition-colors font-body-sm text-body-sm whitespace-nowrap">
+          Condomínio Jardins
+        </button>
+<button class="px-4 py-2 rounded-full bg-surface-container-lowest text-on-surface border border-primary/10 hover:border-secondary hover:text-secondary transition-colors font-body-sm text-body-sm whitespace-nowrap">
+          Centro Nobre
+        </button>
+<!-- Gold Pulsing VR Badge Filter -->
+<button class="px-4 py-2 rounded-full bg-secondary/10 text-secondary border border-secondary/50 font-title-md text-body-sm flex items-center gap-2 whitespace-nowrap hover:bg-secondary/20 transition-all pulse-glow-gold">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">view_in_ar</span>
+          Apenas com Tour 360º VR 🥽
+        </button>
+<button class="px-3.5 py-2 rounded-full bg-surface-container text-on-surface-variant border border-outline-variant/30 hover:border-secondary font-body-sm text-body-sm flex items-center gap-1.5 whitespace-nowrap">
+<span>Faixa: R$ 1.5M - R$ 5.0M</span>
+<span class="material-symbols-outlined text-[16px]">expand_more</span>
+</button>
+</div>
+<!-- Right Action Filters -->
+<div class="flex items-center gap-3 ml-auto">
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-surface border border-outline-variant/40 hover:border-primary-container text-primary font-title-md text-body-sm transition-all shadow-xs">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+<span>Mais Filtros</span>
+<span class="w-5 h-5 rounded-full bg-secondary text-surface-bright text-[11px] font-bold flex items-center justify-center">3</span>
+</button>
+</div>
+</div>
+</section>
+<!-- ================= SECTION 1: BUSCA IMERSIVA NO MAPA ================= -->
+<main class="max-w-[1360px] mx-auto px-4 md:px-8 py-8" id="mapa-saj">
+<div class="mb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<div class="flex items-center gap-2 text-secondary font-label-md text-label-md tracking-wider uppercase mb-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+<span>Cartografia Imobiliária Nobre • Santo Antônio de Jesus - BA</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight font-semibold">
+          Busca Imersiva em Tela Cheia no Mapa
+        </h1>
+</div>
+<p class="font-body-md text-on-surface-variant max-w-md text-right hidden md:block">
+        Explore residências de luxo com integração sensorial direta, coordenadas geoespaciais e tours virtuais WebXR ultradefinidos.
+      </p>
+</div>
+<!-- Container Grid: 35% List / 65% Interactive Cartography -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 bg-surface-container-low p-4 rounded-xl border border-secondary/20 shadow-lg min-h-[780px]">
+<!-- LEFT COLUMN: Exclusive Properties List (35% -> lg:col-span-5 or 4, let's use 4.5 ratio: col-span-4 to col-span-8 or col-span-5 to col-span-7) -->
+<div class="lg:col-span-4 flex flex-col gap-4 max-h-[760px] overflow-y-auto pr-2 custom-scroll">
+<div class="flex items-center justify-between pb-2 border-b border-outline-variant/30">
+<span class="font-title-md text-title-md text-primary">Imóveis em Destaque (<span class="text-secondary font-bold">3 selecionados</span>)</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">sort</span> Mais recentes
+          </span>
+</div>
+<!-- Property Card 1 (Active/Selected - Mansão Villa Imperial) -->
+<article class="bg-surface-container-lowest rounded-xl border-2 border-secondary p-4 shadow-md transition-all duration-300 relative group">
+<!-- VR Badge -->
+<div class="absolute top-6 right-6 z-10 flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-container/90 backdrop-blur-md border border-secondary text-secondary-fixed text-label-sm font-label-sm shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-secondary-fixed" style="font-variation-settings: 'FILL' 1;">view_in_ar</span>
+<span>Tour 360º WebXR Ativo</span>
+</div>
+<div class="relative overflow-hidden rounded-lg aspect-[16/10] mb-3">
+<img alt="Mansão Villa Imperial no Condomínio Busca Vida em Santo Antônio de Jesus" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida/AEtjO1VgDBK5edE1nDYENiMPOLr8SabYChZoR32Dy5xsgfcrKdJINpS-bGv0GjlGdlzaxSCl7UW8pRbGy0O0c0HW-JxtY74rjJ7IL2x1YHyO9tWVNqiVhp90Kz1TWdDVWmt5VTVgEd2myrADE5qKSqvb34vACcAg4tvtq1TL51_aHul0No7hOoNWnZxIeWuj_yjWEjLq0H8FtdnPtGkEYorlsCPT1p6vBFmnB7c20I2jrtiZah1AskM3V1J7-hk"/>
+<div class="absolute bottom-2 left-2 px-2.5 py-1 rounded bg-primary-container/85 text-surface-bright text-label-sm font-label-sm tracking-wide">
+              Alto Padrão SAJ
+            </div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex items-baseline justify-between">
+<span class="font-headline-sm text-headline-sm text-primary font-bold">R$ 2.450.000</span>
+<span class="text-label-sm font-label-sm text-secondary font-semibold">Cond. Busca Vida</span>
+</div>
+<h3 class="font-title-lg text-title-lg text-primary font-semibold group-hover:text-secondary transition-colors">
+              Mansão Villa Imperial
+            </h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant line-clamp-1">
+              Pé-direito duplo imponente, lareira e borda infinita voltada ao pôr do sol do Recôncavo.
+            </p>
+<div class="grid grid-cols-3 gap-2 py-2 my-1 border-y border-surface-container text-body-sm text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[18px]">bed</span>
+<span>4 Suítes</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[18px]">square_foot</span>
+<span>520 m²</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[18px]">directions_car</span>
+<span>4 Vagas</span>
+</div>
+</div>
+<div class="flex items-center gap-2 pt-1">
+<button class="flex-1 py-2.5 px-4 rounded-lg bg-primary-container text-surface-bright hover:bg-tertiary-container font-title-md text-body-sm text-center transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-secondary-fixed">explore</span>
+                Explorar Imóvel
+              </button>
+<button class="p-2.5 rounded-lg border border-outline-variant/40 hover:border-secondary text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">bookmark_border</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Property Card 2: Residência Serena Horizonte -->
+<article class="bg-surface-container-lowest rounded-xl border border-secondary/20 p-4 shadow-sm hover:shadow-md transition-all duration-300 relative group">
+<div class="absolute top-6 left-6 z-10 px-2.5 py-1 rounded bg-secondary text-surface-bright text-label-sm font-label-sm font-bold shadow-sm">
+            Lançamento Exclusivo
+          </div>
+<div class="absolute top-6 right-6 z-10 flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface/90 backdrop-blur-md border border-secondary/40 text-primary text-label-sm font-label-sm shadow-xs">
+<span class="material-symbols-outlined text-[14px] text-secondary">360</span>
+<span>VR Disponível</span>
+</div>
+<div class="relative overflow-hidden rounded-lg aspect-[16/10] mb-3">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A modern luxury residence exterior at golden hour in Santo Antônio de Jesus Bahia featuring glass cantilevered balconies, organic stone finishes, minimalist architectural landscaping, a private lap pool with warm interior lighting glowing through floor to ceiling windows, capturing serenity and refined tropical wealth." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0VKhQvBIHwyX6kwdUdswDTIS8YdZ97Qxi1n0ORVGKZfudxKVGZ9k9yrXoJrecR6d4kle87Ah9DfLASCwHBCpVr4FTC4enS-G7WhMIapqCBScsk3X8MdcuZCA8mw2o2IJMwuPcNDIu5bdVYLuDxqw9pqYzYNrH6ky97RjM6nYXG3X1RIOS_7wkL8_v1TU16wv5noHoVJCTN7Lla8__VkAlDepYYgucLBqhVEcrkZ39vpnsuncBWN5WaN3xFdciVpjn-U8fWgremow"/>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex items-baseline justify-between">
+<span class="font-headline-sm text-headline-sm text-primary font-bold">R$ 1.890.000</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Cond. Jardins SAJ</span>
+</div>
+<h3 class="font-title-lg text-title-lg text-primary font-semibold group-hover:text-secondary transition-colors">
+              Residência Serena Horizonte
+            </h3>
+<div class="grid grid-cols-3 gap-2 py-2 my-1 border-y border-surface-container text-body-sm text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[18px]">bed</span>
+<span>3 Suítes</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[18px]">square_foot</span>
+<span>380 m²</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[18px]">directions_car</span>
+<span>3 Vagas</span>
+</div>
+</div>
+<div class="flex items-center gap-2 pt-1">
+<button class="flex-1 py-2 px-3 rounded-lg bg-surface border border-outline-variant/40 hover:bg-surface-container text-primary font-title-md text-body-sm text-center transition-all">
+                Ver Ficha Técnica
+              </button>
+</div>
+</div>
+</article>
+<!-- Property Card 3: Penthouse Horizon SAJ -->
+<article class="bg-surface-container-lowest rounded-xl border border-secondary/20 p-4 shadow-sm hover:shadow-md transition-all duration-300 relative group">
+<div class="relative overflow-hidden rounded-lg aspect-[16/10] mb-3">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Interior of an ultra luxury penthouse apartment in downtown Santo Antônio de Jesus overlooking the city with massive glass facade, contemporary Brazilian hardwood furnishings, curated art pieces, warm champagne gold metallic lighting fixtures, and a grand open concept salon with soft cream textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOEnWTjkYpl3eUsGxFpf-r_b6DXByBziii0fwQPg76LQT8qRlWGOC5_UgOwGB1LOeL0c7kf9D8_2x2NFGZaqRn3uq881qdx0Hr-0O6GQdWpc4BdaqadF7I7585V98hXypb9dYAhRwnDI75vN2joP6BP4vaLeX1uJnBraSgbiLuAwtcZ7l4bAzR4MYBANGG_J7rH_Mnu17Tmv9jAssJwWxbP2Qoim3-G151G2uL9jOxHUFnX0gqW32mqt-A-j_u3fLA0LPaVqs6L1E"/>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex items-baseline justify-between">
+<span class="font-headline-sm text-headline-sm text-primary font-bold">R$ 3.500.000</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Centro Nobre</span>
+</div>
+<h3 class="font-title-lg text-title-lg text-primary font-semibold group-hover:text-secondary transition-colors">
+              Penthouse Horizon SAJ
+            </h3>
+<div class="grid grid-cols-3 gap-2 py-2 my-1 border-y border-surface-container text-body-sm text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[18px]">bed</span>
+<span>4 Suítes</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[18px]">square_foot</span>
+<span>450 m²</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[18px]">panorama</span>
+<span>Panorâmica</span>
+</div>
+</div>
+<div class="flex items-center gap-2 pt-1">
+<button class="flex-1 py-2 px-3 rounded-lg bg-surface border border-outline-variant/40 hover:bg-surface-container text-primary font-title-md text-body-sm text-center transition-all">
+                Ver Ficha Técnica
+              </button>
+</div>
+</div>
+</article>
+</div>
+<!-- RIGHT COLUMN: Interactive Cartographic Luxury Map (65% -> lg:col-span-8) -->
+<div class="lg:col-span-8 saj-map-grid rounded-xl border border-secondary/30 relative overflow-hidden flex flex-col justify-between p-6 shadow-inner min-h-[640px]">
+<!-- Cartographic Overlay: Roads & Reference Landmarks SAJ -->
+<div class="absolute inset-0 pointer-events-none opacity-40">
+<!-- BR-101 highway vector line -->
+<svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="roadGrad" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#0f2537" stop-opacity="0.25"></stop>
+<stop offset="100%" stop-color="#c8a26b" stop-opacity="0.35"></stop>
+</lineargradient>
+</defs>
+<path d="M -50,480 Q 220,410 420,310 T 950,90" fill="none" stroke="url(#roadGrad)" stroke-dasharray="10 4" stroke-width="6"></path>
+<path d="M 380,-20 L 410,320 L 480,750" fill="none" stroke="#0f2537" stroke-opacity="0.18" stroke-width="4"></path>
+<path d="M 120,220 Q 340,260 620,290" fill="none" stroke="#c8a26b" stroke-opacity="0.25" stroke-width="3"></path>
+<!-- Urban Zone Circles -->
+<circle cx="430" cy="310" fill="#c8a26b" fill-opacity="0.04" r="140" stroke="#c8a26b" stroke-opacity="0.15" stroke-width="1"></circle>
+<circle cx="210" cy="180" fill="#0f2537" fill-opacity="0.03" r="100" stroke="#0f2537" stroke-opacity="0.1" stroke-width="1"></circle>
+<circle cx="720" cy="420" fill="#0f2537" fill-opacity="0.03" r="120" stroke="#0f2537" stroke-opacity="0.1" stroke-width="1"></circle>
+</svg>
+</div>
+<!-- SAJ Landmark Pills & Geographic Coordinates -->
+<div class="relative z-10 flex flex-wrap items-center justify-between gap-2 pointer-events-none">
+<div class="bg-surface/90 backdrop-blur-md border border-secondary/30 px-3.5 py-1.5 rounded-lg shadow-xs pointer-events-auto flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-600 animate-pulse"></span>
+<span class="font-label-md text-label-md text-primary font-bold">Santo Antônio de Jesus • BA</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">12° 58' S, 39° 15' W</span>
+</div>
+<!-- Compass & Weather Indicator -->
+<div class="flex items-center gap-2 bg-surface/90 backdrop-blur-md border border-secondary/30 px-3 py-1.5 rounded-lg shadow-xs pointer-events-auto">
+<span class="material-symbols-outlined text-secondary text-[18px]">explore</span>
+<span class="text-label-sm font-label-sm text-primary font-semibold">Recôncavo Sul</span>
+<span class="text-outline-variant">|</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">26°C Ensolarado</span>
+</div>
+</div>
+<!-- Geographic Landmarks Inset Labels on Map -->
+<div class="absolute top-[28%] left-[16%] pointer-events-none flex items-center gap-1.5 bg-surface-container-high/80 px-2 py-0.5 rounded text-[11px] font-semibold text-on-surface-variant border border-outline-variant/30">
+<span class="material-symbols-outlined text-[13px] text-primary">local_mall</span>
+          Shopping Itaguari
+        </div>
+<div class="absolute bottom-[28%] left-[28%] pointer-events-none flex items-center gap-1.5 bg-surface-container-high/80 px-2 py-0.5 rounded text-[11px] font-semibold text-on-surface-variant border border-outline-variant/30">
+<span class="material-symbols-outlined text-[13px] text-secondary">alt_route</span>
+          BR-101 (Sentido Salvador / Feira de Santana)
+        </div>
+<div class="absolute top-[52%] left-[44%] pointer-events-none flex items-center gap-1.5 bg-surface-container-high/80 px-2 py-0.5 rounded text-[11px] font-semibold text-on-surface-variant border border-outline-variant/30">
+<span class="material-symbols-outlined text-[13px] text-primary">apartment</span>
+          Bairro Maria Preta
+        </div>
+<!-- PIN 2: Residência Serena Horizonte (Cond. Jardins) -->
+<div class="absolute top-[32%] right-[22%] z-20 group cursor-pointer">
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary-container text-surface-bright border border-secondary shadow-md hover:scale-105 transition-transform">
+<span class="text-[12px] font-bold">R$ 1.890.000 🥽</span>
+</div>
+<div class="w-3 h-3 bg-secondary rotate-45 mx-auto -mt-1.5 rounded-xs shadow-xs"></div>
+</div>
+<!-- PIN 3: Penthouse Horizon (Centro Nobre) -->
+<div class="absolute top-[48%] left-[32%] z-20 group cursor-pointer">
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary-container text-surface-bright border border-secondary shadow-md hover:scale-105 transition-transform">
+<span class="text-[12px] font-bold">R$ 3.500.000 🥽</span>
+</div>
+<div class="w-3 h-3 bg-secondary rotate-45 mx-auto -mt-1.5 rounded-xs shadow-xs"></div>
+</div>
+<!-- PIN 4: Fazenda Reserva Recôncavo -->
+<div class="absolute bottom-[18%] right-[14%] z-20 group cursor-pointer">
+<div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-lowest text-primary border border-secondary/50 shadow-sm hover:scale-105 transition-transform text-label-sm font-label-sm">
+<span>R$ 1.450.000</span>
+</div>
+<div class="w-2.5 h-2.5 bg-primary-container rotate-45 mx-auto -mt-1 rounded-xs"></div>
+</div>
+<!-- SELECTED MAIN PIN & FLOATING RICH CARD: Mansão Villa Imperial (Cond. Busca Vida) -->
+<div class="absolute top-[26%] left-[34%] z-30 flex flex-col items-center">
+<!-- Rich Floating Property Card Overlaid Directly on Selected Pin -->
+<div class="w-80 md:w-96 bg-surface-container-lowest rounded-2xl border-2 border-secondary shadow-2xl p-4 mb-2 animate-fade-in relative z-40 transition-all">
+<div class="flex items-center justify-between mb-2">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-secondary/15 text-secondary font-label-sm text-label-sm font-bold border border-secondary/30">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                Condomínio Busca Vida SAJ
+              </span>
+<span class="px-2 py-0.5 rounded bg-primary-container text-secondary-fixed text-[10px] font-bold tracking-wider">
+                WebXR 60FPS
+              </span>
+</div>
+<!-- Thumbnail Image -->
+<div class="relative rounded-lg overflow-hidden h-36 mb-3">
+<img alt="Vista panorâmica da Mansão Villa Imperial" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1VgDBK5edE1nDYENiMPOLr8SabYChZoR32Dy5xsgfcrKdJINpS-bGv0GjlGdlzaxSCl7UW8pRbGy0O0c0HW-JxtY74rjJ7IL2x1YHyO9tWVNqiVhp90Kz1TWdDVWmt5VTVgEd2myrADE5qKSqvb34vACcAg4tvtq1TL51_aHul0No7hOoNWnZxIeWuj_yjWEjLq0H8FtdnPtGkEYorlsCPT1p6vBFmnB7c20I2jrtiZah1AskM3V1J7-hk"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent flex items-end p-2.5">
+<div>
+<h4 class="font-headline-sm text-headline-sm text-surface-bright leading-none mb-0.5">Mansão Villa Imperial</h4>
+<p class="text-[12px] text-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-secondary-fixed">pin_drop</span>
+                    Condomínio Busca Vida, Santo Antônio de Jesus
+                  </p>
+</div>
+</div>
+</div>
+<div class="flex items-baseline justify-between mb-3 px-1">
+<div>
+<span class="text-[11px] uppercase tracking-wider text-on-surface-variant font-semibold">Valor de Oportunidade</span>
+<div class="font-headline-md text-headline-md text-primary font-bold">R$ 2.450.000</div>
+</div>
+<div class="text-right text-[12px] text-on-surface-variant">
+<div>4 Suítes • 520m²</div>
+<div class="text-secondary font-semibold">Vista Vale Verde</div>
+</div>
+</div>
+<!-- Interactive Direct Tour Trigger & WhatsApp Concierge -->
+<div class="flex flex-col gap-2">
+<button class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-secondary to-secondary-container text-on-secondary-fixed font-title-md text-title-md flex items-center justify-center gap-2 shadow-md hover:brightness-105 transition-all pulse-glow-gold">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">view_in_ar</span>
+<span>Entrar no Tour 360º Imediato</span>
+</button>
+<div class="flex gap-2">
+<a class="flex-1 py-2 rounded-lg bg-surface-container border border-outline-variant/40 hover:bg-surface text-primary font-body-sm text-body-sm flex items-center justify-center gap-1.5 transition-colors" href="https://wa.me/5575999999999?text=Ol%C3%A1%2C%20tenho%20interesse%20na%20Mans%C3%A3o%20Villa%20Imperial%20em%20SAJ" target="_blank">
+<span class="material-symbols-outlined text-emerald-600 text-[18px]">chat</span>
+                  Falar no WhatsApp
+                </a>
+<button class="px-3 py-2 rounded-lg bg-surface-container border border-outline-variant/40 hover:bg-surface text-primary transition-colors" title="Compartilhar Link">
+<span class="material-symbols-outlined text-[18px]">share</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Pulsing Pin Anchor Base -->
+<div class="flex flex-col items-center">
+<div class="px-3.5 py-1 rounded-full bg-secondary text-primary-container font-headline-sm text-[13px] font-bold border-2 border-surface shadow-xl">
+              📍 Selecionado: R$ 2.450.000 🥽
+            </div>
+<div class="w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[10px] border-t-secondary"></div>
+<div class="w-4 h-1.5 bg-primary/40 rounded-full blur-[2px] mt-0.5"></div>
+</div>
+</div>
+<!-- MAP CONTROLS (Floating Cluster Bottom Right) -->
+<div class="relative z-10 flex items-end justify-between w-full pt-6">
+<div class="bg-surface/90 backdrop-blur-md border border-secondary/30 p-2.5 rounded-xl shadow-md text-body-sm text-primary flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">layers</span>
+<div class="flex items-center gap-1 bg-surface-container p-1 rounded-lg">
+<button class="px-2.5 py-1 text-label-sm font-label-sm rounded bg-primary-container text-surface-bright font-semibold">Vetor Luxo</button>
+<button class="px-2.5 py-1 text-label-sm font-label-sm rounded text-on-surface hover:text-primary">Satélite HD</button>
+</div>
+</div>
+<div class="flex flex-col gap-2 bg-surface/90 backdrop-blur-md border border-secondary/30 p-1.5 rounded-xl shadow-md">
+<button class="w-9 h-9 rounded-lg hover:bg-surface-container flex items-center justify-center text-primary transition-colors" title="Aproximar">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+<div class="w-full h-px bg-outline-variant/30"></div>
+<button class="w-9 h-9 rounded-lg hover:bg-surface-container flex items-center justify-center text-primary transition-colors" title="Afastar">
+<span class="material-symbols-outlined text-[20px]">remove</span>
+</button>
+<div class="w-full h-px bg-outline-variant/30"></div>
+<button class="w-9 h-9 rounded-lg hover:bg-surface-container flex items-center justify-center text-secondary transition-colors" title="Minha Localização">
+<span class="material-symbols-outlined text-[20px]">my_location</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- ================= SECTION 2: BROKER STUDIO RECÔNCAVO PRIME (LOGIN RESTRITO) ================= -->
+<section class="bg-surface-container py-20 border-t border-outline-variant/30 relative overflow-hidden" id="broker-login">
+<!-- Atmospheric background light subtle accents -->
+<div class="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-secondary/10 blur-3xl pointer-events-none"></div>
+<div class="absolute -bottom-40 -left-40 w-96 h-96 rounded-full bg-primary-container/10 blur-3xl pointer-events-none"></div>
+<div class="max-w-[1360px] mx-auto px-6 md:px-12 relative z-10">
+<!-- Section Title & Credentials Badge -->
+<div class="text-center max-w-2xl mx-auto mb-14">
+<div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary-container text-secondary-fixed border border-secondary/40 font-label-sm text-label-sm mb-4">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span>Plataforma Integrada para Corretores Credenciados CRECI-BA</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-primary tracking-tight font-semibold">
+          Acesso Exclusivo • Broker Studio
+        </h2>
+<p class="font-body-md text-on-surface-variant mt-3">
+          Gestão restrita de carteiras de alto patrimônio, publicação em lote de Virtual Tours 360º e atendimento qualificado a investidores no Recôncavo Baiano.
+        </p>
+</div>
+<!-- SPLIT LUXURY LOGIN CARD -->
+<div class="max-w-4xl mx-auto bg-surface-container-lowest rounded-2xl border border-secondary/30 shadow-2xl overflow-hidden grid grid-cols-1 md:grid-cols-12">
+<!-- Left Side: Visual, Institutional & Consultant Spotlight (md:col-span-5) -->
+<div class="md:col-span-5 bg-primary-container text-surface-bright p-8 flex flex-col justify-between relative overflow-hidden">
+<!-- Subtle background image tint -->
+<div class="absolute inset-0 opacity-15 mix-blend-overlay pointer-events-none">
+<img alt="Background corretor" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1VyRCOdY6-SCPS0aoPIOTYr9vi7pWgzDnQU8JQhcyJpCRzyn7v-Y50b1ExRO6zwZ2e8b2hqvtJtEcg6MG-Rf428PSDkSbxTSViXa8cKbnm5Z58Qw6VTZUeU2wBNt2gtWvY6ZyNpWq2JXzeX69nbRtIfdiaSFWRR96V3pKDndhWXFjulHXlCaQYIxGVQmUZbD6NcQ6n6sRg1sb8sX5nZu8O8dG_N875cAjtWlHWZ7ClkKSrQ4zaJFFKL_0E"/>
+</div>
+<div class="relative z-10">
+<div class="flex items-center gap-2 text-secondary-fixed mb-6">
+<span class="material-symbols-outlined text-[24px]">real_estate_agent</span>
+<span class="font-title-md text-title-md font-bold tracking-tight">Broker Studio SAJ</span>
+</div>
+<blockquote class="font-headline-md text-headline-sm text-surface-bright font-normal leading-snug italic mb-4">
+              “Gerencie seu portfólio de alto padrão e publique Tours Virtuais 360º em segundos.”
+            </blockquote>
+<div class="flex items-center gap-1.5 text-secondary-fixed text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-[16px]">verified_user</span>
+<span>Tecnologia WebXR &amp; Realidade Virtual Certificada</span>
+</div>
+</div>
+<!-- Featured Broker Identity Card -->
+<div class="relative z-10 pt-6 mt-6 border-t border-secondary/20 flex items-center gap-3.5 bg-surface-container-highest/10 p-3 rounded-xl backdrop-blur-xs">
+<div class="w-14 h-14 rounded-full overflow-hidden border-2 border-secondary shrink-0 shadow-sm">
+<img alt="Carlos Eduardo Mendes - Corretor de Imóveis CRECI-BA 24.890" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1VyRCOdY6-SCPS0aoPIOTYr9vi7pWgzDnQU8JQhcyJpCRzyn7v-Y50b1ExRO6zwZ2e8b2hqvtJtEcg6MG-Rf428PSDkSbxTSViXa8cKbnm5Z58Qw6VTZUeU2wBNt2gtWvY6ZyNpWq2JXzeX69nbRtIfdiaSFWRR96V3pKDndhWXFjulHXlCaQYIxGVQmUZbD6NcQ6n6sRg1sb8sX5nZu8O8dG_N875cAjtWlHWZ7ClkKSrQ4zaJFFKL_0E"/>
+</div>
+<div>
+<div class="font-title-md text-title-md text-surface-bright font-semibold leading-tight">Carlos Eduardo Mendes</div>
+<div class="text-secondary-fixed text-body-sm font-medium">Consultor Sênior Prime</div>
+<div class="text-[11px] text-on-primary-container tracking-wider uppercase">CRECI-BA 24.890</div>
+</div>
+</div>
+</div>
+<!-- Right Side: Secure Authentication Form (md:col-span-7) -->
+<div class="md:col-span-7 p-8 md:p-12 flex flex-col justify-center bg-surface-container-lowest">
+<div class="mb-8">
+<h3 class="font-headline-md text-headline-md text-primary font-semibold mb-2">
+              Login no Broker Studio
+            </h3>
+<p class="font-body-md text-on-surface-variant">
+              Digite suas credenciais credenciadas para acessar a gestão de leads VIP e publicação 360º.
+            </p>
+</div>
+<form action="#" class="space-y-5" method="POST" onsubmit="event.preventDefault();">
+<!-- Input 1: CRECI or Corporate Email -->
+<div>
+<label class="block font-label-md text-label-md text-primary font-semibold uppercase tracking-wider mb-2" for="broker-identifier">
+                E-mail Corporativo ou Registro CRECI-BA
+              </label>
+<div class="relative rounded-lg shadow-xs">
+<div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">badge</span>
+</div>
+<input class="w-full pl-11 pr-4 py-3 rounded-lg border border-outline-variant/60 focus:border-secondary focus:ring-2 focus:ring-secondary/20 bg-surface font-body-md text-primary text-body-md transition-all outline-none" id="broker-identifier" name="broker-identifier" placeholder="ex: corretor@reconcavoprime.com.br ou CRECI 00.000" required="" type="text" value="carlos.mendes@reconcavoprime.com.br"/>
+</div>
+</div>
+<!-- Input 2: Password with toggle -->
+<div>
+<div class="flex items-center justify-between mb-2">
+<label class="block font-label-md text-label-md text-primary font-semibold uppercase tracking-wider" for="broker-password">
+                  Senha de Acesso
+                </label>
+<a class="font-label-md text-label-md text-secondary hover:underline font-semibold" href="#recuperar-senha">
+                  Esqueceu a senha?
+                </a>
+</div>
+<div class="relative rounded-lg shadow-xs">
+<div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">key</span>
+</div>
+<input class="w-full pl-11 pr-11 py-3 rounded-lg border border-outline-variant/60 focus:border-secondary focus:ring-2 focus:ring-secondary/20 bg-surface font-body-md text-primary text-body-md transition-all outline-none" id="broker-password" name="broker-password" required="" type="password" value="••••••••••••••••"/>
+<button class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-on-surface-variant hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+</div>
+<!-- Security Checkbox -->
+<div class="flex items-center justify-between pt-1">
+<label class="flex items-center gap-2.5 cursor-pointer">
+<input checked="" class="w-4 h-4 rounded border-outline-variant/60 text-secondary focus:ring-secondary/20 accent-[#775929]" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Manter sessão ativa neste dispositivo seguro</span>
+</label>
+</div>
+<!-- Submit Primary Button -->
+<button class="w-full py-3.5 px-6 rounded-lg bg-primary-container text-surface-bright font-title-md text-title-md border border-secondary/40 shadow-md hover:bg-tertiary-container hover:shadow-lg transition-all flex items-center justify-center gap-2 group" type="submit">
+<span>Acessar Painel Administrativo</span>
+<span class="material-symbols-outlined text-[20px] text-secondary-fixed transition-transform group-hover:translate-x-1">arrow_forward</span>
+</button>
+<!-- Secondary Action: Register Request -->
+<div class="pt-3 text-center">
+<a class="font-body-sm text-body-sm text-secondary hover:text-primary transition-colors font-semibold flex items-center justify-center gap-1.5" href="#solicitar-credenciamento">
+<span class="material-symbols-outlined text-[16px]">how_to_reg</span>
+                Solicitar Credenciamento de Corretor de Luxo
+              </a>
+</div>
+</form>
+<!-- Security Certification Badge -->
+<div class="mt-8 pt-6 border-t border-outline-variant/20 flex items-center justify-center gap-2 text-on-surface-variant text-label-sm font-label-sm text-center">
+<span class="material-symbols-outlined text-secondary text-[16px]">encrypted</span>
+<span>Ambiente Criptografado de Ponta a Ponta • Exclusivo Corretores Credenciados Recôncavo Prime SAJ</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ================= FOOTER (SHARED COMPONENT) ================= -->
+<footer class="bg-primary dark:bg-tertiary-container text-surface-bright border-t border-outline/20 shadow-inner w-full mt-auto">
+<div class="max-w-[1360px] mx-auto px-6 md:px-12 py-16 flex flex-col gap-12">
+<!-- Top Row: Brand & Architectural Advisory Statement -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+<div class="md:col-span-5 flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-secondary/20 text-secondary-fixed flex items-center justify-center border border-secondary/40">
+<span class="material-symbols-outlined text-secondary-fixed" style="font-variation-settings: 'FILL' 1;">villa</span>
+</div>
+<span class="font-headline-md text-headline-md text-surface-bright tracking-tight font-semibold">
+              Recôncavo Prime
+            </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-primary-container max-w-sm">
+            Boutique imobiliária especializada em propriedades de alto luxo, fazendas históricas e residências em condomínios fechados em Santo Antônio de Jesus e todo o Recôncavo Baiano.
+          </p>
+<div class="flex items-center gap-3 pt-2">
+<span class="px-2.5 py-1 rounded bg-secondary/15 text-secondary-fixed text-label-sm font-label-sm border border-secondary/30">
+              CRECI-BA 14.892-J
+            </span>
+<span class="text-on-primary-container text-label-sm font-label-sm">
+              Membro da Associação Brasileira de Alto Padrão
+            </span>
+</div>
+</div>
+<!-- Links Column 1: Portfólio Exclusivo -->
+<div class="md:col-span-4 flex flex-col gap-3">
+<h4 class="font-title-lg text-title-lg text-surface-bright font-semibold mb-1">
+            Segmentos &amp; Curadoria
+          </h4>
+<ul class="flex flex-col gap-2 font-body-sm text-body-sm text-on-primary-container">
+<li><a class="hover:text-secondary-fixed-dim transition-colors duration-200" href="#">Mansões &amp; Casas de Luxo</a></li>
+<li><a class="hover:text-secondary-fixed-dim transition-colors duration-200" href="#">Condomínios Fechados (Busca Vida, Jardins)</a></li>
+<li><a class="hover:text-secondary-fixed-dim transition-colors duration-200" href="#">Fazendas &amp; Haras no Recôncavo</a></li>
+<li><a class="hover:text-secondary-fixed-dim transition-colors duration-200" href="#">Investimentos &amp; Terrenos Nobres</a></li>
+</ul>
+</div>
+<!-- Links Column 2: Institucional & Governança -->
+<div class="md:col-span-3 flex flex-col gap-3">
+<h4 class="font-title-lg text-title-lg text-surface-bright font-semibold mb-1">
+            Governança &amp; Broker
+          </h4>
+<ul class="flex flex-col gap-2 font-body-sm text-body-sm text-on-primary-container">
+<li><a class="text-secondary-fixed font-title-md hover:text-secondary-fixed-dim transition-colors duration-200 flex items-center gap-1.5" href="#broker-login">
+<span class="material-symbols-outlined text-[16px]">lock</span> Broker Studio Login
+            </a></li>
+<li><a class="hover:text-secondary-fixed-dim transition-colors duration-200" href="#">Consultoria Imobiliária</a></li>
+<li><a class="hover:text-secondary-fixed-dim transition-colors duration-200" href="#">Termos de Privacidade</a></li>
+<li><a class="hover:text-secondary-fixed-dim transition-colors duration-200" href="#">Ética &amp; Governança</a></li>
+</ul>
+</div>
+</div>
+<!-- Bottom Row: Copyright & Legal Compliance -->
+<div class="pt-8 border-t border-outline/20 flex flex-col md:flex-row items-center justify-between gap-4 font-body-sm text-body-sm text-on-primary-container">
+<p>© 2024 Imobiliária Recôncavo Prime. Todos os direitos reservados. CRECI-BA 14.892-J. Santo Antônio de Jesus, Bahia.</p>
+<div class="flex items-center gap-6">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">verified</span>
+            Auditoria &amp; Compliance Imobiliário
+          </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">headset_mic</span>
+            Concierge VIP: (75) 3631-9000
+          </span>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

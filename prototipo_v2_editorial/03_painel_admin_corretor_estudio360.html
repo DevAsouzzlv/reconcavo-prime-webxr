@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Broker Studio 2.0 - Recôncavo Prime</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "primary-fixed": "#fedeb1",
+          "on-secondary-fixed": "#281800",
+          "outline-variant": "#4d463c",
+          "background": "#121316",
+          "on-primary": "#402d0e",
+          "error-container": "#93000a",
+          "on-tertiary-fixed-variant": "#44474b",
+          "surface-container": "#1f1f23",
+          "primary-fixed-dim": "#e0c297",
+          "on-secondary": "#402d0f",
+          "surface-tint": "#e0c297",
+          "on-tertiary-fixed": "#191c20",
+          "error": "#ffb4ab",
+          "primary": "#e0c297",
+          "on-background": "#e3e2e6",
+          "tertiary-fixed-dim": "#c5c6cc",
+          "secondary-container": "#584323",
+          "on-surface": "#e3e2e6",
+          "on-error-container": "#ffdad6",
+          "primary-container": "#b89c74",
+          "surface-container-highest": "#343538",
+          "surface-variant": "#343538",
+          "on-primary-fixed-variant": "#584323",
+          "on-error": "#690005",
+          "outline": "#998f83",
+          "inverse-surface": "#e3e2e6",
+          "surface-dim": "#121316",
+          "surface": "#121316",
+          "on-tertiary-container": "#34373b",
+          "surface-container-lowest": "#0d0e11",
+          "tertiary-fixed": "#e1e2e8",
+          "tertiary": "#c5c6cc",
+          "on-secondary-fixed-variant": "#584323",
+          "on-tertiary": "#2e3135",
+          "on-primary-container": "#473414",
+          "inverse-primary": "#725b38",
+          "surface-container-low": "#1b1b1f",
+          "on-secondary-container": "#ceb188",
+          "secondary-fixed": "#fedeb2",
+          "surface-bright": "#38393c",
+          "tertiary-container": "#9ea0a5",
+          "surface-container-high": "#292a2d",
+          "inverse-on-surface": "#2f3034",
+          "on-surface-variant": "#d0c5b8",
+          "secondary": "#e0c298",
+          "on-primary-fixed": "#281800",
+          "secondary-fixed-dim": "#e0c298"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.125rem",
+          "lg": "0.25rem",
+          "xl": "0.5rem",
+          "full": "0.75rem"
+        },
+        "spacing": {
+          "space-md": "1rem",
+          "space-lg": "1.5rem",
+          "space-xs": "0.25rem",
+          "space-sm": "0.5rem",
+          "space-xl": "3rem",
+          "margin": "2rem",
+          "gutter": "1.5rem"
+        },
+        "fontFamily": {
+          "headline-lg-mobile": ["Bodoni Moda"],
+          "headline-sm": ["Bodoni Moda"],
+          "body-sm": ["Inter"],
+          "headline-xl": ["Bodoni Moda"],
+          "label-sm": ["Inter"],
+          "label-md": ["Inter"],
+          "headline-lg": ["Bodoni Moda"],
+          "body-md": ["Inter"],
+          "body-lg": ["Inter"],
+          "headline-md": ["Bodoni Moda"],
+          "headline-xl-mobile": ["Bodoni Moda"]
+        },
+        "fontSize": {
+          "headline-lg-mobile": ["26px", {"lineHeight": "32px", "fontWeight": "500"}],
+          "headline-sm": ["18px", {"lineHeight": "24px", "fontWeight": "400"}],
+          "body-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+          "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "500"}],
+          "label-sm": ["10px", {"lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "500"}],
+          "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+          "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+          "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+          "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+          "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "400"}],
+          "headline-xl-mobile": ["32px", {"lineHeight": "38px", "fontWeight": "500"}]
+        }
+      },
+    },
+  }
+</script>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col justify-between">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-surface w-full">
+<div class="flex justify-between items-center w-full px-8 py-4 max-w-7xl mx-auto">
+<div class="flex items-center gap-6">
+<span class="text-headline-md font-headline-md font-medium text-primary dark:text-inverse-primary">Recôncavo Prime</span>
+<nav class="hidden md:flex items-center gap-6 ml-8">
+<a class="text-on-surface-variant hover:text-on-surface text-label-md font-label-md hover:text-primary transition-colors duration-200" href="#">Portfolio</a>
+<a class="text-on-surface-variant hover:text-on-surface text-label-md font-label-md hover:text-primary transition-colors duration-200" href="#">Registry</a>
+<a class="text-on-surface-variant hover:text-on-surface text-label-md font-label-md hover:text-primary transition-colors duration-200" href="#">Analytics</a>
+<a class="text-on-surface-variant hover:text-on-surface text-label-md font-label-md hover:text-primary transition-colors duration-200" href="#">Secure Vault</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden lg:flex items-center gap-3 bg-surface-container px-3 py-1.5 rounded-xl border border-outline-variant/20">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+<span class="text-label-md font-label-md text-on-surface-variant">Secure Session: <strong class="text-primary">Carlos Mendes (CRECI-BA 12.894-J)</strong></span>
+</div>
+<button class="p-2 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="shield">shield</span>
+</button>
+<button class="p-2 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="verified">verified</span>
+</button>
+<button class="bg-primary-container text-on-primary-container px-4 py-2 rounded-xl text-label-md font-label-md font-semibold hover:opacity-90 transition-opacity">
+        Authorize Session
+      </button>
+</div>
+</div>
+</header>
+<!-- Main Workspace Grid -->
+<main class="w-full max-w-7xl mx-auto px-4 md:px-8 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Sidebar -->
+<aside class="lg:col-span-3 flex flex-col gap-6">
+<!-- Broker Profile Card -->
+<div class="bg-surface-container border border-outline-variant/20 rounded-xl p-6 flex flex-col gap-4">
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 rounded-full bg-surface-container-highest bg-cover bg-center border border-primary/30" data-alt="Architectural Digest high-end luxury portrait of a distinguished senior male luxury real estate broker in a bespoke charcoal tailored suit standing inside a modern travertine office in Santo Antônio de Jesus Bahia Brazil, warm lighting, professional executive aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCNC-chleB_zviwC-PZNe-fS6rcGkzkVwty6SuRrxd-QGlIwq8CJs69YpjYQ9AASQAqGpaGftgAEoqFd1WPxLvRWGzL1aKUm-mv64k_hhcWHuo2HXAhD_7h5ZND3ftf8KGUiKlgp3Q-kwGV6N6q2_YdWL7sk9X3ghRQajFdgoxsHtbXcetRob38LdAf-GusjYHMpZP3E1wNo_DFEl_w2r6lQ6SVw7N5CyWMj1NcnXHY_lMfEe432VXL7cYkmivzrf-Ys1vtTxRrF0tq')"></div>
+<div>
+<h2 class="text-headline-sm font-headline-sm text-on-background">Carlos Mendes</h2>
+<p class="text-label-sm font-label-sm text-primary uppercase tracking-wider">CRECI-BA 24.890</p>
+</div>
+</div>
+<div class="pt-4 border-t border-outline-variant/20 flex justify-between items-center">
+<span class="text-body-sm text-on-surface-variant">Active Estates</span>
+<span class="text-headline-sm font-headline-sm text-primary">14</span>
+</div>
+</div>
+<!-- Quick Navigation -->
+<div class="bg-surface-container border border-outline-variant/20 rounded-xl p-4 flex flex-col gap-1">
+<p class="text-label-sm font-label-sm text-outline px-3 py-2 uppercase tracking-widest">Studio Directory</p>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary-container/20 text-primary text-body-md font-medium" href="#curadoria">
+<span class="material-symbols-outlined" data-icon="architecture">architecture</span>
+        Curadoria
+      </a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-background transition-colors text-body-md" href="#mapa">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+        Mapa Geodésico
+      </a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-background transition-colors text-body-md" href="#dossiers">
+<span class="material-symbols-outlined" data-icon="folder_managed">folder_managed</span>
+        Dossiers Restritos
+      </a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-background transition-colors text-body-md" href="#vault">
+<span class="material-symbols-outlined" data-icon="view_in_ar">view_in_ar</span>
+        Vault 360º
+      </a>
+</div>
+<!-- Compliance Status -->
+<div class="bg-surface-container border border-outline-variant/20 rounded-xl p-5 flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<span class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Compliance Protocol</span>
+<span class="px-2 py-0.5 rounded text-label-sm font-label-sm bg-primary/20 text-primary">Level 4 Strict</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[94%]"></div>
+</div>
+<p class="text-body-sm text-on-surface-variant">Encrypted biometric session active under Brazilian LGPD &amp; International Real Estate Registry standards.</p>
+</div>
+</aside>
+<!-- Central Workspace / Main Area -->
+<section class="lg:col-span-9 flex flex-col gap-8">
+<!-- Workspace Header -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-1 rounded-full bg-surface-container border border-outline-variant/30 text-label-sm font-label-sm text-primary uppercase">Broker Studio 2.0</span>
+<span class="text-body-sm text-on-surface-variant">Santo Antônio de Jesus, Bahia</span>
+</div>
+<h1 class="text-headline-xl font-headline-xl text-on-background">Studio de Curadoria &amp; Ingestão Imersiva</h1>
+<p class="text-body-lg text-on-surface-variant">Restricted curation and high-precision spatial asset ingestion portal for ultra-luxury architectural portfolios.</p>
+</div>
+<!-- Section A: Cadastro de Ativo & Especificações Técnicas -->
+<div class="bg-surface-container border border-outline-variant/20 rounded-xl p-6 md:p-8 flex flex-col gap-6" id="curadoria">
+<div class="flex items-center justify-between border-b border-outline-variant/20 pb-4">
+<div class="flex items-center gap-3">
+<span class="p-2 rounded-lg bg-primary/10 text-primary material-symbols-outlined" data-icon="edit_note">edit_note</span>
+<div>
+<h2 class="text-headline-md font-headline-md text-on-background">Cadastro de Ativo &amp; Especificações Técnicas</h2>
+<p class="text-body-sm text-on-surface-variant">Define core property parameters, architectural tags, and high-net utility specs.</p>
+</div>
+</div>
+<span class="px-3 py-1 rounded bg-amber-500/10 text-amber-400 text-label-sm font-label-sm border border-amber-500/20">Em Revisão NDA</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="flex flex-col gap-2 md:col-span-2">
+<label class="text-label-md font-label-md text-on-surface-variant">Property Title / Exclusive Designation</label>
+<input class="bg-surface border border-outline-variant/30 rounded-xl px-4 py-3 text-on-background focus:border-primary focus:ring-0 text-body-md" placeholder="Enter title..." type="text" value="Residência Brutalista Villa Recôncavo - Lote 04"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-label-md font-label-md text-on-surface-variant">Gross Area (m²)</label>
+<input class="bg-surface border border-outline-variant/30 rounded-xl px-4 py-3 text-on-background focus:border-primary focus:ring-0 text-body-md" type="number" value="1420"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-label-md font-label-md text-on-surface-variant">Suites &amp; Master Quarters</label>
+<input class="bg-surface border border-outline-variant/30 rounded-xl px-4 py-3 text-on-background focus:border-primary focus:ring-0 text-body-md" type="number" value="6"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-label-md font-label-md text-on-surface-variant">Latitude Coordinate</label>
+<input class="bg-surface border border-outline-variant/30 rounded-xl px-4 py-3 text-on-background focus:border-primary focus:ring-0 text-body-md font-mono" type="text" value="-12.9694° S"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-label-md font-label-md text-on-surface-variant">Longitude Coordinate</label>
+<input class="bg-surface border border-outline-variant/30 rounded-xl px-4 py-3 text-on-background focus:border-primary focus:ring-0 text-body-md font-mono" type="text" value="-39.2611° W"/>
+</div>
+</div>
+<!-- Brutalist/Minimalist Style Tags & Toggles -->
+<div class="pt-4 border-t border-outline-variant/20 flex flex-col gap-4">
+<p class="text-label-md font-label-md text-on-surface-variant uppercase tracking-wider">Architectural &amp; Utility Infrastructure Tags</p>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+<label class="flex items-center gap-3 p-4 rounded-xl bg-surface border border-outline-variant/30 cursor-pointer hover:border-primary/50 transition-colors">
+<input checked="" class="rounded border-outline-variant text-primary focus:ring-0 bg-surface-container" type="checkbox"/>
+<span class="text-body-md text-on-background">Subterranean Wine Cellar</span>
+</label>
+<label class="flex items-center gap-3 p-4 rounded-xl bg-surface border border-outline-variant/30 cursor-pointer hover:border-primary/50 transition-colors">
+<input checked="" class="rounded border-outline-variant text-primary focus:ring-0 bg-surface-container" type="checkbox"/>
+<span class="text-body-md text-on-background">Independent Solar Grid</span>
+</label>
+<label class="flex items-center gap-3 p-4 rounded-xl bg-surface border border-outline-variant/30 cursor-pointer hover:border-primary/50 transition-colors">
+<input checked="" class="rounded border-outline-variant text-primary focus:ring-0 bg-surface-container" type="checkbox"/>
+<span class="text-body-md text-on-background">KNX Smart Automation</span>
+</label>
+</div>
+</div>
+</div>
+<!-- Section B: Geolocalização & Alfinete Cadastral -->
+<div class="bg-surface-container border border-outline-variant/20 rounded-xl p-6 md:p-8 flex flex-col gap-6" id="mapa">
+<div class="flex items-center justify-between border-b border-outline-variant/20 pb-4">
+<div class="flex items-center gap-3">
+<span class="p-2 rounded-lg bg-primary/10 text-primary material-symbols-outlined" data-icon="explore">explore</span>
+<div>
+<h2 class="text-headline-md font-headline-md text-on-background">Geolocalização &amp; Alfinete Cadastral</h2>
+<p class="text-body-sm text-on-surface-variant">Precision satellite mapping and cadastral pin calibration in Santo Antônio de Jesus.</p>
+</div>
+</div>
+<span class="text-body-sm font-mono text-primary">Lat: -12.9694° S | Lon: -39.2611° W</span>
+</div>
+<!-- Interactive map preview card -->
+<div class="relative w-full h-80 rounded-xl overflow-hidden border border-outline-variant/30 bg-cover bg-center flex items-center justify-center" data-alt="High-resolution dark-mode satellite cartography map aerial view of Santo Antônio de Jesus Bahia Brazil, showing precise topographical contour lines, lush green vegetation, luxury gated enclave layouts, highlighted by a subtle glowing golden bronze geolocation pin marker at the exact coordinate point." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA893AM7_CxP4PdFmXVu2HDroviWmXoNzMgmzCLAr5uLiwalgm9zcbqPZxZkE5v4wTyOw5oD_Mr8zx8tpggl3mt0_2rZ0gQ6i6-k-YBIzng4b5GO9nPN1XeHVmSTsq45h1SR_-xK9EMvI7dA_Uojx8TPzDLYFott0ma7ZJyOWs968WgfOW9P_2MdkYHcWvrBpF_yDR04-yPPIwrSU2e4dGpN7jL8Ukk1vIpNFrufEHqi5ENquFdszc6YwfojHxkiQb_WJTaRlLZJl9j')">
+<div class="absolute inset-0 bg-black/40"></div>
+<!-- Draggable pin simulation element -->
+<div class="relative z-10 flex flex-col items-center gap-2 animate-bounce">
+<div class="bg-primary text-on-primary px-3 py-1.5 rounded-full shadow-lg text-label-md font-label-md flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm" data-icon="location_on">location_on</span>
+            Santo Antônio de Jesus Pin Active
+          </div>
+<div class="w-4 h-4 rounded-full bg-primary animate-ping"></div>
+</div>
+<div class="absolute bottom-4 left-4 right-4 bg-surface/90 backdrop-blur-md p-4 rounded-xl border border-outline-variant/30 flex justify-between items-center">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="satellite_alt">satellite_alt</span>
+<div>
+<p class="text-body-md font-medium text-on-background">Geodesic Lock Established</p>
+<p class="text-body-sm text-on-surface-variant">Grid projection aligned with Bahia State Registry standards.</p>
+</div>
+</div>
+<button class="px-4 py-2 rounded-lg bg-surface-container-highest text-on-surface hover:text-primary text-label-md font-label-md border border-outline-variant/30 transition-colors">Recalibrate Pin</button>
+</div>
+</div>
+</div>
+<!-- Section C: Studio Equiretangular 8K & WebXR 360 Upload -->
+<div class="bg-surface-container border border-outline-variant/20 rounded-xl p-6 md:p-8 flex flex-col gap-6" id="vault">
+<div class="flex items-center justify-between border-b border-outline-variant/20 pb-4">
+<div class="flex items-center gap-3">
+<span class="p-2 rounded-lg bg-primary/10 text-primary material-symbols-outlined" data-icon="view_in_ar">view_in_ar</span>
+<div>
+<h2 class="text-headline-md font-headline-md text-on-background">Studio Equiretangular 8K &amp; WebXR 360 Upload</h2>
+<p class="text-body-sm text-on-surface-variant">Ingest high-fidelity equirectangular imagery for immersive VR property walkthroughs.</p>
+</div>
+</div>
+<span class="px-3 py-1 rounded bg-emerald-500/10 text-emerald-400 text-label-sm font-label-sm border border-emerald-500/20 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="verified">verified</span>
+          Certificado WebXR 8K
+        </span>
+</div>
+<!-- Drag and Drop Zone -->
+<div class="border-2 border-dashed border-outline-variant/40 rounded-xl p-8 flex flex-col items-center justify-center gap-4 text-center hover:border-primary transition-colors bg-surface/50 relative overflow-hidden group">
+<div class="absolute inset-0 bg-cover bg-center opacity-10 group-hover:opacity-20 transition-opacity pointer-events-none" style="background-image: url('https://lh3.googleusercontent.com/aida/AEtjO1WzSAiiQ0NLBXOE7ZjkMRmZr-3Grpg_YG9d08c-WsQM1pr3Lsxg6F5UYDzmaVzUEWF62SOa4U8KzqlJSnrP2tNF-U9RfT2m5cC352XdmyvUT4y-VfbqT-GH5c1SmKDuyU8Ig9lWRHjRag5KTOB95UGWr0Y6SaEJ9RJa2Dru3zZP5aGpr9wNQ1hqdmlOrAzxGKC8ohMf-_KDyyh8ugHiez9pKmj7ndr461qQMeYGh0xWvEm4PR5L41FB9Mzj')"></div>
+<div class="w-16 h-16 rounded-full bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl" data-icon="upload_file">upload_file</span>
+</div>
+<div class="flex flex-col gap-1 max-w-md">
+<p class="text-headline-sm font-headline-sm text-on-background">Drop 8K Equiretangular TIFF / EXR Panoramas Here</p>
+<p class="text-body-sm text-on-surface-variant">Supports dual-hemisphere projections up to 16,384 x 8,192 resolution with uncompressed color profiles.</p>
+</div>
+<button class="mt-2 px-6 py-2.5 rounded-xl bg-surface-container-highest text-primary border border-primary/30 text-label-md font-label-md hover:bg-primary hover:text-on-primary transition-all">Browse Secure Files</button>
+</div>
+<!-- Preview Reference Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="relative h-48 rounded-xl overflow-hidden border border-outline-variant/30 bg-cover bg-center flex items-end p-4" style="background-image: url('https://lh3.googleusercontent.com/aida/AEtjO1WzSAiiQ0NLBXOE7ZjkMRmZr-3Grpg_YG9d08c-WsQM1pr3Lsxg6F5UYDzmaVzUEWF62SOa4U8KzqlJSnrP2tNF-U9RfT2m5cC352XdmyvUT4y-VfbqT-GH5c1SmKDuyU8Ig9lWRHjRag5KTOB95UGWr0Y6SaEJ9RJa2Dru3zZP5aGpr9wNQ1hqdmlOrAzxGKC8ohMf-_KDyyh8ugHiez9pKmj7ndr461qQMeYGh0xWvEm4PR5L41FB9Mzj')">
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+<div class="relative z-10 flex justify-between items-end w-full">
+<div>
+<span class="text-label-sm font-label-sm text-primary uppercase">Active Panorama 01</span>
+<p class="text-headline-sm font-headline-sm text-on-background">Living Pavilion Twilight</p>
+</div>
+<span class="px-2 py-1 rounded bg-black/60 backdrop-blur-md text-xs font-mono text-white">8192x4096 8K</span>
+</div>
+</div>
+<div class="relative h-48 rounded-xl overflow-hidden border border-outline-variant/30 bg-cover bg-center flex items-end p-4" style="background-image: url('https://lh3.googleusercontent.com/aida/AEtjO1XiAnMCupCFy4BEX-pjEjiJELn1043ZX-NaK7qdiVccOlkD48K5uLES6ULJ8PDpwPwV9a_0Kh7BNR9gbUngNAd_MyhXplsF1vCef4uYXqG239YtYBuwT7lnkrvEJ4fxQZS3RsQZE0awKjX86kbXgPlW47ZgW1zPq7CrkAUiN-hBsCznE6Hfyw4h_3qcUEzIMNKg2AjmAYktaQXBnljBv65UAAdo1uRzjDTSh5fKr26Xuxup-jclrMtqwsDq')">
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+<div class="relative z-10 flex justify-between items-end w-full">
+<div>
+<span class="text-label-sm font-label-sm text-primary uppercase">Active Panorama 02</span>
+<p class="text-headline-sm font-headline-sm text-on-background">Cantilevered Master Suite</p>
+</div>
+<span class="px-2 py-1 rounded bg-black/60 backdrop-blur-md text-xs font-mono text-white">8192x4096 8K</span>
+</div>
+</div>
+</div>
+<!-- Toggle Switches & Hotspot Placement -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-outline-variant/20">
+<div class="flex flex-col gap-4">
+<label class="flex items-center justify-between p-4 rounded-xl bg-surface border border-outline-variant/30 cursor-pointer">
+<span class="flex flex-col">
+<span class="text-body-md font-medium text-on-background">WebXR Immersive Protocol</span>
+<span class="text-body-sm text-on-surface-variant">Enable direct headset streaming via WebGL engine</span>
+</span>
+<input checked="" class="rounded border-outline-variant text-primary focus:ring-0 bg-surface-container w-5 h-5" type="checkbox"/>
+</label>
+<label class="flex items-center justify-between p-4 rounded-xl bg-surface border border-outline-variant/30 cursor-pointer">
+<span class="flex flex-col">
+<span class="text-body-md font-medium text-on-background">VR Box Gyroscope Calibration</span>
+<span class="text-body-sm text-on-surface-variant">Sub-pixel stabilization for mobile VR viewers</span>
+</span>
+<input checked="" class="rounded border-outline-variant text-primary focus:ring-0 bg-surface-container w-5 h-5" type="checkbox"/>
+</label>
+</div>
+<div class="flex flex-col justify-between p-4 rounded-xl bg-surface border border-outline-variant/30 gap-4">
+<div>
+<p class="text-label-md font-label-md text-on-surface-variant uppercase tracking-wider mb-1">Hotspot Spatial Anchor Placement</p>
+<p class="text-body-sm text-on-surface-variant">Map interactive anchor nodes across the three core property zones.</p>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant/30 text-body-sm text-primary flex items-center gap-1.5">
+<span class="material-symbols-outlined text-xs" data-icon="fiber_manual_record" style="font-variation-settings: 'FILL' 1;">fiber_manual_record</span>
+              Living Pavilion
+            </span>
+<span class="px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant/30 text-body-sm text-primary flex items-center gap-1.5">
+<span class="material-symbols-outlined text-xs" data-icon="fiber_manual_record" style="font-variation-settings: 'FILL' 1;">fiber_manual_record</span>
+              Master Suite
+            </span>
+<span class="px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant/30 text-body-sm text-primary flex items-center gap-1.5">
+<span class="material-symbols-outlined text-xs" data-icon="fiber_manual_record" style="font-variation-settings: 'FILL' 1;">fiber_manual_record</span>
+              Infinite Pool Deck
+            </span>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col sm:flex-row justify-end gap-4 pt-6 border-t border-outline-variant/20">
+<button class="px-6 py-3 rounded-xl bg-surface-container-highest text-on-surface hover:text-on-background border border-outline-variant/30 text-label-md font-label-md transition-colors">
+          Salvar Rascunho Geodésico
+        </button>
+<button class="px-8 py-3 rounded-xl bg-primary-container text-on-primary-container text-label-md font-label-md font-bold hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" data-icon="lock">lock</span>
+          Publicar Dossier Privativo
+        </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container dark:bg-surface-container w-full border-t border-outline-variant/20 mt-16">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-8 py-6 max-w-7xl mx-auto gap-4">
+<div class="flex flex-col md:flex-row items-center gap-4 text-center md:text-left">
+<span class="text-headline-sm font-headline-sm text-primary">Recôncavo Prime</span>
+<p class="text-body-sm font-body-sm text-on-surface-variant max-w-xl">
+        © Recôncavo Prime. All rights reserved. Strict confidentiality protocols apply under international real estate registry standards.
+      </p>
+</div>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="text-on-surface-variant text-label-sm font-label-sm hover:text-primary transition-colors duration-200" href="#">Legal Registry</a>
+<a class="text-on-surface-variant text-label-sm font-label-sm hover:text-primary transition-colors duration-200" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant text-label-sm font-label-sm hover:text-primary transition-colors duration-200" href="#">Compliance</a>
+<a class="text-on-surface-variant text-label-sm font-label-sm hover:text-primary transition-colors duration-200" href="#">Secure Data Protocol</a>
+</div>
+</div>
+</footer>
+</body></html>

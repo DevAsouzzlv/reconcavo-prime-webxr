@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Recôncavo Prime VR - Mansão Villa Imperial</title>
+<!-- Google Fonts & Material Symbols -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS with custom theme config -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container-lowest": "#ffffff",
+            "primary-fixed": "#cfe5fd",
+            "surface-variant": "#e5e2dc",
+            "tertiary": "#000f1d",
+            "on-secondary-fixed-variant": "#5d4214",
+            "tertiary-fixed-dim": "#abcae8",
+            "primary": "#000f1d",
+            "primary-fixed-dim": "#b3c9e0",
+            "surface": "#fcf9f3",
+            "on-background": "#1c1c18",
+            "on-primary": "#ffffff",
+            "secondary-fixed": "#ffddb0",
+            "on-tertiary-fixed-variant": "#2b4962",
+            "on-surface": "#1c1c18",
+            "on-secondary-container": "#785a2a",
+            "on-primary-fixed": "#061d2f",
+            "surface-dim": "#dcdad4",
+            "inverse-on-surface": "#f3f0ea",
+            "on-surface-variant": "#43474c",
+            "secondary-container": "#fdd398",
+            "error-container": "#ffdad6",
+            "surface-container-low": "#f6f3ed",
+            "error": "#ba1a1a",
+            "outline-variant": "#c3c7cd",
+            "outline": "#74777d",
+            "on-secondary": "#ffffff",
+            "background": "#fcf9f3",
+            "on-tertiary-fixed": "#001d31",
+            "surface-bright": "#fcf9f3",
+            "on-tertiary-container": "#708eaa",
+            "inverse-surface": "#31312d",
+            "secondary": "#775929",
+            "on-secondary-fixed": "#281800",
+            "on-error": "#ffffff",
+            "inverse-primary": "#b3c9e0",
+            "surface-container-high": "#ebe8e2",
+            "surface-container": "#f0eee8",
+            "on-primary-container": "#788da3",
+            "secondary-fixed-dim": "#e9c086",
+            "primary-container": "#0f2537",
+            "on-primary-fixed-variant": "#34495c",
+            "tertiary-fixed": "#cde5ff",
+            "on-error-container": "#93000a",
+            "tertiary-container": "#01263d",
+            "surface-tint": "#4c6075",
+            "surface-container-highest": "#e5e2dc",
+            "on-tertiary": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xl": "2.5rem",
+            "gutter-lg": "2rem",
+            "gutter-sm": "1rem",
+            "margin": "1.5rem",
+            "margin-lg": "5rem",
+            "space-lg": "1.5rem",
+            "margin-md": "3rem",
+            "gutter": "1.5rem",
+            "space-xs": "0.25rem",
+            "space-md": "1rem",
+            "space-sm": "0.5rem"
+          },
+          "fontFamily": {
+            "body-lg": ["Plus Jakarta Sans"],
+            "label-sm": ["Plus Jakarta Sans"],
+            "display-mobile": ["Playfair Display"],
+            "title-md": ["Plus Jakarta Sans"],
+            "headline-lg-mobile": ["Playfair Display"],
+            "display": ["Playfair Display"],
+            "title-lg": ["Plus Jakarta Sans"],
+            "headline-md": ["Playfair Display"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "headline-lg": ["Playfair Display"],
+            "body-sm": ["Plus Jakarta Sans"],
+            "label-md": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+            "label-sm": ["11px", {"lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "600"}],
+            "display-mobile": ["38px", {"lineHeight": "46px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+            "title-md": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+            "headline-lg-mobile": ["30px", {"lineHeight": "38px", "letterSpacing": "0em", "fontWeight": "600"}],
+            "display": ["56px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+            "title-lg": ["18px", {"lineHeight": "26px", "fontWeight": "600"}],
+            "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "500"}],
+            "headline-sm": ["22px", {"lineHeight": "30px", "fontWeight": "600"}],
+            "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+            "body-sm": ["13px", {"lineHeight": "20px", "fontWeight": "400"}],
+            "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "600"}],
+            "body-md": ["15px", {"lineHeight": "24px", "fontWeight": "400"}]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .material-symbols-outlined.fill {
+      font-variation-settings: 'FILL' 1;
+    }
+    @keyframes pulse-gold {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(200, 162, 107, 0.7), 0 0 20px rgba(200, 162, 107, 0.45);
+      }
+      50% {
+        box-shadow: 0 0 0 12px rgba(200, 162, 107, 0), 0 0 28px rgba(200, 162, 107, 0.65);
+      }
+    }
+    .animate-pulse-gold {
+      animation: pulse-gold 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .lens-mask {
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: inset 0 0 25px rgba(0,0,0,0.85);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased selection:bg-secondary-container selection:text-primary-container h-full">
+<!-- TOP APP BAR (Shared Component Anchor) -->
+<header class="bg-primary/80 dark:bg-primary/90 backdrop-blur-md text-on-primary dark:text-inverse-on-surface docked full-width top-0 fixed z-50 shadow-lg">
+<div class="flex justify-between items-center w-full px-margin py-space-sm max-w-screen-md mx-auto">
+<div class="flex items-center space-x-2">
+<button aria-label="Voltar" class="w-9 h-9 rounded-full bg-surface-container-highest/10 hover:text-secondary-container transition-colors duration-200 active:scale-95 flex items-center justify-center" type="button">
+<span class="material-symbols-outlined text-[20px]">arrow_back</span>
+</button>
+<div>
+<h1 class="text-title-lg font-title-lg font-bold text-on-primary tracking-wide leading-tight">Recôncavo Prime VR</h1>
+<p class="text-[10px] uppercase tracking-widest text-secondary-fixed/90 font-semibold">Mansão Villa Imperial • SAJ</p>
+</div>
+</div>
+<div class="flex items-center space-x-2">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary-fixed/15 border border-secondary-fixed-dim/30 text-[11px] font-semibold text-secondary-fixed">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+<span>Giroscópio Ativo</span>
+</span>
+<button aria-label="Modo AR" class="w-9 h-9 rounded-full bg-surface-container-highest/10 hover:text-secondary-container transition-colors duration-200 active:scale-95 flex items-center justify-center" type="button">
+<span class="material-symbols-outlined text-[20px]">view_in_ar</span>
+</button>
+</div>
+</div>
+</header>
+<!-- MAIN SCROLL CONTAINER -->
+<main class="pt-[62px] pb-[168px] max-w-screen-md mx-auto min-h-screen flex flex-col">
+<!-- UPPER SECTION: INTERACTIVE 360º GYROSCOPE VIEWER -->
+<section class="relative w-full aspect-[4/3] sm:aspect-[16/10] bg-primary overflow-hidden select-none touch-pan-x">
+<!-- 360 Background Living Room Panoramics -->
+<img alt="Living room 360 view" class="w-full h-full object-cover scale-105 transition-transform duration-700 ease-out" src="https://lh3.googleusercontent.com/aida/AEtjO1VgDBK5edE1nDYENiMPOLr8SabYChZoR32Dy5xsgfcrKdJINpS-bGv0GjlGdlzaxSCl7UW8pRbGy0O0c0HW-JxtY74rjJ7IL2x1YHyO9tWVNqiVhp90Kz1TWdDVWmt5VTVgEd2myrADE5qKSqvb34vACcAg4tvtq1TL51_aHul0No7hOoNWnZxIeWuj_yjWEjLq0H8FtdnPtGkEYorlsCPT1p6vBFmnB7c20I2jrtiZah1AskM3V1J7-hk"/>
+<!-- Gradient Overlays for Readability -->
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/10 to-primary/60 pointer-events-none"></div>
+<!-- Azimuth & Orientation Overlay -->
+<div class="absolute top-3 right-3 z-20 flex items-center gap-2">
+<div class="backdrop-blur-md bg-primary-container/80 border border-secondary-fixed-dim/30 px-3 py-1.5 rounded-full shadow-lg flex items-center gap-2 text-on-primary">
+<span class="material-symbols-outlined text-[16px] text-secondary-fixed rotate-45">explore</span>
+<span class="text-[11px] font-semibold tracking-wider font-mono text-secondary-fixed">142º SE</span>
+<span class="w-px h-3 bg-white/20"></span>
+<span class="text-[10px] text-on-primary/80">Horizonte 0.0º</span>
+</div>
+</div>
+<!-- Gesture & Interaction Prompt (Subtle Floating Pill) -->
+<div class="absolute top-3 left-3 z-20">
+<div class="backdrop-blur-md bg-primary-container/70 border border-white/10 px-2.5 py-1 rounded-full flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-secondary-fixed-dim">screen_rotation</span>
+<span class="text-[10px] text-on-primary/90 font-medium">Incline o celular p/ girar</span>
+</div>
+</div>
+<!-- 3D Interactive Hotspot 1: Gourmet & Piscina -->
+<div class="absolute bottom-16 right-8 z-20 flex flex-col items-end group cursor-pointer active:scale-95 transition-all">
+<div class="flex items-center gap-2 mb-1.5 bg-primary-container/90 border border-secondary-fixed-dim/50 backdrop-blur-md text-secondary-fixed px-3 py-1 rounded-full shadow-xl">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed animate-ping"></span>
+<span class="text-[11px] font-semibold tracking-wide">Área Gourmet &amp; Piscina (8m)</span>
+<span class="material-symbols-outlined text-[15px]">arrow_forward</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-secondary-fixed text-primary flex items-center justify-center animate-pulse-gold shadow-2xl">
+<span class="material-symbols-outlined text-[20px] font-bold">door_open</span>
+</div>
+</div>
+<!-- 3D Interactive Hotspot 2: Ceiling Footprint -->
+<div class="absolute top-1/4 left-1/4 z-20 flex items-center gap-2 group cursor-pointer active:scale-95 transition-transform">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed/90 backdrop-blur-sm text-primary flex items-center justify-center shadow-lg border border-white/40">
+<span class="material-symbols-outlined text-[16px]">expand</span>
+</div>
+<div class="backdrop-blur-md bg-primary-container/85 border border-white/15 px-2.5 py-1 rounded-full shadow-md">
+<p class="text-[10px] font-semibold text-secondary-fixed">Pé-Direito Duplo 6,20m</p>
+</div>
+</div>
+<!-- Centered Subtle Gyro Crosshair Overlay -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-40">
+<div class="w-8 h-8 border border-secondary-fixed/50 rounded-full flex items-center justify-center">
+<div class="w-1.5 h-1.5 bg-secondary-fixed rounded-full"></div>
+</div>
+</div>
+<!-- Room Carousel Selector (Bottom of Viewer) -->
+<div class="absolute bottom-2 left-0 right-0 z-30 px-3">
+<div class="flex items-center gap-2 overflow-x-auto hide-scrollbar py-1">
+<button class="flex-shrink-0 px-3 py-1.5 rounded-full bg-secondary text-on-secondary text-[11px] font-semibold border border-secondary-fixed shadow-md flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-fixed"></span>
+            Living &amp; Sala Integrada
+          </button>
+<button class="flex-shrink-0 px-3 py-1.5 rounded-full bg-primary/80 backdrop-blur-md text-on-primary/80 text-[11px] font-medium border border-white/15 hover:border-secondary-fixed/40 transition-colors">
+            Deck &amp; Borda Infinita
+          </button>
+<button class="flex-shrink-0 px-3 py-1.5 rounded-full bg-primary/80 backdrop-blur-md text-on-primary/80 text-[11px] font-medium border border-white/15 hover:border-secondary-fixed/40 transition-colors">
+            Suíte Master &amp; SPA
+          </button>
+<button class="flex-shrink-0 px-3 py-1.5 rounded-full bg-primary/80 backdrop-blur-md text-on-primary/80 text-[11px] font-medium border border-white/15 hover:border-secondary-fixed/40 transition-colors">
+            Fachada Noturna
+          </button>
+</div>
+</div>
+</section>
+<!-- SECTION: PROPERTY SPECS & OVERVIEW -->
+<section class="px-margin pt- space-md pb- space-sm">
+<div class="bg-surface-container-lowest p-space-md rounded-xl border border-secondary/15 shadow-sm">
+<div class="flex items-start justify-between">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="text-[10px] uppercase font-bold tracking-widest bg-secondary-container/40 text-on-secondary-container px-2 py-0.5 rounded">Alto Padrão SAJ</span>
+<span class="text-[10px] text-on-surface-variant font-medium">Loteamento Fechado</span>
+</div>
+<h2 class="text-headline-sm font-headline-sm text-primary leading-tight">Mansão Villa Imperial</h2>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">Condomínio Jardins • Santo Antônio de Jesus, Bahia</p>
+</div>
+<div class="text-right">
+<span class="text-label-sm font-label-sm text-secondary block">Valor de Venda</span>
+<span class="text-title-lg font-title-lg font-bold text-primary">R$ 2.450.000</span>
+</div>
+</div>
+<div class="grid grid-cols-4 gap-2 mt-4 pt-3 border-t border-surface-variant/40 text-center">
+<div class="bg-surface-container-low p-2 rounded-lg">
+<span class="material-symbols-outlined text-[18px] text-secondary block mx-auto">square_foot</span>
+<span class="text-[11px] font-bold text-primary block mt-0.5">480 m²</span>
+<span class="text-[9px] text-on-surface-variant uppercase">Construção</span>
+</div>
+<div class="bg-surface-container-low p-2 rounded-lg">
+<span class="material-symbols-outlined text-[18px] text-secondary block mx-auto">bed</span>
+<span class="text-[11px] font-bold text-primary block mt-0.5">4 Suítes</span>
+<span class="text-[9px] text-on-surface-variant uppercase">Privativas</span>
+</div>
+<div class="bg-surface-container-low p-2 rounded-lg">
+<span class="material-symbols-outlined text-[18px] text-secondary block mx-auto">pool</span>
+<span class="text-[11px] font-bold text-primary block mt-0.5">Infinita</span>
+<span class="text-[9px] text-on-surface-variant uppercase">Piscina</span>
+</div>
+<div class="bg-surface-container-low p-2 rounded-lg">
+<span class="material-symbols-outlined text-[18px] text-secondary block mx-auto">directions_car</span>
+<span class="text-[11px] font-bold text-primary block mt-0.5">4 Vagas</span>
+<span class="text-[9px] text-on-surface-variant uppercase">Garagem</span>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: STEREOSCOPIC VR BOX / CARDBOARD DUAL LENS MODE -->
+<section class="px-margin py-space-sm flex-1">
+<div class="bg-primary-container text-on-primary rounded-xl p-space-md border border-secondary/25 shadow-xl relative overflow-hidden">
+<!-- Ambient Champagne Accents -->
+<div class="absolute -top-12 -right-12 w-40 h-40 bg-secondary/15 rounded-full blur-2xl pointer-events-none"></div>
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-fixed text-[22px]">vrpano</span>
+<h3 class="text-title-md font-title-md font-bold text-on-primary">Modo Óculos VR (Stereo)</h3>
+</div>
+<span class="px-2 py-0.5 text-[10px] font-bold bg-secondary-fixed/20 text-secondary-fixed rounded-full border border-secondary-fixed/30 tracking-wide uppercase">Imersão 3D</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-primary/80 mb-4">
+          Transforme seu smartphone em óculos de realidade virtual. Encaixe no seu headset <strong class="text-secondary-fixed">VR Box</strong> ou <strong class="text-secondary-fixed">Google Cardboard</strong> para caminhar com giroscópio de cabeça.
+        </p>
+<!-- Split Screen Stereoscopic VR Simulation Container -->
+<div class="relative bg-tertiary p-3 rounded-lg border border-secondary/20 shadow-inner">
+<div class="flex items-center justify-between text-[10px] font-mono text-on-primary/60 mb-2 px-1">
+<span>[ OLHO ESQUERDO ]</span>
+<span class="text-secondary-fixed font-bold flex items-center gap-1">
+<span class="w-1.5 h-1.5 bg-emerald-400 rounded-full"></span> 60 FPS VR CALIBRADO
+            </span>
+<span>[ OLHO DIREITO ]</span>
+</div>
+<!-- Dual Lens Viewport with Center Divider -->
+<div class="grid grid-cols-2 gap-2 relative">
+<!-- Center Optical Divider Line -->
+<div class="absolute inset-y-0 left-1/2 -ml-[1px] w-[2px] bg-white/20 z-20 flex items-center justify-center">
+<span class="w-3 h-3 rounded-full bg-primary border border-secondary-fixed-dim/40"></span>
+</div>
+<!-- Left Lens -->
+<div class="relative aspect-square lens-mask bg-black border border-secondary/30">
+<img alt="Left eye stereoscopic VR lens view" class="w-full h-full object-cover scale-125 translate-x-1" src="https://lh3.googleusercontent.com/aida/AEtjO1VgDBK5edE1nDYENiMPOLr8SabYChZoR32Dy5xsgfcrKdJINpS-bGv0GjlGdlzaxSCl7UW8pRbGy0O0c0HW-JxtY74rjJ7IL2x1YHyO9tWVNqiVhp90Kz1TWdDVWmt5VTVgEd2myrADE5qKSqvb34vACcAg4tvtq1TL51_aHul0No7hOoNWnZxIeWuj_yjWEjLq0H8FtdnPtGkEYorlsCPT1p6vBFmnB7c20I2jrtiZah1AskM3V1J7-hk"/>
+<!-- Stereoscopic Barrel Vignette and Reticle -->
+<div class="absolute inset-0 bg-radial from-transparent via-transparent to-black/80 pointer-events-none"></div>
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="w-3 h-3 border-2 border-secondary-fixed rounded-full shadow-lg"></div>
+</div>
+</div>
+<!-- Right Lens -->
+<div class="relative aspect-square lens-mask bg-black border border-secondary/30">
+<img alt="Right eye stereoscopic VR lens view" class="w-full h-full object-cover scale-125 -translate-x-1" src="https://lh3.googleusercontent.com/aida/AEtjO1VgDBK5edE1nDYENiMPOLr8SabYChZoR32Dy5xsgfcrKdJINpS-bGv0GjlGdlzaxSCl7UW8pRbGy0O0c0HW-JxtY74rjJ7IL2x1YHyO9tWVNqiVhp90Kz1TWdDVWmt5VTVgEd2myrADE5qKSqvb34vACcAg4tvtq1TL51_aHul0No7hOoNWnZxIeWuj_yjWEjLq0H8FtdnPtGkEYorlsCPT1p6vBFmnB7c20I2jrtiZah1AskM3V1J7-hk"/>
+<!-- Stereoscopic Barrel Vignette and Reticle -->
+<div class="absolute inset-0 bg-radial from-transparent via-transparent to-black/80 pointer-events-none"></div>
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="w-3 h-3 border-2 border-secondary-fixed rounded-full shadow-lg"></div>
+</div>
+</div>
+</div>
+<!-- Visual Guidance for Gaze Tracking -->
+<div class="mt-2.5 bg-primary/70 rounded p-2 text-center border border-white/5">
+<p class="text-[11px] text-secondary-fixed-dim font-medium flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-secondary-fixed">center_focus_strong</span>
+              Mire o ponto dourado por 2s para teletransportar sem tocar na tela.
+            </p>
+</div>
+</div>
+<!-- Launch VR Mode Fullscreen Trigger -->
+<button class="w-full mt-4 bg-secondary text-on-secondary hover:bg-secondary/90 py-3.5 px-4 rounded-lg font-title-md font-semibold text-title-md shadow-lg flex items-center justify-center gap-2 border border-secondary-fixed-dim/40 transition-transform active:scale-95" type="button">
+<span class="material-symbols-outlined text-[22px]">play_circle</span>
+<span>Iniciar Experiência Estereoscópica VR</span>
+</button>
+<!-- Technical Badges -->
+<div class="mt-3 flex items-center justify-center gap-3 text-[10px] text-on-primary/60 font-mono">
+<span>WebXR v2.1</span>
+<span>•</span>
+<span>iOS / Android</span>
+<span>•</span>
+<span>Calibração SAJ-360</span>
+</div>
+</div>
+</section>
+<!-- BROKER EXPERT PROFILE CARD -->
+<section class="px-margin py-space-sm mb-4">
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-secondary/15 flex items-center justify-between shadow-sm">
+<div class="flex items-center space-x-3">
+<div class="relative">
+<img alt="Corretor de Imóveis Carlos Mendes" class="w-13 h-13 w-12 h-12 rounded-full object-cover border-2 border-secondary" src="https://lh3.googleusercontent.com/aida/AEtjO1VyRCOdY6-SCPS0aoPIOTYr9vi7pWgzDnQU8JQhcyJpCRzyn7v-Y50b1ExRO6zwZ2e8b2hqvtJtEcg6MG-Rf428PSDkSbxTSViXa8cKbnm5Z58Qw6VTZUeU2wBNt2gtWvY6ZyNpWq2JXzeX69nbRtIfdiaSFWRR96V3pKDndhWXFjulHXlCaQYIxGVQmUZbD6NcQ6n6sRg1sb8sX5nZu8O8dG_N875cAjtWlHWZ7ClkKSrQ4zaJFFKL_0E"/>
+<span class="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 border-2 border-white rounded-full"></span>
+</div>
+<div>
+<h4 class="text-title-md font-title-md font-bold text-primary">Carlos Eduardo Mendes</h4>
+<p class="text-[11px] text-secondary font-medium">Especialista Alto Padrão • CRECI 24.890-BA</p>
+<p class="text-[11px] text-on-surface-variant">Pronto para conduzir sua visita guiada online.</p>
+</div>
+</div>
+<a class="bg-secondary-fixed text-on-secondary-fixed p-2.5 rounded-full hover:bg-secondary-container transition-colors active:scale-95 flex items-center justify-center shadow" href="https://wa.me/5575999999999" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+</a>
+</div>
+</section>
+</main>
+<!-- BOTTOM STICKY MOBILE ACTION BAR & VIP CONCIERGE -->
+<div class="fixed bottom-[58px] left-0 right-0 z-40 bg-primary/95 backdrop-blur-xl border-t border-secondary/20 px-margin py-2.5 max-w-screen-md mx-auto shadow-2xl">
+<div class="flex items-center justify-between gap-3">
+<div class="flex-1">
+<span class="text-[10px] text-secondary-fixed/90 uppercase tracking-wider block font-semibold">Mansão Villa Imperial</span>
+<div class="flex items-baseline gap-1.5">
+<span class="text-title-lg font-title-lg font-bold text-on-primary">R$ 2.450.000</span>
+<span class="text-[10px] text-on-primary/60">Cond. Jardins</span>
+</div>
+</div>
+<a class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-body-sm px-4 py-2.5 rounded-lg flex items-center gap-2 shadow-lg active:scale-95 transition-transform" href="https://wa.me/5575999999999?text=Ol%C3%A1%20Carlos,%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20a%20Mans%C3%A3o%20Villa%20Imperial%20pelo%20Tour%20VR">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+<span>WhatsApp Carlos</span>
+</a>
+</div>
+</div>
+<!-- BOTTOM NAVBAR (Shared Component Anchor) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-gutter-sm py-space-xs bg-primary/90 dark:bg-primary/95 backdrop-blur-xl border-t border-secondary/20 shadow-2xl max-w-screen-md mx-auto right-0">
+<!-- Tab 1: Giroscópio (ACTIVE) -->
+<button class="flex flex-col items-center justify-center text-secondary-fixed dark:text-secondary-fixed font-bold scale-105 active:scale-95 transition-transform duration-150" type="button">
+<span class="material-symbols-outlined text-[22px]">screen_rotation</span>
+<span class="text-label-sm font-label-sm mt-0.5">Giroscópio</span>
+</button>
+<!-- Tab 2: VR Box -->
+<button class="flex flex-col items-center justify-center text-on-primary/60 dark:text-on-primary/50 hover:text-secondary-container transition-colors duration-200 active:scale-95" type="button">
+<span class="material-symbols-outlined text-[22px]">vrpano</span>
+<span class="text-label-sm font-label-sm mt-0.5">VR Box</span>
+</button>
+<!-- Tab 3: Cômodos -->
+<button class="flex flex-col items-center justify-center text-on-primary/60 dark:text-on-primary/50 hover:text-secondary-container transition-colors duration-200 active:scale-95" type="button">
+<span class="material-symbols-outlined text-[22px]">view_carousel</span>
+<span class="text-label-sm font-label-sm mt-0.5">Cômodos</span>
+</button>
+<!-- Tab 4: Corretor -->
+<button class="flex flex-col items-center justify-center text-on-primary/60 dark:text-on-primary/50 hover:text-secondary-container transition-colors duration-200 active:scale-95" type="button">
+<span class="material-symbols-outlined text-[22px]">chat</span>
+<span class="text-label-sm font-label-sm mt-0.5">Corretor</span>
+</button>
+</nav>
+</body></html>

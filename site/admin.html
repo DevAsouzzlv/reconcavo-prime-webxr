@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo do Corretor — Broker Studio | Recôncavo Prime</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#0f1115',
+                        travertine: '#f6f4ee',
+                        bronze: '#b89c74',
+                        'bronze-hover': '#a4875e',
+                        surface: '#16191f',
+                        card: '#1b1f27'
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Leaflet CSS & JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body class="bg-obsidian text-travertine font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- TOP BAR -->
+    <header class="h-20 bg-card border-b border-white/10 px-6 flex items-center justify-between sticky top-0 z-30">
+        <div class="flex items-center space-x-6">
+            <a href="index.html" class="flex flex-col">
+                <span class="font-serif text-2xl tracking-[0.2em] font-bold text-white">RECÔNCAVO PRIME</span>
+                <span class="text-[9px] tracking-[0.3em] uppercase text-bronze -mt-1 font-sans">Broker Studio • Painel do Corretor</span>
+            </a>
+            <span class="text-white/20 hidden md:inline">|</span>
+            <span class="text-xs text-emerald-400 hidden md:flex items-center space-x-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>Carlos Eduardo Mendes (CRECI-BA 24.890) • Online</span>
+            </span>
+        </div>
+
+        <div class="flex items-center space-x-4">
+            <a href="index.html" class="text-xs text-white/70 hover:text-white">Ver Portal Público</a>
+            <a href="mapa.html" class="text-xs text-white/70 hover:text-white">Ver Mapa de SAJ</a>
+            <button onclick="logout()" class="px-4 py-2 bg-white/5 border border-white/15 rounded-full text-xs text-red-400 hover:bg-red-500/20 transition">
+                Sair
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-10 flex-grow w-full">
+        <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 pb-4 border-b border-white/10">
+            <div>
+                <h1 class="font-serif text-3xl sm:text-4xl text-white font-bold">Gestão & Cadastro com APIs Integradas</h1>
+                <p class="text-xs text-white/60 mt-1">Busca automática de CEP (ViaCEP), Geocodificação OpenStreetMap e publicação imediata com WebXR 360º.</p>
+            </div>
+            <div class="mt-4 md:mt-0 flex space-x-3">
+                <span class="px-4 py-2 bg-bronze/10 border border-bronze/30 text-bronze rounded-2xl text-xs font-bold" id="badge-total-props">
+                    Carregando...
+                </span>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- FORMULÁRIO DE CADASTRO (8 colunas) -->
+            <div class="lg:col-span-8 bg-card p-8 rounded-3xl border border-white/10 shadow-2xl">
+                <h2 class="font-serif text-2xl text-white font-bold mb-6 flex items-center space-x-2">
+                    <span class="text-bronze">➕</span><span>Cadastrar Imóvel com Geocodificação Automática</span>
+                </h2>
+
+                <form onsubmit="saveNewProperty(event)" class="space-y-6">
+                    <!-- BUSCA AUTOMÁTICA POR CEP (API VIACEP) -->
+                    <div class="p-4 bg-obsidian/70 border border-bronze/30 rounded-2xl">
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="text-xs uppercase tracking-wider text-bronze font-bold flex items-center space-x-1.5">
+                                <span>⚡</span><span>Localização Inteligente via CEP (API ViaCEP)</span>
+                            </label>
+                            <span id="cep-status" class="text-[10px] text-white/50">Digite o CEP para preencher o endereço</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <input type="text" id="form-cep" maxlength="9" placeholder="44572-000" class="w-36 bg-obsidian border border-white/15 rounded-xl px-3 py-2 text-xs text-white font-mono focus:border-bronze">
+                            <button type="button" onclick="handleSearchCEP()" class="px-4 py-2 bg-bronze hover:bg-bronze-hover text-obsidian text-xs font-bold rounded-xl transition">
+                                Buscar CEP
+                            </button>
+                            <input type="text" id="form-address" placeholder="Endereço / Condomínio em SAJ" class="flex-grow bg-obsidian border border-white/15 rounded-xl px-3 py-2 text-xs text-white focus:border-bronze">
+                            <button type="button" onclick="handleGeocodeAddress()" class="px-4 py-2 bg-white/10 hover:bg-white/20 text-white text-xs font-semibold rounded-xl transition flex items-center space-x-1">
+                                <span>📍</span><span>Geocodificar</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider text-white/70 mb-2 font-semibold">Título do Imóvel</label>
+                            <input type="text" id="form-title" required placeholder="Ex: Mansão Reserva dos Pássaros" class="w-full bg-obsidian border border-white/15 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-bronze">
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider text-white/70 mb-2 font-semibold">Preço de Venda (R$)</label>
+                            <input type="text" id="form-price" required placeholder="Ex: R$ 2.950.000" class="w-full bg-obsidian border border-white/15 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-bronze">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider text-white/70 mb-2 font-semibold">Bairro / Condomínio</label>
+                            <select id="form-bairro" class="w-full bg-obsidian border border-white/15 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-bronze">
+                                <option value="Condomínio Busca Vida">Condomínio Busca Vida</option>
+                                <option value="Condomínio Jardins">Condomínio Jardins</option>
+                                <option value="Centro Nobre">Centro Nobre</option>
+                                <option value="Maria Preta">Maria Preta</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider text-white/70 mb-2 font-semibold">Tipologia</label>
+                            <select id="form-tipo" class="w-full bg-obsidian border border-white/15 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-bronze">
+                                <option value="mansao">Mansão em Condomínio</option>
+                                <option value="cobertura">Cobertura Panorâmica</option>
+                                <option value="casa">Casa Contemporânea</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider text-white/70 mb-2 font-semibold">Área Construída (m²)</label>
+                            <input type="number" id="form-area" required placeholder="480" class="w-full bg-obsidian border border-white/15 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-bronze">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider text-white/70 mb-2 font-semibold">Suítes</label>
+                            <input type="number" id="form-suites" required value="4" class="w-full bg-obsidian border border-white/15 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-bronze">
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider text-white/70 mb-2 font-semibold">Vagas</label>
+                            <input type="number" id="form-vagas" required value="4" class="w-full bg-obsidian border border-white/15 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-bronze">
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider text-white/70 mb-2 font-semibold">Condomínio (R$)</label>
+                            <input type="text" id="form-condo" placeholder="R$ 900" class="w-full bg-obsidian border border-white/15 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-bronze">
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider text-white/70 mb-2 font-semibold">IPTU (R$)</label>
+                            <input type="text" id="form-iptu" placeholder="R$ 3.000" class="w-full bg-obsidian border border-white/15 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-bronze">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-white/70 mb-2 font-semibold">Descrição Arquitetônica</label>
+                        <textarea id="form-desc" rows="3" placeholder="Detalhes dos acabamentos nobres, projeto luminotécnico e integração com área de lazer..." class="w-full bg-obsidian border border-white/15 rounded-2xl p-4 text-sm text-white focus:outline-none focus:border-bronze"></textarea>
+                    </div>
+
+                    <!-- MAPA INTERATIVO COM PINO ARRASTÁVEL E COORDENADAS -->
+                    <div class="p-4 bg-obsidian/60 border border-white/10 rounded-2xl">
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="text-xs uppercase tracking-wider text-bronze font-bold">Pino no Mapa de Santo Antônio de Jesus</label>
+                            <span class="text-[10px] text-white/50">Clique ou arraste o pino para refinar a localização</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3 mb-2">
+                            <input type="text" id="form-lat" readonly value="-12.9720" class="bg-obsidian border border-white/10 rounded-xl px-3 py-1.5 text-xs text-white/80 font-mono">
+                            <input type="text" id="form-lng" readonly value="-39.2630" class="bg-obsidian border border-white/10 rounded-xl px-3 py-1.5 text-xs text-white/80 font-mono">
+                        </div>
+                        <div id="admin-map" class="h-48 w-full rounded-xl border border-white/10"></div>
+                    </div>
+
+                    <!-- ESTÚDIO 360 & WEBRX -->
+                    <div class="p-4 bg-obsidian/60 border border-white/10 rounded-2xl">
+                        <label class="block text-xs uppercase tracking-wider text-bronze font-bold mb-2">Estúdio 360º (Fotos Equiretangulares)</label>
+                        <div class="border-2 border-dashed border-bronze/40 rounded-2xl p-6 text-center hover:border-bronze cursor-pointer transition">
+                            <span class="text-3xl block mb-2">🥽</span>
+                            <strong class="text-xs text-white block">Equiretangulares vinculadas automaticamente</strong>
+                            <p class="text-[10px] text-white/50 mt-1">Living 360º, Varanda Gourmet e Suíte Master com suporte a Giroscópio e VR Box.</p>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 bg-bronze hover:bg-bronze-hover text-obsidian font-bold text-xs uppercase tracking-widest rounded-2xl shadow-xl transition">
+                        Publicar Imóvel no Portal & Atualizar Mapa SAJ
+                    </button>
+                </form>
+            </div>
+
+            <!-- LISTAGEM LATERAL DOS IMÓVEIS CADASTRADOS (4 colunas) -->
+            <div class="lg:col-span-4 space-y-6">
+                <div class="bg-card p-6 rounded-3xl border border-white/10">
+                    <h3 class="text-sm font-bold text-white uppercase tracking-wider mb-4 flex justify-between items-center">
+                        <span>Seu Portfólio Ativo</span>
+                        <span class="text-xs text-bronze">CRECI 24.890</span>
+                    </h3>
+                    <div id="admin-props-list" class="space-y-3 max-h-[600px] overflow-y-auto pr-1">
+                        <!-- Imóveis cadastrados -->
+                    </div>
+                </div>
+
+                <div class="bg-card p-6 rounded-3xl border border-white/10">
+                    <h3 class="text-sm font-bold text-white uppercase tracking-wider mb-3">WhatsApp de Destino dos Leads</h3>
+                    <p class="text-xs text-white/60 mb-2">Seus clientes em SAJ serão direcionados para:</p>
+                    <input type="text" id="admin-phone" value="5575998124500" class="w-full bg-obsidian border border-white/15 rounded-xl px-3 py-2 text-xs text-white font-mono mb-2">
+                    <span class="text-[10px] text-emerald-400 block">✓ Botão dinâmico sincronizado em todas as páginas</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="assets/data.js"></script>
+    <script>
+        let map;
+        let pinMarker;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initAdminMap();
+            renderAdminProps();
+        });
+
+        function initAdminMap() {
+            map = L.map('admin-map', { zoomControl: true }).setView([-12.9720, -39.2630], 14);
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(map);
+
+            pinMarker = L.marker([-12.9720, -39.2630], { draggable: true }).addTo(map);
+
+            pinMarker.on('dragend', () => {
+                const pos = pinMarker.getLatLng();
+                document.getElementById('form-lat').value = pos.lat.toFixed(4);
+                document.getElementById('form-lng').value = pos.lng.toFixed(4);
+            });
+
+            map.on('click', (e) => {
+                pinMarker.setLatLng(e.latlng);
+                document.getElementById('form-lat').value = e.latlng.lat.toFixed(4);
+                document.getElementById('form-lng').value = e.latlng.lng.toFixed(4);
+            });
+        }
+
+        // INTEGRAÇÃO VIACEP
+        async function handleSearchCEP() {
+            const cep = document.getElementById('form-cep').value;
+            const status = document.getElementById('cep-status');
+            status.innerText = 'Consultando ViaCEP...';
+
+            const res = await fetchViaCEP(cep);
+            if (res) {
+                status.innerText = `✓ CEP Localizado: ${res.bairro || 'SAJ'}`;
+                document.getElementById('form-address').value = `${res.logradouro || ''}, ${res.bairro || ''}, Santo Antônio de Jesus - BA`;
+                // Tenta geocodificar automaticamente
+                handleGeocodeAddress();
+            } else {
+                status.innerText = '⚠️ CEP não encontrado ou inválido.';
+            }
+        }
+
+        // INTEGRAÇÃO NOMINATIM OPENSTREETMAP GEOCODING
+        async function handleGeocodeAddress() {
+            const addr = document.getElementById('form-address').value;
+            if (!addr) return alert('Digite um endereço ou busque o CEP primeiro.');
+
+            const status = document.getElementById('cep-status');
+            status.innerText = 'Geocodificando com OpenStreetMap...';
+
+            const geo = await geocodeSAJAddress(addr);
+            if (geo) {
+                status.innerText = '✓ Coordenadas sincronizadas no mapa!';
+                document.getElementById('form-lat').value = geo.lat.toFixed(4);
+                document.getElementById('form-lng').value = geo.lng.toFixed(4);
+                pinMarker.setLatLng([geo.lat, geo.lng]);
+                map.setView([geo.lat, geo.lng], 16);
+            } else {
+                status.innerText = 'Localização aproximada em SAJ mantida.';
+            }
+        }
+
+        function renderAdminProps() {
+            const list = getProperties();
+            document.getElementById('badge-total-props').innerText = `${list.length} Imóveis Ativos`;
+            const container = document.getElementById('admin-props-list');
+            container.innerHTML = '';
+
+            list.forEach(p => {
+                const item = document.createElement('div');
+                item.className = 'p-3 bg-obsidian rounded-2xl border border-white/5 flex items-center justify-between text-xs';
+                item.innerHTML = `
+                    <div class="pr-2">
+                        <strong class="text-white block font-medium">${p.title}</strong>
+                        <span class="text-white/40">${p.bairro} • ${p.price}</span>
+                    </div>
+                    <div class="flex space-x-1 flex-shrink-0">
+                        <a href="detalhes.html?id=${p.id}" class="px-2 py-1 bg-white/10 hover:bg-white/20 text-white rounded-lg text-[10px]">Ficha</a>
+                        <a href="tour360.html?id=${p.id}" class="px-2 py-1 bg-bronze text-obsidian font-bold rounded-lg text-[10px]">360º</a>
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        function saveNewProperty(e) {
+            e.preventDefault();
+            const title = document.getElementById('form-title').value;
+            const price = document.getElementById('form-price').value;
+            const bairro = document.getElementById('form-bairro').value;
+            const tipo = document.getElementById('form-tipo').value;
+            const area = document.getElementById('form-area').value + ' m²';
+            const suites = parseInt(document.getElementById('form-suites').value);
+            const vagas = parseInt(document.getElementById('form-vagas').value);
+            const condo = document.getElementById('form-condo').value || 'R$ 800';
+            const iptu = document.getElementById('form-iptu').value || 'R$ 2.500';
+            const desc = document.getElementById('form-desc').value || 'Residência exclusiva com acabamento de alto padrão cadastrada pelo corretor Carlos Mendes.';
+            const lat = parseFloat(document.getElementById('form-lat').value);
+            const lng = parseFloat(document.getElementById('form-lng').value);
+
+            const newProp = {
+                id: 'imovel-' + Date.now(),
+                title: title,
+                price: price,
+                priceNum: 3000000,
+                condo: condo,
+                iptu: iptu,
+                bairro: bairro,
+                bairroKey: bairro.toLowerCase().includes('busca') ? 'busca-vida' : (bairro.toLowerCase().includes('jardins') ? 'jardins' : (bairro.toLowerCase().includes('maria') ? 'maria-preta' : 'centro')),
+                tipo: tipo,
+                tipoLabel: tipo === 'mansao' ? 'Mansão em Condomínio' : (tipo === 'cobertura' ? 'Cobertura Duplex' : 'Casa Contemporânea'),
+                area: area,
+                terreno: '700 m²',
+                suites: suites,
+                banheiros: suites + 2,
+                vagas: vagas,
+                hasVR: true,
+                destaque: true,
+                lat: lat,
+                lng: lng,
+                image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
+                gallery: [
+                    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
+                    'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80'
+                ],
+                desc: desc,
+                features: ['Acabamento de Alto Padrão', 'Área de Lazer Integrada', 'Garagem Coberta', 'Tour 360º WebXR Habilitado'],
+                broker: {
+                    name: 'Carlos Eduardo Mendes',
+                    creci: 'CRECI-BA 24.890',
+                    phone: document.getElementById('admin-phone').value || '5575998124500',
+                    avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=200&q=80',
+                    email: 'carlos.mendes@reconcavoprime.com.br'
+                },
+                panoramas: {
+                    living: { title: 'Living Principal', url: 'assets/panoramas/living_360.jpg', hotspots: [] },
+                    gourmet: { title: 'Varanda Gourmet & Piscina', url: 'assets/panoramas/gourmet_360.jpg', hotspots: [] },
+                    suite: { title: 'Suíte Master', url: 'assets/panoramas/suite_360.jpg', hotspots: [] }
+                }
+            };
+
+            const props = getProperties();
+            props.unshift(newProp);
+            saveProperties(props);
+
+            alert('🎉 Imóvel publicado com sucesso! O Tour 360º e o novo pino no mapa de Santo Antônio de Jesus já estão ao vivo.');
+            e.target.reset();
+            renderAdminProps();
+        }
+
+        function logout() {
+            sessionStorage.removeItem('broker_logged');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>

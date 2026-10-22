@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dossier Arquitetônico — Recôncavo Prime</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#0f1115',
+                        travertine: '#f6f4ee',
+                        bronze: '#b89c74',
+                        'bronze-hover': '#a4875e',
+                        surface: '#16191f',
+                        card: '#1b1f27'
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-obsidian text-travertine font-sans antialiased selection:bg-bronze selection:text-obsidian flex flex-col min-h-screen">
+
+    <!-- HEADER -->
+    <header class="sticky top-0 z-40 bg-obsidian/90 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-6">
+                <a href="index.html" class="flex flex-col">
+                    <span class="font-serif text-2xl tracking-[0.2em] font-bold text-white">RECÔNCAVO PRIME</span>
+                    <span class="text-[9px] tracking-[0.3em] uppercase text-bronze -mt-1 font-sans">Dossier Arquitetônico • SAJ</span>
+                </a>
+                <span class="text-white/20 hidden md:inline">|</span>
+                <nav class="hidden md:flex items-center space-x-4 text-xs text-white/60">
+                    <a href="index.html" class="hover:text-white">Início</a>
+                    <span>›</span>
+                    <a href="mapa.html" class="hover:text-white">Imóveis em SAJ</a>
+                    <span>›</span>
+                    <span class="text-bronze font-medium" id="breadcrumb-title">Dossier</span>
+                </nav>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <a href="mapa.html" class="text-xs text-white/70 hover:text-white">← Voltar ao Mapa</a>
+                <a id="btn-header-vr" href="#" class="bg-bronze hover:bg-bronze-hover text-obsidian px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider flex items-center space-x-1.5 shadow-lg transition">
+                    <span>🥽</span><span>Iniciar Tour 360º</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL DO DOSSIER -->
+    <main class="max-w-7xl mx-auto px-6 py-12 flex-grow">
+        <!-- Título e Valores -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-white/10 pb-8 mb-8">
+            <div>
+                <div class="flex items-center space-x-3 mb-2">
+                    <span class="px-3 py-1 rounded-full bg-bronze/10 border border-bronze/30 text-bronze text-[10px] uppercase tracking-widest font-bold" id="prop-bairro">
+                        Condomínio Fechado
+                    </span>
+                    <span class="text-xs text-emerald-400 flex items-center space-x-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span><span>Exclusividade Recôncavo Prime</span>
+                    </span>
+                </div>
+                <h1 class="font-serif text-4xl sm:text-6xl text-white font-bold" id="prop-title">Mansão Villa Imperial</h1>
+                <p class="text-white/60 text-sm mt-2" id="prop-tipolabel">Mansão Brutalista Contemporânea em Santo Antônio de Jesus - BA</p>
+            </div>
+
+            <div class="mt-6 md:mt-0 text-left md:text-right">
+                <span class="text-xs text-white/50 uppercase tracking-widest block font-medium">Valor de Investimento</span>
+                <span class="font-serif text-3xl sm:text-5xl font-bold text-white block mt-1" id="prop-price">R$ 2.450.000</span>
+                <span class="text-xs text-white/60 block mt-1" id="prop-taxes">Condomínio: R$ 850 / mês • IPTU: R$ 3.200 / ano</span>
+            </div>
+        </div>
+
+        <!-- GALERIA DE FOTOS ARQUITETÔNICAS COM BANNER 360 DESTAQUE -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-12">
+            <!-- Foto Principal com CTA 360 Sobreposto -->
+            <div class="md:col-span-8 relative h-[480px] rounded-3xl overflow-hidden border border-white/10 group">
+                <img id="main-gallery-img" src="" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-obsidian/90 via-transparent to-black/20"></div>
+                
+                <div class="absolute bottom-6 left-6 right-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                        <span class="text-xs text-bronze uppercase tracking-widest font-semibold block">Visitação Imersiva WebXR</span>
+                        <h3 class="text-xl font-serif text-white font-bold">Faça o tour 360º por todos os cômodos desta residência</h3>
+                    </div>
+                    <a id="btn-banner-vr" href="#" class="px-6 py-3 bg-bronze hover:bg-bronze-hover text-obsidian font-bold text-xs uppercase tracking-widest rounded-2xl shadow-xl flex items-center justify-center space-x-2 transition flex-shrink-0">
+                        <span>🥽</span><span>Abrir Tour Virtual 360º</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Coluna de Thumbnails Secundárias -->
+            <div class="md:col-span-4 grid grid-cols-2 md:grid-cols-1 gap-6">
+                <div class="relative h-56 rounded-3xl overflow-hidden border border-white/10">
+                    <img id="thumb-1" src="" class="w-full h-full object-cover">
+                </div>
+                <div class="relative h-56 rounded-3xl overflow-hidden border border-white/10 bg-card p-6 flex flex-col justify-between">
+                    <div>
+                        <span class="text-2xl block mb-2">📱</span>
+                        <h4 class="text-sm font-bold text-white mb-1">Giroscópio & VR Box</h4>
+                        <p class="text-xs text-white/60 leading-relaxed">Compatível com smartphones, iPhone, Android e óculos VR Box simples.</p>
+                    </div>
+                    <a id="btn-thumb-vr" href="#" class="text-xs text-bronze font-bold hover:underline flex items-center space-x-1">
+                        <span>Experimentar no navegador</span><span>→</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- GRID DE ESPECIFICAÇÕES TÉCNICAS E CONTATO DO CORRETOR -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- Coluna Esquerda: Especificações e Descrição (8 colunas) -->
+            <div class="lg:col-span-8 space-y-8">
+                <!-- Barra de Métricas Arquitetônicas -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 p-6 bg-card rounded-3xl border border-white/10 text-center">
+                    <div>
+                        <span class="block text-2xl font-serif text-white font-bold" id="spec-area">520 m²</span>
+                        <span class="text-[10px] uppercase tracking-wider text-white/50">Área Construída</span>
+                    </div>
+                    <div>
+                        <span class="block text-2xl font-serif text-white font-bold" id="spec-terreno">850 m²</span>
+                        <span class="text-[10px] uppercase tracking-wider text-white/50">Área Total do Lote</span>
+                    </div>
+                    <div>
+                        <span class="block text-2xl font-serif text-white font-bold" id="spec-suites">4 Suítes</span>
+                        <span class="text-[10px] uppercase tracking-wider text-white/50">Dormitórios / Suítes</span>
+                    </div>
+                    <div>
+                        <span class="block text-2xl font-serif text-white font-bold" id="spec-vagas">4 Vagas</span>
+                        <span class="text-[10px] uppercase tracking-wider text-white/50">Garagem Coberta</span>
+                    </div>
+                </div>
+
+                <!-- Descrição Editorial -->
+                <div class="bg-card p-8 rounded-3xl border border-white/10">
+                    <h3 class="font-serif text-2xl text-white font-bold mb-4">Sobre esta Residência</h3>
+                    <p class="text-white/70 text-sm sm:text-base leading-relaxed font-light mb-6" id="prop-desc"></p>
+
+                    <h4 class="text-xs uppercase tracking-widest text-bronze font-bold mb-3">Diferenciais e Acabamentos</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="prop-features-list">
+                        <!-- Lista de diferenciais -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Coluna Direita: Card do Corretor Responsável & WhatsApp (4 colunas) -->
+            <div class="lg:col-span-4 space-y-6 sticky top-28">
+                <div class="bg-card p-6 rounded-3xl border border-bronze/30 shadow-2xl">
+                    <span class="text-[10px] uppercase tracking-widest text-bronze font-bold block mb-4">Corretor Responsável</span>
+                    
+                    <div class="flex items-center space-x-4 pb-4 border-b border-white/10">
+                        <img id="broker-avatar" src="" class="w-16 h-16 rounded-2xl object-cover border border-bronze">
+                        <div>
+                            <h4 class="font-bold text-white text-base" id="broker-name">Carlos Eduardo Mendes</h4>
+                            <span class="text-xs text-bronze font-semibold" id="broker-creci">CRECI-BA 24.890</span>
+                            <span class="text-[11px] text-emerald-400 block mt-0.5 flex items-center space-x-1">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span><span>Disponível no WhatsApp</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="py-4 space-y-2 text-xs text-white/70">
+                        <p>Atendimento exclusivo para compradores de alto padrão na região de Santo Antônio de Jesus.</p>
+                    </div>
+
+                    <!-- Botão WhatsApp com mensagem pré-formatada -->
+                    <a id="btn-whatsapp" href="#" target="_blank" class="w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl text-xs uppercase tracking-widest font-bold flex items-center justify-center space-x-2 shadow-lg transition">
+                        <span>💬</span><span>Agendar Visita via WhatsApp</span>
+                    </a>
+
+                    <!-- Enviar Tour para Smartphone -->
+                    <button onclick="shareLinkMobile()" class="w-full mt-3 py-3 bg-white/5 hover:bg-white/10 border border-white/10 text-white/80 rounded-2xl text-xs uppercase tracking-widest font-semibold flex items-center justify-center space-x-2 transition">
+                        <span>📱</span><span>Copiar Link do Tour VR</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-card border-t border-white/10 py-12 px-6 mt-16">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-xs text-white/50 space-y-4 md:space-y-0">
+            <div>
+                <span class="font-serif text-lg font-bold text-white tracking-widest">RECÔNCAVO PRIME</span>
+                <p class="mt-1">Santo Antônio de Jesus - Bahia • CRECI-BA Jurídico J-2890</p>
+            </div>
+            <div class="flex space-x-6">
+                <a href="index.html" class="hover:text-bronze">Início</a>
+                <a href="mapa.html" class="hover:text-bronze">Mapa Interativo</a>
+                <a href="admin.html" class="hover:text-bronze">Área do Corretor</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/data.js"></script>
+    <script>
+        let currentProp;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const propId = urlParams.get('id') || 'villa-imperial';
+            currentProp = getPropertyById(propId);
+
+            // Preencher dados na tela
+            document.title = `${currentProp.title} — Recôncavo Prime`;
+            document.getElementById('breadcrumb-title').innerText = currentProp.title;
+            document.getElementById('prop-bairro').innerText = currentProp.bairro;
+            document.getElementById('prop-title').innerText = currentProp.title;
+            document.getElementById('prop-tipolabel').innerText = `${currentProp.tipoLabel} em Santo Antônio de Jesus - BA`;
+            document.getElementById('prop-price').innerText = currentProp.price;
+            document.getElementById('prop-taxes').innerText = `Condomínio: ${currentProp.condo} • IPTU: ${currentProp.iptu}`;
+
+            document.getElementById('main-gallery-img').src = currentProp.gallery[0] || currentProp.image;
+            document.getElementById('thumb-1').src = currentProp.gallery[1] || currentProp.image;
+
+            document.getElementById('spec-area').innerText = currentProp.area;
+            document.getElementById('spec-terreno').innerText = currentProp.terreno;
+            document.getElementById('spec-suites').innerText = `${currentProp.suites} Suítes`;
+            document.getElementById('spec-vagas').innerText = `${currentProp.vagas} Vagas`;
+            document.getElementById('prop-desc').innerText = currentProp.desc;
+
+            // Features
+            const featContainer = document.getElementById('prop-features-list');
+            featContainer.innerHTML = currentProp.features.map(f => `
+                <div class="flex items-center space-x-2 text-xs text-white/80">
+                    <span class="text-bronze">✓</span><span>${f}</span>
+                </div>
+            `).join('');
+
+            // Corretor & WhatsApp
+            document.getElementById('broker-avatar').src = currentProp.broker.avatar;
+            document.getElementById('broker-name').innerText = currentProp.broker.name;
+            document.getElementById('broker-creci').innerText = currentProp.broker.creci;
+            document.getElementById('btn-whatsapp').href = generateWhatsAppUrl(currentProp);
+
+            // Links para Tour VR 360
+            const vrUrl = `tour360.html?id=${currentProp.id}`;
+            document.getElementById('btn-header-vr').href = vrUrl;
+            document.getElementById('btn-banner-vr').href = vrUrl;
+            document.getElementById('btn-thumb-vr').href = vrUrl;
+        });
+
+        function shareLinkMobile() {
+            navigator.clipboard.writeText(window.location.href);
+            alert('🔗 Link do imóvel copiado com sucesso! Você pode enviá-lo pelo WhatsApp ou abrir no celular.');
+        }
+    </script>
+</body>
+</html>

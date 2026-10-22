@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tour Virtual 360º WebXR & Realidade Virtual — Recôncavo Prime</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#0f1115',
+                        travertine: '#f6f4ee',
+                        bronze: '#b89c74',
+                        surface: '#16191f',
+                        card: '#1b1f27'
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Pannellum CSS & JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+
+    <style>
+        .vr-split-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            height: 100%;
+            width: 100%;
+            gap: 6px;
+            background: #000;
+        }
+        .vr-eye {
+            position: relative;
+            height: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 2px solid #222;
+        }
+        .vr-reticle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 14px;
+            height: 14px;
+            border: 2px solid #b89c74;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 50;
+        }
+    </style>
+</head>
+<body class="bg-obsidian text-travertine font-sans antialiased h-screen flex flex-col overflow-hidden">
+
+    <!-- HEADER DO TOUR VR -->
+    <header class="h-16 bg-obsidian/95 border-b border-white/10 px-6 flex items-center justify-between flex-shrink-0 z-30">
+        <div class="flex items-center space-x-4">
+            <a id="btn-back-dossier" href="mapa.html" class="text-xs text-white/60 hover:text-white flex items-center space-x-1">
+                <span>←</span><span>Voltar à Ficha</span>
+            </a>
+            <span class="text-white/20">|</span>
+            <div>
+                <h1 class="font-serif text-lg text-white font-bold leading-tight" id="header-prop-title">Mansão Villa Imperial</h1>
+                <span class="text-[10px] text-bronze uppercase tracking-widest block font-medium" id="header-room-title">Living Principal</span>
+            </div>
+        </div>
+
+        <!-- CONTROLES IMERSIVOS DE TOPO -->
+        <div class="flex items-center space-x-3">
+            <!-- Botão Giroscópio (Mobile) -->
+            <button id="btn-gyro" onclick="toggleGyroscope()" class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-bronze hover:text-obsidian text-white text-xs font-semibold flex items-center space-x-1.5 transition">
+                <span>🧭</span><span class="hidden sm:inline">Giroscópio Mobile</span>
+            </button>
+
+            <!-- Botão VR Box (Lente Dupla Estereoscópica) -->
+            <button id="btn-vr-toggle" onclick="toggleVREyeMode()" class="px-4 py-1.5 rounded-full bg-bronze hover:bg-bronze-hover text-obsidian text-xs font-bold flex items-center space-x-1.5 shadow-lg transition">
+                <span>🥽</span><span>Modo VR Box (Estéreo)</span>
+            </button>
+
+            <!-- Contato Rápido WhatsApp -->
+            <a id="btn-header-wa" href="#" target="_blank" class="px-3 py-1.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold flex items-center space-x-1.5 transition">
+                <span>💬</span><span class="hidden sm:inline">WhatsApp</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- ÁREA DO VISUALIZADOR 360 -->
+    <main class="flex-grow relative bg-black">
+        
+        <!-- MODO PADRÃO (PANNELLUM MONOCULAR) -->
+        <div id="main-pano-viewer" class="w-full h-full"></div>
+
+        <!-- MODO VR BOX ESTEREOSCÓPICO (LENTE DUPLA COM RETÍCULO) -->
+        <div id="stereo-vr-viewer" class="hidden w-full h-full p-2 bg-black">
+            <div class="vr-split-container">
+                <!-- Olho Esquerdo -->
+                <div class="vr-eye">
+                    <div id="vr-left" class="w-full h-full"></div>
+                    <div class="vr-reticle"></div>
+                    <span class="absolute bottom-4 left-4 bg-black/70 px-3 py-1 rounded text-xs text-white/80">Lente Esquerda</span>
+                </div>
+                <!-- Olho Direito -->
+                <div class="vr-eye">
+                    <div id="vr-right" class="w-full h-full"></div>
+                    <div class="vr-reticle"></div>
+                    <span class="absolute bottom-4 right-4 bg-black/70 px-3 py-1 rounded text-xs text-white/80">Lente Direita</span>
+                </div>
+            </div>
+            <!-- Dica para encaixe no óculos -->
+            <div class="absolute top-4 left-1/2 -translate-x-1/2 bg-black/80 border border-bronze/40 px-4 py-1.5 rounded-full text-xs text-white/90 z-50 text-center">
+                🎯 Encaixe o celular no seu óculos VR Box ou Google Cardboard
+            </div>
+        </div>
+
+        <!-- DOCK INFERIOR FLUTUANTE DE TROCA DE CÔMODOS -->
+        <div class="absolute bottom-6 left-6 right-6 z-20 flex justify-center pointer-events-none">
+            <div class="pointer-events-auto bg-obsidian/90 backdrop-blur-xl border border-white/15 p-2 rounded-2xl flex items-center space-x-2 overflow-x-auto max-w-full shadow-2xl" id="room-buttons-container">
+                <!-- Botões de cômodos injetados dinamicamente -->
+            </div>
+        </div>
+    </main>
+
+    <script src="assets/data.js"></script>
+    <script>
+        let currentProp;
+        let currentRoomKey = 'living';
+        let pannellumInstance = null;
+        let leftInstance = null;
+        let rightInstance = null;
+        let isStereoMode = false;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const propId = urlParams.get('id') || 'villa-imperial';
+            currentProp = getPropertyById(propId);
+
+            document.title = `Tour 360º — ${currentProp.title} | Recôncavo Prime`;
+            document.getElementById('header-prop-title').innerText = currentProp.title;
+            document.getElementById('btn-back-dossier').href = `detalhes.html?id=${currentProp.id}`;
+            document.getElementById('btn-header-wa').href = generateWhatsAppUrl(currentProp, `Olá ${currentProp.broker.name}, estou fazendo o Tour 360º da ${currentProp.title} e gostaria de tirar uma dúvida.`);
+
+            buildRoomDock();
+            loadRoom(currentRoomKey);
+        });
+
+        function buildRoomDock() {
+            const container = document.getElementById('room-buttons-container');
+            container.innerHTML = '';
+            const rooms = currentProp.panoramas;
+
+            Object.keys(rooms).forEach((key, idx) => {
+                const room = rooms[key];
+                const btn = document.createElement('button');
+                btn.id = `dock-btn-${key}`;
+                btn.className = `px-4 py-2 rounded-xl text-xs font-semibold transition ${key === currentRoomKey ? 'bg-bronze text-obsidian font-bold' : 'text-white/80 hover:bg-white/10'}`;
+                btn.innerText = `${idx + 1}. ${room.title}`;
+                btn.onclick = () => loadRoom(key);
+                container.appendChild(btn);
+            });
+        }
+
+        function loadRoom(roomKey) {
+            currentRoomKey = roomKey;
+            const roomData = currentProp.panoramas[roomKey];
+            if (!roomData) return;
+
+            document.getElementById('header-room-title').innerText = `Cômodo: ${roomData.title}`;
+
+            // Atualizar botões do dock
+            Object.keys(currentProp.panoramas).forEach(k => {
+                const b = document.getElementById(`dock-btn-${k}`);
+                if (b) {
+                    b.className = `px-4 py-2 rounded-xl text-xs font-semibold transition ${k === roomKey ? 'bg-bronze text-obsidian font-bold' : 'text-white/80 hover:bg-white/10'}`;
+                }
+            });
+
+            if (isStereoMode) {
+                initStereoViewers(roomData.url);
+            } else {
+                initStandardViewer(roomData);
+            }
+        }
+
+        function initStandardViewer(roomData) {
+            if (pannellumInstance) try { pannellumInstance.destroy(); } catch(e){}
+
+            const formattedHotspots = (roomData.hotspots || []).map(h => ({
+                pitch: h.pitch,
+                yaw: h.yaw,
+                type: 'info',
+                text: h.text,
+                clickHandlerFunc: h.target ? () => loadRoom(h.target) : null
+            }));
+
+            pannellumInstance = pannellum.viewer('main-pano-viewer', {
+                type: 'equirectangular',
+                panorama: roomData.url,
+                autoLoad: true,
+                autoRotate: -1.2,
+                compass: true,
+                showZoomCtrl: true,
+                showFullscreenCtrl: true,
+                hfov: 110,
+                hotSpots: formattedHotspots
+            });
+        }
+
+        function toggleGyroscope() {
+            if (window.DeviceOrientationEvent) {
+                if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+                    DeviceOrientationEvent.requestPermission()
+                        .then(res => {
+                            if (res === 'granted') {
+                                if (pannellumInstance) pannellumInstance.startOrientation();
+                                alert('🧭 Giroscópio ativado! Mova o celular para olhar ao redor.');
+                            } else {
+                                alert('Permissão de giroscópio negada.');
+                            }
+                        }).catch(console.error);
+                } else {
+                    if (pannellumInstance) pannellumInstance.startOrientation();
+                    alert('🧭 Giroscópio ativado! Gire o smartphone para explorar.');
+                }
+            } else {
+                alert('Sensor de giroscópio não suportado neste navegador.');
+            }
+        }
+
+        function toggleVREyeMode() {
+            isStereoMode = !isStereoMode;
+            const standard = document.getElementById('main-pano-viewer');
+            const stereo = document.getElementById('stereo-vr-viewer');
+            const btn = document.getElementById('btn-vr-toggle');
+
+            if (isStereoMode) {
+                standard.classList.add('hidden');
+                stereo.classList.remove('hidden');
+                btn.innerHTML = '<span>✕</span><span>Sair do Modo VR Box</span>';
+                initStereoViewers(currentProp.panoramas[currentRoomKey].url);
+            } else {
+                stereo.classList.add('hidden');
+                standard.classList.remove('hidden');
+                btn.innerHTML = '<span>🥽</span><span>Modo VR Box (Estéreo)</span>';
+                initStandardViewer(currentProp.panoramas[currentRoomKey]);
+            }
+        }
+
+        function initStereoViewers(panoUrl) {
+            if (leftInstance) try { leftInstance.destroy(); } catch(e){}
+            if (rightInstance) try { rightInstance.destroy(); } catch(e){}
+
+            leftInstance = pannellum.viewer('vr-left', {
+                type: 'equirectangular',
+                panorama: panoUrl,
+                autoLoad: true,
+                autoRotate: -1,
+                showControls: false,
+                hfov: 95
+            });
+
+            rightInstance = pannellum.viewer('vr-right', {
+                type: 'equirectangular',
+                panorama: panoUrl,
+                autoLoad: true,
+                autoRotate: -1,
+                showControls: false,
+                hfov: 95
+            });
+
+            leftInstance.on('mouseup', () => {
+                rightInstance.setPitch(leftInstance.getPitch());
+                rightInstance.setYaw(leftInstance.getYaw());
+            });
+        }
+    </script>
+</body>
+</html>

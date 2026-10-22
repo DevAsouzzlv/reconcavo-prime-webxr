@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RECÔNCAVO PRIME — Dossier Arquitetônico &amp; Tour Imersivo 360º WebXR</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config Theme -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary-fixed-dim": "#c6c6c9",
+            "on-secondary-container": "#796044",
+            "outline-variant": "#c5c6ca",
+            "on-tertiary-container": "#87837d",
+            "secondary-fixed": "#ffddba",
+            "on-surface-variant": "#45474a",
+            "outline": "#75777a",
+            "on-tertiary-fixed-variant": "#494741",
+            "inverse-on-surface": "#f2f1ec",
+            "primary-container": "#1a1c1e",
+            "on-surface": "#1b1c19",
+            "on-secondary": "#ffffff",
+            "on-primary-container": "#838486",
+            "inverse-surface": "#30312e",
+            "background": "#fbf9f4",
+            "on-error-container": "#93000a",
+            "primary-fixed": "#e2e2e5",
+            "surface-dim": "#dbdad5",
+            "on-tertiary-fixed": "#1d1c17",
+            "surface-container-lowest": "#ffffff",
+            "secondary": "#725a3e",
+            "on-secondary-fixed-variant": "#594329",
+            "on-secondary-fixed": "#291803",
+            "secondary-fixed-dim": "#e1c19f",
+            "on-primary-fixed-variant": "#454749",
+            "on-background": "#1b1c19",
+            "primary": "#000000",
+            "tertiary": "#000000",
+            "tertiary-container": "#1d1c17",
+            "inverse-primary": "#c6c6c9",
+            "error-container": "#ffdad6",
+            "tertiary-fixed-dim": "#cac6be",
+            "surface-container-high": "#eae8e3",
+            "surface-container-low": "#f5f3ee",
+            "surface-container": "#f0eee9",
+            "secondary-container": "#ffddba",
+            "on-tertiary": "#ffffff",
+            "on-primary-fixed": "#1a1c1e",
+            "on-error": "#ffffff",
+            "surface-tint": "#5d5e61",
+            "error": "#ba1a1a",
+            "tertiary-fixed": "#e7e2da",
+            "surface-container-highest": "#e4e2dd",
+            "on-primary": "#ffffff",
+            "surface-variant": "#e4e2dd",
+            "surface-bright": "#fbf9f4",
+            "surface": "#fbf9f4"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter": "1.5rem",
+            "space-md": "1rem",
+            "space-sm": "0.5rem",
+            "margin": "1.5rem",
+            "space-2xl": "6rem",
+            "space-lg": "2rem",
+            "margin-desktop": "4rem",
+            "gutter-desktop": "2.5rem",
+            "space-xl": "3.5rem",
+            "space-xs": "0.25rem"
+          },
+          "fontFamily": {
+            "headline-xl-mobile": ["Bodoni Moda"],
+            "body-sm": ["Plus Jakarta Sans"],
+            "label-caps-wide": ["Plus Jakarta Sans"],
+            "display-hero": ["Bodoni Moda"],
+            "label-numeric": ["Plus Jakarta Sans"],
+            "body-xl": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "display-hero-mobile": ["Bodoni Moda"],
+            "headline-xl": ["Bodoni Moda"],
+            "headline-lg": ["Bodoni Moda"],
+            "headline-md": ["Bodoni Moda"]
+          },
+          "fontSize": {
+            "headline-xl-mobile": ["2.125rem", { "lineHeight": "1.18", "letterSpacing": "-0.01em", "fontWeight": "400" }],
+            "body-sm": ["0.875rem", { "lineHeight": "1.5", "fontWeight": "400" }],
+            "label-caps-wide": ["0.6875rem", { "lineHeight": "1.4", "letterSpacing": "0.18em", "fontWeight": "600" }],
+            "display-hero": ["5.5rem", { "lineHeight": "1.05", "letterSpacing": "-0.03em", "fontWeight": "400" }],
+            "label-numeric": ["0.8125rem", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "500" }],
+            "body-xl": ["1.25rem", { "lineHeight": "1.75", "letterSpacing": "-0.01em", "fontWeight": "300" }],
+            "body-md": ["1rem", { "lineHeight": "1.65", "fontWeight": "400" }],
+            "display-hero-mobile": ["2.75rem", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "400" }],
+            "headline-xl": ["3.5rem", { "lineHeight": "1.12", "letterSpacing": "-0.02em", "fontWeight": "400" }],
+            "headline-lg": ["2.25rem", { "lineHeight": "1.25", "letterSpacing": "-0.01em", "fontWeight": "400" }],
+            "headline-md": ["1.625rem", { "lineHeight": "1.3", "fontWeight": "500" }]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md antialiased selection:bg-secondary selection:text-on-secondary min-h-full flex flex-col">
+<!-- TopNavBar Component -->
+<header class="bg-surface/90 dark:bg-primary-container/90 backdrop-blur-md border-b border-surface-variant dark:border-outline-variant/20 docked full-width top-0 sticky z-50">
+<div class="w-full px-6 md:px-12 lg:px-16 flex justify-between items-center h-20">
+<!-- Brand Logo -->
+<a class="font-headline-md text-headline-md tracking-widest text-primary dark:text-on-primary uppercase" href="#">
+        RECÔNCAVO PRIME
+      </a>
+<!-- Desktop Navigation Links -->
+<nav class="hidden md:flex items-center space-x-8">
+<a class="text-on-surface-variant dark:text-tertiary-fixed-dim hover:text-primary dark:hover:text-on-primary transition-colors duration-200 font-label-caps-wide text-label-caps-wide" href="#">Estates</a>
+<a class="text-on-surface-variant dark:text-tertiary-fixed-dim hover:text-primary dark:hover:text-on-primary transition-colors duration-200 font-label-caps-wide text-label-caps-wide" href="#">Architectural Map</a>
+<a class="text-on-surface-variant dark:text-tertiary-fixed-dim hover:text-primary dark:hover:text-on-primary transition-colors duration-200 font-label-caps-wide text-label-caps-wide" href="#">Private Archive</a>
+<a class="text-on-surface-variant dark:text-tertiary-fixed-dim hover:text-primary dark:hover:text-on-primary transition-colors duration-200 font-label-caps-wide text-label-caps-wide" href="#">Concierge</a>
+</nav>
+<!-- Trailing Actions & Icons -->
+<div class="hidden lg:flex items-center space-x-6">
+<button aria-label="Language Selector" class="text-on-surface-variant hover:text-primary transition-colors duration-200">
+<span class="material-symbols-outlined text-xl">language</span>
+</button>
+<button aria-label="Tune Preferences" class="text-on-surface-variant hover:text-primary transition-colors duration-200">
+<span class="material-symbols-outlined text-xl">tune</span>
+</button>
+<a class="bg-primary text-on-primary px-6 py-3 font-label-caps-wide text-label-caps-wide hover:bg-secondary transition-all duration-300" href="#inquiry">
+          Private Consultation
+        </a>
+<a class="border border-primary text-primary px-6 py-3 font-label-caps-wide text-label-caps-wide hover:bg-primary hover:text-on-primary transition-all duration-300" href="#portal">
+          Client Portal
+        </a>
+</div>
+<!-- Mobile Menu Button -->
+<div class="md:hidden flex items-center">
+<button aria-label="Open Navigation" class="text-primary p-2">
+<span class="material-symbols-outlined text-2xl">menu</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow">
+<!-- Hero / Header Dossier Intro -->
+<section class="w-full px-6 md:px-12 lg:px-16 py-12 md:py-20 border-b border-surface-variant">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+<div>
+<div class="flex items-center space-x-3 mb-4">
+<span class="border border-outline-variant px-3 py-1 font-label-caps-wide text-label-caps-wide bg-surface-container-lowest">EXCLUSIVE DOSSIER</span>
+<span class="font-label-caps-wide text-label-caps-wide text-secondary">SANTO ANTÔNIO DE JESUS, BAHIA</span>
+</div>
+<h1 class="font-headline-xl md:text-headline-xl text-headline-xl-mobile font-normal text-primary">
+            Mansão Brutalista Villa Imperial
+          </h1>
+</div>
+<div class="flex items-center space-x-4">
+<a class="bg-primary text-on-primary px-8 py-4 font-label-caps-wide text-label-caps-wide hover:bg-secondary transition-all duration-300" href="#inquiry">
+            Solicitar Dossier Privativo
+          </a>
+</div>
+</div>
+</section>
+<!-- Full-Width Interactive 360 Panoramic Viewport Section -->
+<section class="relative w-full h-[716px] md:h-[870px] bg-primary-container overflow-hidden">
+<!-- Image Viewport with placeholder substitution -->
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 hover:scale-105" data-alt="A museum-grade architectural photograph capturing an ultra-luxury brutalist villa at dusk in Santo Antônio de Jesus, Bahia. Board-formed concrete walls merge seamlessly with warm travertine limestone, illuminated by soft golden interior lighting. An expansive cantilevered terrace hovers above an obsidian infinity pool reflecting the violet and amber twilight sky. Lush Bahian tropical foliage, tall palm trees, and manicured landscaping frame the monumental structure. High fashion architectural digest aesthetic with exquisite texture and restrained negative space." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDd1bfz36g_5ZjlUN1FRL2oBft9FqVOnpHvO-kJdNbzsR9GWtQ5uRJ1AthkPGycCGl2uGqtpehVE0sZvzHklebLtL88Zka1dru9KXKdxgRqoKNeGlPMp1HyIzMUde4k9C9MCU87Ty8IEmc5XMx9ZsPJ9tChuTuGs0WkGZvTi_-TAjY_Ih87oK_yevhKBgDRk_xV5gpDrql9kXnDC6WPJoSQhuS2sQ06tR4EEhaFRIIrJjGRMCPHAy5omROpa4kD-bNoC-UyPvSz5-JO')">
+</div>
+<!-- Subtle Atmospheric Dark Gradient Overlay -->
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none"></div>
+<!-- Interactive Room Hotspot Markers -->
+<div class="absolute inset-0 p-8 md:p-16 flex flex-col justify-between pointer-events-none">
+<!-- Top Toolbar inside Viewport -->
+<div class="flex justify-between items-center pointer-events-auto">
+<div class="bg-surface/90 backdrop-blur-md px-4 py-2 border border-outline-variant/30 flex items-center space-x-2">
+<span class="material-symbols-outlined text-sm text-secondary">visibility</span>
+<span class="font-label-caps-wide text-label-caps-wide text-primary">WEBXR 360º PANORAMIC VIEWPORT</span>
+</div>
+<div class="flex space-x-3">
+<button class="bg-surface/90 backdrop-blur-md text-primary px-4 py-2 font-label-caps-wide text-label-caps-wide border border-outline-variant/30 hover:bg-primary hover:text-on-primary transition-colors flex items-center space-x-2">
+<span class="material-symbols-outlined text-sm">view_in_ar</span>
+<span>VR Mode</span>
+</button>
+<button class="bg-surface/90 backdrop-blur-md text-primary px-4 py-2 font-label-caps-wide text-label-caps-wide border border-outline-variant/30 hover:bg-primary hover:text-on-primary transition-colors flex items-center space-x-2">
+<span class="material-symbols-outlined text-sm">screen_rotation</span>
+<span>Gyroscope</span>
+</button>
+</div>
+</div>
+<!-- Hotspot Indicator Badges Placed on Canvas -->
+<div class="relative w-full h-full">
+<!-- Hotspot 1 -->
+<div class="absolute top-[45%] left-[30%] pointer-events-auto group cursor-pointer">
+<div class="flex items-center space-x-2 bg-surface/90 backdrop-blur-md px-3 py-1.5 border border-primary/20 shadow-lg hover:border-secondary transition-all">
+<span class="w-2 h-2 rounded-full bg-secondary animate-ping"></span>
+<span class="font-label-caps-wide text-label-caps-wide text-primary">Living Pavilion</span>
+</div>
+</div>
+<!-- Hotspot 2 -->
+<div class="absolute top-[28%] left-[65%] pointer-events-auto group cursor-pointer">
+<div class="flex items-center space-x-2 bg-surface/90 backdrop-blur-md px-3 py-1.5 border border-primary/20 shadow-lg hover:border-secondary transition-all">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-caps-wide text-label-caps-wide text-primary">Master Suite</span>
+</div>
+</div>
+<!-- Hotspot 3 -->
+<div class="absolute top-[75%] left-[50%] pointer-events-auto group cursor-pointer">
+<div class="flex items-center space-x-2 bg-surface/90 backdrop-blur-md px-3 py-1.5 border border-primary/20 shadow-lg hover:border-secondary transition-all">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-caps-wide text-label-caps-wide text-primary">Infinite Pool Deck</span>
+</div>
+</div>
+</div>
+<!-- Secondary Panoramic Image Thumbnail Switcher -->
+<div class="flex justify-center space-x-4 pointer-events-auto">
+<button class="w-20 h-12 border-2 border-surface overflow-hidden focus:border-secondary transition-all">
+<div class="w-full h-full bg-cover bg-center" data-alt="Interior architectural view of Mansão Brutalista Villa Imperial showing double-height travertine walls, minimalist designer furniture, and full-height glass sliding doors opening directly onto the tropical pool deck." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCFOTPf1_MLNsUGxH8upvKhucoUpyVZZHSQ4iRTpfnVIyFpP_A7ShCZZ-ZyqO5hiq8zvmW4RPweIJ6NyrsyFCw4DgKgIwCPZqlqW4l-jYSi4eGlW3cYnLwNsoxSrXaUQtWZ1MH6dsk0yGSgCInkEFAckLw9TpZG8MlfjEAmYF1rYimiRYT5UyOroQQGs9lR6JeXg7ELW7kNRxDxzpGHt6bbKgyNThEzz1RbUfMY-bHTBXZmT6Yzgkc-wc3OvbEP5Q8uDrS--irO2AE6')"></div>
+</button>
+<button class="w-20 h-12 border-2 border-surface/50 overflow-hidden focus:border-secondary transition-all">
+<div class="w-full h-full bg-cover bg-center" data-alt="Exterior night perspective of the brutalist concrete cantilever overhanging the panoramic landscape of Santo Antônio de Jesus, highlighting architectural recessed illumination." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBbp7mr8yA5Tcw2-TnW11UycvIQKfeYERfNirUY46MVVKwgH5KEVFgjJF9pHg-k4VVRRtZPAEkZhABcEccgXdHCnrqAG4wfl5egWiQKw9XxSS4tyzmtqcbJ9JEd-2r5yd5MtxO6GDphtjoFZqbx1TpwFn1J4_Gor37ic_FY0wjwBwvtvDSD7TulFCPUuoKvrzMjHaTnqy6qtMes-D_A_IM-MFzteP7G88Gfc86pwgpB09ahEhUBFN6cktzUtMpDK1ByliKQr5iy9lKM')"></div>
+</button>
+</div>
+</div>
+</section>
+<!-- Architectural Narrative & Specifications Split Grid -->
+<section class="w-full px-6 md:px-12 lg:px-16 py-24">
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+<!-- Narrative (7 Columns) -->
+<div class="lg:col-span-7 space-y-8">
+<div class="space-y-4">
+<h3 class="font-label-caps-wide text-label-caps-wide text-secondary">ARCHITECTURAL MONOGRAPH</h3>
+<h2 class="font-headline-lg md:text-headline-lg text-headline-lg-mobile font-normal text-primary leading-snug">
+              Unapologetic spatial abundance where negative space operates as an active luxury material.
+            </h2>
+</div>
+<div class="space-y-6 text-on-surface-variant font-body-xl">
+<p>
+              Conceived as a masterwork of brutalist restraint, the Mansão Brutalista Villa Imperial commands an elevated promontory in Santo Antônio de Jesus, Bahia. The structure marries raw, board-formed architectural concrete with the honed organic warmth of travertine limestone.
+            </p>
+<p>
+              Monumental floor-to-ceiling glass planes retract effortlessly, dissolving the boundary between interior sanctuaries and the wild Bahian canopy. Every sightline is carefully curated to frame panoramic vistas, establishing an architectural dialogue between monumental geometry and natural topography.
+            </p>
+</div>
+<!-- Secondary Image Grid Feature -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6">
+<div class="aspect-[4/3] bg-surface-container-high overflow-hidden">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 hover:scale-105" data-alt="Interior detail showcasing double-height board-formed concrete walls, monumental suspended fireplace, custom linen sectional seating, and museum-quality tactile finishes." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDXrv0wvEK2xfa3pEAxLI43lBD0YYV_iBD3zfcSV9GSpHg5BflXnow1p48opmbtLLbvaHGNKcQ2XKNpV6PWT294MTkuPcBC6oSmD3kEcVF5xXmGXN259dQpz0Zjktu0ZLeZajq3jmls99dw9cCLFNoc4VSmzVDO_-HhM-Yy9SVtpGPzG6T92qhEoH8YUwPP_wa6JYKhhsfi_VugMDkXgRdQe06qX5R3yACF-2ftVUl74OoCoTyhtmfFYkUEC0InX0y77_O5CFg5zkSO')"></div>
+</div>
+<div class="aspect-[4/3] bg-surface-container-high overflow-hidden">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 hover:scale-105" data-alt="Exterior dusk view focusing on the cantilevered travertine terrace and illuminated infinity pool overlooking the lush valleys of Bahia." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB_PAnbP0Df0Zyp4qthduxGNM_CTe1Oe2xvZ7xs-30lPcPtS5wqtMUKfBdwJm_kwIRPSoRPjW6pNrWtmVas5bW1VVqeGDn-UZPYXA9psYyDrty3kLu2LB9NVyA0lHw2sVAlwd97Pv2HO7NhqjeRwxAOIyWCNl3rLuD_tm3yveA973Y8gF9jPPwN1wOGcFzWteBiuNNd2pbwCcpofeB9IwxMEdeGW4wq0F5xsg_V_y7wjTtScbwLsSmGMMYQZ0bWQbzaCqqGlms4LYk5')"></div>
+</div>
+</div>
+</div>
+<!-- Specifications Table with Subtle Bronze Borders (5 Columns) -->
+<div class="lg:col-span-5 bg-surface-container-lowest border border-[#D4AF37]/40 p-8 md:p-10 space-y-8">
+<div class="border-b border-[#D4AF37]/30 pb-4">
+<h3 class="font-headline-md text-headline-md font-medium text-primary">Cadastral Spec Sheet</h3>
+<p class="font-label-caps-wide text-label-caps-wide text-on-surface-variant mt-1">TECHNICAL &amp; STRUCTURAL PARAMETERS</p>
+</div>
+<div class="space-y-6">
+<div class="flex justify-between items-center border-b border-surface-variant pb-4">
+<span class="font-label-caps-wide text-label-caps-wide text-on-surface-variant">Gross Area</span>
+<span class="font-label-numeric text-label-numeric text-primary font-bold">850 m²</span>
+</div>
+<div class="flex justify-between items-center border-b border-surface-variant pb-4">
+<span class="font-label-caps-wide text-label-caps-wide text-on-surface-variant">Private Suites</span>
+<span class="font-label-numeric text-label-numeric text-primary font-bold">6 Suites</span>
+</div>
+<div class="flex justify-between items-center border-b border-surface-variant pb-4">
+<span class="font-label-caps-wide text-label-caps-wide text-on-surface-variant">Subterranean Wine Cellar</span>
+<span class="font-label-numeric text-label-numeric text-primary font-bold">Climate-Controlled (2,500 Bottles)</span>
+</div>
+<div class="flex justify-between items-center border-b border-surface-variant pb-4">
+<span class="font-label-caps-wide text-label-caps-wide text-on-surface-variant">Solar Photovoltaic Grid</span>
+<span class="font-label-numeric text-label-numeric text-primary font-bold">Autonomous Off-Grid Capable</span>
+</div>
+<div class="flex justify-between items-center border-b border-surface-variant pb-4">
+<span class="font-label-caps-wide text-label-caps-wide text-on-surface-variant">Smart Automation</span>
+<span class="font-label-numeric text-label-numeric text-primary font-bold">Bespoke KNX Architectural IoT</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-label-caps-wide text-label-caps-wide text-on-surface-variant">Topography &amp; Orientation</span>
+<span class="font-label-numeric text-label-numeric text-primary font-bold">North-East Promontory</span>
+</div>
+</div>
+<div class="pt-4">
+<a class="w-full block text-center bg-primary text-on-primary py-4 font-label-caps-wide text-label-caps-wide hover:bg-secondary transition-all" href="#inquiry">
+              Download Full Technical Dossier (.PDF)
+            </a>
+</div>
+</div>
+</div>
+</section>
+<!-- Sticky Private Client Concierge Inquiry Card & Broker Profile Section -->
+<section class="w-full bg-surface-container-low py-24 border-t border-surface-variant" id="inquiry">
+<div class="max-w-5xl mx-auto px-6 md:px-12">
+<div class="bg-surface border border-outline-variant/40 p-8 md:p-16 flex flex-col md:flex-row gap-12 items-center justify-between shadow-sm">
+<!-- Broker Profile -->
+<div class="space-y-6 max-w-md">
+<div class="flex items-center space-x-4">
+<div class="w-20 h-20 rounded-full bg-surface-container-high overflow-hidden border border-primary/20">
+<div class="w-full h-full bg-cover bg-center" data-alt="Portrait photograph of Rodrigo D'Ávila, Private Client Director at Recôncavo Prime, wearing a tailored charcoal bespoke suit in a minimalist modernist office setting." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDMKmDshVuvxoCNxX2po7C4ECo7Rub70-uDR5Tmz4xMMPGjf5cp8WEShKzfjUg0qQjaU6VySST_PqJzgqGdSv6J_tOm9jiGb9T4ncTn871uOit6itXbIPm8SuF_e_uBTypKn0TOBAav3uzSf_RergehVwnWLDUG00u3T76pz2IPmgBTlqNiTm_bx-YoD4YagOUWigOwi8me311ipe6_FSGq8mB7NWvnLIEPJktKB-TWqwGBFirRyqQX2ix49iu72SKAjHU_oxqVRwnS')"></div>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md font-medium text-primary">Rodrigo D'Ávila</h4>
+<p class="font-label-caps-wide text-label-caps-wide text-secondary mt-1">PRIVATE CLIENT DIRECTOR</p>
+</div>
+</div>
+<p class="font-body-sm text-on-surface-variant leading-relaxed">
+              Assigned curator for Mansão Villa Imperial. Available for private consultations, helicopter transfers, and discreet architectural walkthroughs.
+            </p>
+<div class="flex items-center space-x-6 pt-2">
+<a class="flex items-center space-x-2 text-primary hover:text-secondary font-label-caps-wide text-label-caps-wide transition-colors" href="https://whatsapp.com" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-xl">chat</span>
+<span>WhatsApp Direct</span>
+</a>
+<a class="flex items-center space-x-2 text-primary hover:text-secondary font-label-caps-wide text-label-caps-wide transition-colors" href="tel:+557500000000">
+<span class="material-symbols-outlined text-xl">call</span>
+<span>Secure Line</span>
+</a>
+</div>
+</div>
+<!-- Inquiry Form Action Card -->
+<div class="w-full md:w-auto flex-1 bg-surface-container-lowest p-8 border border-outline-variant/30 space-y-6">
+<div>
+<h5 class="font-headline-md text-headline-md font-medium text-primary">Private Consultation</h5>
+<p class="font-body-sm text-on-surface-variant mt-1">Submit your credentials for verified client onboarding.</p>
+</div>
+<form class="space-y-4" onsubmit="event.preventDefault(); alert('Dossier inquiry transmitted securely.');">
+<div>
+<input class="w-full bg-transparent border-b border-primary/30 py-3 text-on-surface placeholder:text-on-surface-variant/50 focus:border-primary focus:ring-0 font-body-sm" placeholder="Full Legal Name / Entity" required="" type="text"/>
+</div>
+<div>
+<input class="w-full bg-transparent border-b border-primary/30 py-3 text-on-surface placeholder:text-on-surface-variant/50 focus:border-primary focus:ring-0 font-body-sm" placeholder="Secure Electronic Mail" required="" type="email"/>
+</div>
+<div>
+<input class="w-full bg-transparent border-b border-primary/30 py-3 text-on-surface placeholder:text-on-surface-variant/50 focus:border-primary focus:ring-0 font-body-sm" placeholder="Private Telephone" required="" type="tel"/>
+</div>
+<button class="w-full bg-primary text-on-primary py-4 font-label-caps-wide text-label-caps-wide hover:bg-secondary transition-all duration-300 mt-2" type="submit">
+                Initiate Private Dialogue
+              </button>
+</form>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Component -->
+<footer class="bg-surface dark:bg-primary-container border-t border-surface-variant dark:border-outline-variant/25 docked full-width bottom">
+<div class="w-full px-6 md:px-12 lg:px-16 py-16 flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
+<!-- Brand & Copyright -->
+<div class="space-y-4 max-w-lg">
+<a class="font-headline-md text-headline-md tracking-widest text-primary dark:text-on-primary uppercase block" href="#">
+          RECÔNCAVO PRIME
+        </a>
+<p class="font-label-caps-wide text-label-caps-wide text-on-surface-variant dark:text-tertiary-fixed-dim leading-relaxed">
+          © 2024 RECÔNCAVO PRIME IMÓVEIS DE ARQUITETURA. SANTO ANTÔNIO DE JESUS, BAHIA. ALL PRIVILEGES RESERVED.
+        </p>
+</div>
+<!-- Footer Navigation Links -->
+<div class="flex flex-wrap gap-x-8 gap-y-4">
+<a class="text-on-surface-variant dark:text-tertiary-fixed-dim hover:text-primary dark:hover:text-on-primary transition-colors duration-200 font-label-caps-wide text-label-caps-wide" href="#">Curated Residences</a>
+<a class="text-on-surface-variant dark:text-tertiary-fixed-dim hover:text-primary dark:hover:text-on-primary transition-colors duration-200 font-label-caps-wide text-label-caps-wide" href="#">Territorial Holdings</a>
+<a class="text-on-surface-variant dark:text-tertiary-fixed-dim hover:text-primary dark:hover:text-on-primary transition-colors duration-200 font-label-caps-wide text-label-caps-wide" href="#">Private Dossiers</a>
+<a class="text-on-surface-variant dark:text-tertiary-fixed-dim hover:text-primary dark:hover:text-on-primary transition-colors duration-200 font-label-caps-wide text-label-caps-wide" href="#">Architectural Advisory</a>
+<a class="text-on-surface-variant dark:text-tertiary-fixed-dim hover:text-primary dark:hover:text-on-primary transition-colors duration-200 font-label-caps-wide text-label-caps-wide" href="#">Privacy Protocol</a>
+<a class="text-on-surface-variant dark:text-tertiary-fixed-dim hover:text-primary dark:hover:text-on-primary transition-colors duration-200 font-label-caps-wide text-label-caps-wide" href="#">Legal Registry</a>
+</div>
+</div>
+</footer>
+</body></html>

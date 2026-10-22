@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Busca por Geolocalização no Mapa de SAJ — Recôncavo Prime</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#0f1115',
+                        travertine: '#f6f4ee',
+                        bronze: '#b89c74',
+                        surface: '#16191f',
+                        card: '#1b1f27'
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Leaflet CSS & JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <style>
+        .leaflet-container { background: #0f1115 !important; font-family: 'Plus Jakarta Sans', sans-serif; }
+        .custom-pin {
+            background: #0f1115;
+            color: #f6f4ee;
+            border: 1px solid #b89c74;
+            padding: 5px 12px;
+            border-radius: 9999px;
+            font-size: 11px;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+        .custom-pin:hover, .custom-pin.active {
+            background: #b89c74;
+            color: #0f1115;
+            border-color: #fff;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="bg-obsidian text-travertine font-sans antialiased h-screen flex flex-col overflow-hidden">
+
+    <!-- HEADER -->
+    <header class="h-16 bg-obsidian border-b border-white/10 px-6 flex items-center justify-between flex-shrink-0 z-30">
+        <div class="flex items-center space-x-6">
+            <a href="index.html" class="flex flex-col">
+                <span class="font-serif text-xl tracking-[0.2em] font-bold text-white">RECÔNCAVO PRIME</span>
+                <span class="text-[8px] tracking-[0.3em] uppercase text-bronze font-sans -mt-1">Mapa Interativo • SAJ</span>
+            </a>
+            <span class="text-white/20 hidden sm:inline">|</span>
+            <span class="text-xs text-white/60 hidden sm:inline">Navegação estilo Airbnb em Santo Antônio de Jesus</span>
+        </div>
+
+        <div class="flex items-center space-x-4">
+            <a href="index.html" class="text-xs text-white/70 hover:text-white">← Voltar ao Início</a>
+            <a href="admin.html" class="text-xs bg-white/5 border border-white/15 px-3 py-1.5 rounded-full text-bronze hover:bg-bronze hover:text-obsidian transition">
+                Área do Corretor
+            </a>
+        </div>
+    </header>
+
+    <!-- BARRA DE FILTROS SUPERIOR -->
+    <div class="bg-card border-b border-white/10 px-6 py-3 flex flex-wrap gap-4 items-center justify-between flex-shrink-0 z-20">
+        <div class="flex flex-wrap items-center gap-3">
+            <button onclick="filterByBairro('todos')" id="btn-fil-todos" class="filter-pill px-4 py-1.5 rounded-full text-xs font-semibold bg-bronze text-obsidian transition">
+                Todos em SAJ (<span id="count-all">0</span>)
+            </button>
+            <button onclick="filterByBairro('busca-vida')" id="btn-fil-busca-vida" class="filter-pill px-4 py-1.5 rounded-full text-xs font-semibold bg-white/5 border border-white/10 text-white/80 hover:border-bronze transition">
+                Cond. Busca Vida
+            </button>
+            <button onclick="filterByBairro('jardins')" id="btn-fil-jardins" class="filter-pill px-4 py-1.5 rounded-full text-xs font-semibold bg-white/5 border border-white/10 text-white/80 hover:border-bronze transition">
+                Cond. Jardins
+            </button>
+            <button onclick="filterByBairro('centro')" id="btn-fil-centro" class="filter-pill px-4 py-1.5 rounded-full text-xs font-semibold bg-white/5 border border-white/10 text-white/80 hover:border-bronze transition">
+                Centro Nobre
+            </button>
+            <button onclick="filterByBairro('maria-preta')" id="btn-fil-maria-preta" class="filter-pill px-4 py-1.5 rounded-full text-xs font-semibold bg-white/5 border border-white/10 text-white/80 hover:border-bronze transition">
+                Maria Preta
+            </button>
+        </div>
+
+        <div class="flex items-center space-x-3">
+            <label class="inline-flex items-center space-x-2 text-xs text-white/80 cursor-pointer">
+                <input type="checkbox" id="check-vr" onchange="applyFilters()" class="rounded bg-white/10 border-white/20 text-bronze focus:ring-bronze accent-bronze">
+                <span>Somente com Tour 360º WebXR 🥽</span>
+            </label>
+        </div>
+    </div>
+
+    <!-- ÁREA PRINCIPAL SPLIT: LISTA LATERAL (40%) + MAPA CHEIO (60%) -->
+    <main class="flex-grow flex flex-col md:flex-row overflow-hidden relative">
+        
+        <!-- LISTA LATERAL ESQUERDA -->
+        <div class="w-full md:w-[460px] lg:w-[500px] h-1/2 md:h-full overflow-y-auto p-4 space-y-4 bg-obsidian border-r border-white/10 flex-shrink-0" id="property-list">
+            <!-- Cards dos Imóveis injetados dinamicamente -->
+        </div>
+
+        <!-- MAPA FULLSCREEN DIREITA -->
+        <div class="w-full md:flex-grow h-1/2 md:h-full relative">
+            <div id="map" class="w-full h-full"></div>
+
+            <!-- Card flutuante sobreposto com pré-visualização rápida -->
+            <div id="floating-preview" class="hidden absolute bottom-6 left-6 right-6 md:left-auto md:right-6 md:w-96 z-[600] bg-card/95 backdrop-blur-xl border border-bronze/40 p-4 rounded-3xl shadow-2xl transition-all duration-300">
+                <button onclick="closePreview()" class="absolute top-3 right-3 text-white/40 hover:text-white text-xs">✕</button>
+                <div class="flex space-x-3">
+                    <img id="prev-img" src="" class="w-28 h-24 rounded-2xl object-cover">
+                    <div class="flex-grow flex flex-col justify-between">
+                        <div>
+                            <span id="prev-bairro" class="text-[10px] text-bronze uppercase tracking-wider font-semibold block"></span>
+                            <h4 id="prev-title" class="font-serif text-lg text-white font-bold leading-snug"></h4>
+                            <span id="prev-price" class="text-sm font-extrabold text-white"></span>
+                        </div>
+                        <div class="flex space-x-2 mt-2">
+                            <a id="prev-btn-dossier" href="#" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white rounded-xl text-xs font-semibold text-center flex-grow">
+                                Ver Ficha
+                            </a>
+                            <a id="prev-btn-vr" href="#" class="px-3 py-1.5 bg-bronze hover:bg-bronze-hover text-obsidian rounded-xl text-xs font-bold text-center flex-grow">
+                                🥽 Tour 360º
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="assets/data.js"></script>
+    <script>
+        let map;
+        let markers = [];
+        let currentBairro = 'todos';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initMap();
+            // Checar parâmetro da URL
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('bairro')) {
+                currentBairro = urlParams.get('bairro');
+            }
+            if (urlParams.get('vr') === '1') {
+                document.getElementById('check-vr').checked = true;
+            }
+            applyFilters();
+        });
+
+        function initMap() {
+            map = L.map('map', { zoomControl: false }).setView([-12.9700, -39.2620], 14);
+            L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+                maxZoom: 19
+            }).addTo(map);
+        }
+
+        function filterByBairro(bairroKey) {
+            currentBairro = bairroKey;
+            document.querySelectorAll('.filter-pill').forEach(btn => {
+                btn.className = 'filter-pill px-4 py-1.5 rounded-full text-xs font-semibold bg-white/5 border border-white/10 text-white/80 hover:border-bronze transition';
+            });
+            const activeBtn = document.getElementById(`btn-fil-${bairroKey}`);
+            if (activeBtn) activeBtn.className = 'filter-pill px-4 py-1.5 rounded-full text-xs font-semibold bg-bronze text-obsidian transition';
+            applyFilters();
+        }
+
+        function applyFilters() {
+            const props = getProperties();
+            document.getElementById('count-all').innerText = props.length;
+            const vrOnly = document.getElementById('check-vr').checked;
+
+            const filtered = props.filter(p => {
+                const matchBairro = currentBairro === 'todos' || p.bairroKey === currentBairro;
+                const matchVR = !vrOnly || p.hasVR;
+                return matchBairro && matchVR;
+            });
+
+            renderSidebarList(filtered);
+            renderMapPins(filtered);
+        }
+
+        function renderSidebarList(list) {
+            const container = document.getElementById('property-list');
+            container.innerHTML = '';
+
+            if (list.length === 0) {
+                container.innerHTML = `<div class="p-8 text-center text-white/40">Nenhum imóvel encontrado para este filtro em Santo Antônio de Jesus.</div>`;
+                return;
+            }
+
+            list.forEach(p => {
+                const card = document.createElement('div');
+                card.id = `card-${p.id}`;
+                card.className = 'p-4 rounded-3xl bg-card border border-white/10 hover:border-bronze transition cursor-pointer flex gap-4';
+                card.onclick = () => focusProperty(p.id);
+
+                card.innerHTML = `
+                    <img src="${p.image}" class="w-32 h-28 object-cover rounded-2xl flex-shrink-0">
+                    <div class="flex flex-col justify-between flex-grow">
+                        <div>
+                            <div class="flex justify-between items-start">
+                                <span class="text-[10px] text-bronze uppercase tracking-wider font-semibold">${p.bairro}</span>
+                                <span class="text-xs font-bold text-white">${p.price}</span>
+                            </div>
+                            <h4 class="font-serif text-base text-white font-bold leading-snug mt-1">${p.title}</h4>
+                            <p class="text-[11px] text-white/50 mt-1">${p.area} • ${p.suites} Suítes • ${p.vagas} Vagas</p>
+                        </div>
+                        <div class="flex space-x-2 mt-2 pt-2 border-t border-white/5">
+                            <a href="detalhes.html?id=${p.id}" class="text-xs text-white/70 hover:text-white underline">Ficha Técnica</a>
+                            <span class="text-white/20">|</span>
+                            <a href="tour360.html?id=${p.id}" class="text-xs text-bronze font-semibold hover:underline">🥽 Tour 360º</a>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function renderMapPins(list) {
+            markers.forEach(m => map.removeLayer(m));
+            markers = [];
+
+            list.forEach(p => {
+                const icon = L.divIcon({
+                    className: 'custom-pin-wrap',
+                    html: `<div class="custom-pin" id="pin-${p.id}">${p.price} 🥽</div>`,
+                    iconSize: [110, 30],
+                    iconAnchor: [55, 15]
+                });
+
+                const marker = L.marker([p.lat, p.lng], { icon: icon }).addTo(map);
+                marker.on('click', () => {
+                    focusProperty(p.id);
+                });
+                markers.push({ id: p.id, marker });
+            });
+        }
+
+        function focusProperty(id) {
+            const p = getPropertyById(id);
+            if (!p) return;
+
+            map.flyTo([p.lat, p.lng], 16, { duration: 1 });
+
+            // Ativar pin
+            document.querySelectorAll('.custom-pin').forEach(el => el.classList.remove('active'));
+            const pinEl = document.getElementById(`pin-${p.id}`);
+            if (pinEl) pinEl.classList.add('active');
+
+            // Abrir pré-visualização flutuante
+            const prev = document.getElementById('floating-preview');
+            document.getElementById('prev-img').src = p.image;
+            document.getElementById('prev-bairro').innerText = p.bairro;
+            document.getElementById('prev-title').innerText = p.title;
+            document.getElementById('prev-price').innerText = p.price;
+            document.getElementById('prev-btn-dossier').href = `detalhes.html?id=${p.id}`;
+            document.getElementById('prev-btn-vr').href = `tour360.html?id=${p.id}`;
+            prev.classList.remove('hidden');
+        }
+
+        function closePreview() {
+            document.getElementById('floating-preview').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>

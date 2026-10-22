@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recôncavo Prime — Imóveis de Alto Padrão em Santo Antônio de Jesus | WebXR</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#0f1115',
+                        travertine: '#f6f4ee',
+                        bronze: '#b89c74',
+                        'bronze-hover': '#a4875e',
+                        surface: '#16191f',
+                        card: '#1b1f27'
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-obsidian text-travertine font-sans antialiased selection:bg-bronze selection:text-obsidian flex flex-col min-h-screen">
+
+    <!-- TOP BAR COM DADOS DE APIS EM TEMPO REAL (CLIMA SAJ & COTAÇÕES) -->
+    <aside aria-label="Informações do portal" class="bg-card border-b border-white/5 py-2 px-6 text-xs text-white/60 flex flex-wrap gap-2 justify-between items-center">
+        <div class="flex items-center space-x-4">
+            <span class="flex items-center space-x-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>Plataforma WebXR Oficial</span>
+            </span>
+            <!-- Widget Clima SAJ (API Open-Meteo) -->
+            <span class="text-white/20">|</span>
+            <span id="weather-widget" class="flex items-center space-x-1 text-white/80 font-medium">
+                <span>🌤️ SAJ: Carregando clima...</span>
+            </span>
+            <!-- Widget Cotação Moedas (API AwesomeAPI) -->
+            <span class="hidden lg:inline text-white/20">|</span>
+            <span id="currency-widget" class="hidden lg:flex items-center space-x-2 text-white/70">
+                <span>Câmbio: USD/BRL ...</span>
+            </span>
+        </div>
+        <div class="flex items-center space-x-4">
+            <span>Plantão VIP: <strong class="text-white/80">(75) 99812-4500</strong></span>
+            <a href="login.html" class="text-bronze hover:underline font-medium">Área do Corretor</a>
+        </div>
+    </aside>
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-40 bg-obsidian/90 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex flex-col">
+                <span class="font-serif text-2xl tracking-[0.2em] font-bold text-white">RECÔNCAVO PRIME</span>
+                <span class="text-[9px] tracking-[0.3em] uppercase text-bronze -mt-1 font-sans">Imóveis de Alto Padrão • SAJ</span>
+            </a>
+
+            <nav class="hidden md:flex items-center space-x-8 text-sm text-white/80 font-medium">
+                <a href="index.html" class="text-bronze font-semibold">Início</a>
+                <a href="mapa.html" class="hover:text-bronze transition">Explorar no Mapa</a>
+                <a href="tour360.html?id=villa-imperial" class="hover:text-bronze transition flex items-center space-x-1.5 text-white/90">
+                    <span>🥽</span><span>Tour 360º VR</span>
+                </a>
+                <a href="admin.html" class="hover:text-bronze transition">Painel Corretor</a>
+            </nav>
+
+            <div class="flex items-center space-x-4">
+                <a href="mapa.html" class="hidden sm:inline-flex items-center space-x-2 px-5 py-2 rounded-full border border-bronze/40 text-bronze hover:bg-bronze hover:text-obsidian transition text-xs uppercase tracking-widest font-semibold">
+                    <span>Abrir Mapa de SAJ</span>
+                </a>
+                <a href="tour360.html?id=villa-imperial" class="bg-bronze hover:bg-bronze-hover text-obsidian px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider flex items-center space-x-1.5 shadow-lg transition">
+                    <span>🥽</span><span>Experiência VR</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=2400&q=85" alt="Mansão de Alto Padrão" class="w-full h-full object-cover filter brightness-[0.45] scale-105 duration-1000">
+            <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/40 to-transparent"></div>
+        </div>
+
+        <div class="relative z-10 max-w-5xl mx-auto px-6 text-center pt-8 pb-20">
+            <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-6">
+                <span class="w-2 h-2 rounded-full bg-bronze animate-ping"></span>
+                <span class="text-xs tracking-widest uppercase text-white/80">Santo Antônio de Jesus • Bahia</span>
+            </div>
+
+            <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl font-normal leading-tight text-white mb-6">
+                A Nova Dimensão da Arquitetura Baiana.
+            </h1>
+            <p class="text-lg sm:text-xl text-white/70 max-w-2xl mx-auto font-light leading-relaxed mb-10">
+                Uma curadoria exclusiva de residências e condomínios fechados em SAJ com tecnologia <strong>WebXR 360º</strong>, giroscópio e modo óculos VR.
+            </p>
+
+            <!-- BARRA DE BUSCA RÁPIDA -->
+            <div class="bg-card/90 backdrop-blur-xl border border-white/15 rounded-3xl p-4 max-w-4xl mx-auto shadow-2xl text-left">
+                <form action="mapa.html" method="GET" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 items-center">
+                    <div class="px-3 py-2 border-b sm:border-b-0 sm:border-r border-white/10">
+                        <label class="block text-[10px] uppercase tracking-wider text-bronze font-semibold">Localização em SAJ</label>
+                        <select name="bairro" class="w-full bg-transparent text-sm text-white focus:outline-none cursor-pointer mt-1 font-medium">
+                            <option value="todos" class="bg-card">Todos os Bairros</option>
+                            <option value="busca-vida" class="bg-card">Condomínio Busca Vida</option>
+                            <option value="jardins" class="bg-card">Condomínio Jardins</option>
+                            <option value="centro" class="bg-card">Centro Nobre</option>
+                            <option value="maria-preta" class="bg-card">Maria Preta</option>
+                        </select>
+                    </div>
+
+                    <div class="px-3 py-2 border-b sm:border-b-0 sm:border-r border-white/10">
+                        <label class="block text-[10px] uppercase tracking-wider text-bronze font-semibold">Tipologia</label>
+                        <select name="tipo" class="w-full bg-transparent text-sm text-white focus:outline-none cursor-pointer mt-1 font-medium">
+                            <option value="todos" class="bg-card">Todas as Tipologias</option>
+                            <option value="mansao" class="bg-card">Mansão em Condomínio</option>
+                            <option value="cobertura" class="bg-card">Cobertura Panorâmica</option>
+                            <option value="casa" class="bg-card">Casa Térrea Contemporânea</option>
+                        </select>
+                    </div>
+
+                    <div class="px-3 py-2 border-b sm:border-b-0 sm:border-r border-white/10 flex flex-col justify-center">
+                        <label class="block text-[10px] uppercase tracking-wider text-bronze font-semibold">Tecnologia</label>
+                        <label class="inline-flex items-center space-x-2 mt-1 cursor-pointer">
+                            <input type="checkbox" name="vr" value="1" checked class="rounded bg-white/10 border-white/20 text-bronze focus:ring-bronze accent-bronze">
+                            <span class="text-xs text-white/90">Apenas com Tour VR 🥽</span>
+                        </label>
+                    </div>
+
+                    <div>
+                        <button type="submit" class="w-full py-3.5 bg-bronze hover:bg-bronze-hover text-obsidian font-bold text-xs uppercase tracking-widest rounded-2xl flex items-center justify-center space-x-2 transition shadow-lg">
+                            <span>Buscar no Mapa</span>
+                            <span>→</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- DIFERENCIAIS WEBXR -->
+    <section class="py-16 bg-surface/40 border-y border-white/10">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="p-6 rounded-2xl bg-card border border-white/5">
+                <span class="text-3xl block mb-3">🥽</span>
+                <h3 class="font-serif text-xl text-white mb-2">WebXR & Realidade Virtual</h3>
+                <p class="text-xs text-white/60 leading-relaxed">Imersão completa com visualizador panorâmico 360º compatível com óculos VR Box simples e headsets.</p>
+            </div>
+            <div class="p-6 rounded-2xl bg-card border border-white/5">
+                <span class="text-3xl block mb-3">📱</span>
+                <h3 class="font-serif text-xl text-white mb-2">Sensor de Giroscópio</h3>
+                <p class="text-xs text-white/60 leading-relaxed">No celular, movimente fisicamente o aparelho para olhar por todo o ambiente sem tocar na tela.</p>
+            </div>
+            <div class="p-6 rounded-2xl bg-card border border-white/5">
+                <span class="text-3xl block mb-3">🗺️</span>
+                <h3 class="font-serif text-xl text-white mb-2">Busca Georreferenciada</h3>
+                <p class="text-xs text-white/60 leading-relaxed">Navegação estilo Airbnb sobre mapa cartográfico de Santo Antônio de Jesus e seus condomínios.</p>
+            </div>
+            <div class="p-6 rounded-2xl bg-card border border-white/5">
+                <span class="text-3xl block mb-3">💬</span>
+                <h3 class="font-serif text-xl text-white mb-2">WhatsApp Dinâmico</h3>
+                <p class="text-xs text-white/60 leading-relaxed">Conexão direta com o corretor responsável pelo imóvel através de mensagem personalizada instantânea.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- VITRINE DE IMÓVEIS (EDITORIAL GRID) -->
+    <section class="py-20 max-w-7xl mx-auto px-6 flex-grow">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+            <div>
+                <span class="text-bronze uppercase tracking-[0.2em] text-xs font-semibold">Residências em Destaque</span>
+                <h2 class="font-serif text-3xl sm:text-5xl text-white mt-2">Coleção Exclusiva SAJ</h2>
+            </div>
+            <a href="mapa.html" class="mt-4 md:mt-0 text-sm text-bronze hover:underline flex items-center space-x-1.5 font-medium">
+                <span>Ver todas as propriedades no mapa</span><span>→</span>
+            </a>
+        </div>
+
+        <div id="home-properties-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Injetado via JS -->
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-card border-t border-white/10 py-12 px-6 mt-auto">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-xs text-white/50 space-y-4 md:space-y-0">
+            <div>
+                <span class="font-serif text-lg font-bold text-white tracking-widest">RECÔNCAVO PRIME</span>
+                <p class="mt-1">Santo Antônio de Jesus - Bahia • CRECI-BA Jurídico J-2890</p>
+            </div>
+            <div class="flex space-x-6">
+                <a href="index.html" class="hover:text-bronze">Início</a>
+                <a href="mapa.html" class="hover:text-bronze">Mapa Interativo</a>
+                <a href="tour360.html?id=villa-imperial" class="hover:text-bronze">Tour 360º VR</a>
+                <a href="admin.html" class="hover:text-bronze">Área do Corretor</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Dados Globais e Integrações de APIs -->
+    <script src="assets/data.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // 1. Carregar Clima ao Vivo de SAJ (API Open-Meteo)
+            try {
+                const weather = await fetchSAJWeather();
+                document.getElementById('weather-widget').innerHTML = `
+                    <span>☀️ SAJ Agora: <strong>${weather.temperature.toFixed(1)}°C</strong> • Vento: ${weather.windspeed} km/h</span>
+                `;
+            } catch(e){}
+
+            // 2. Carregar Cotações de Moedas ao Vivo (AwesomeAPI)
+            try {
+                const cur = await fetchCurrencies();
+                document.getElementById('currency-widget').innerHTML = `
+                    <span>USD: <strong>R$ ${cur.usd.toFixed(2)}</strong></span>
+                    <span class="text-white/20">•</span>
+                    <span>EUR: <strong>R$ ${cur.eur.toFixed(2)}</strong></span>
+                `;
+            } catch(e){}
+
+            // 3. Renderizar Imóveis
+            const grid = document.getElementById('home-properties-grid');
+            const props = getProperties();
+
+            grid.innerHTML = props.map(p => `
+                <div class="bg-card rounded-3xl overflow-hidden border border-white/10 hover:border-bronze/60 transition group flex flex-col justify-between">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-obsidian/80 via-transparent to-black/20"></div>
+                        <span class="absolute top-4 left-4 bg-obsidian/80 backdrop-blur-md text-white text-[10px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full border border-white/10">
+                            ${p.tipoLabel}
+                        </span>
+                        ${p.hasVR ? `
+                            <a href="tour360.html?id=${p.id}" class="absolute top-4 right-4 bg-bronze text-obsidian text-[11px] font-bold px-3 py-1 rounded-full shadow-lg flex items-center space-x-1 hover:bg-white transition">
+                                <span>🥽</span><span>Tour 360º VR</span>
+                            </a>
+                        ` : ''}
+                        <div class="absolute bottom-4 left-4 right-4 flex justify-between items-end">
+                            <div>
+                                <span class="text-xs text-bronze uppercase tracking-widest block font-medium">${p.bairro}</span>
+                                <h3 class="font-serif text-2xl text-white font-bold">${p.title}</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-6 flex-grow flex flex-col justify-between">
+                        <div class="grid grid-cols-3 gap-2 py-3 border-y border-white/5 text-center text-xs mb-4">
+                            <div><strong class="text-white block">${p.area}</strong><span class="text-white/40 text-[10px]">Área</span></div>
+                            <div><strong class="text-white block">${p.suites} Suítes</strong><span class="text-white/40 text-[10px]">Dormitórios</span></div>
+                            <div><strong class="text-white block">${p.vagas} Vagas</strong><span class="text-white/40 text-[10px]">Garagem</span></div>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-2">
+                            <div>
+                                <span class="text-[10px] text-white/50 block uppercase">Investimento</span>
+                                <span class="text-xl font-bold text-white font-sans">${p.price}</span>
+                            </div>
+                            <div class="flex space-x-2">
+                                <a href="detalhes.html?id=${p.id}" class="px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/15 rounded-xl text-xs font-semibold text-white transition">
+                                    Dossier
+                                </a>
+                                <a href="tour360.html?id=${p.id}" class="px-4 py-2 bg-bronze hover:bg-bronze-hover text-obsidian rounded-xl text-xs font-bold transition flex items-center space-x-1">
+                                    <span>🥽 360º</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        });
+    </script>
+</body>
+</html>
