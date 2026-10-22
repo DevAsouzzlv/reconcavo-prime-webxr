@@ -223,7 +223,10 @@
 
         function initAdminMap() {
             map = L.map('admin-map', { zoomControl: true }).setView([-12.9720, -39.2630], 14);
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(map);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors',
+                maxZoom: 19
+            }).addTo(map);
 
             pinMarker = L.marker([-12.9720, -39.2630], { draggable: true }).addTo(map);
 
