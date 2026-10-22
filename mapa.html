@@ -113,12 +113,12 @@
     <main class="flex-grow flex flex-col md:flex-row overflow-hidden relative">
         
         <!-- LISTA LATERAL ESQUERDA -->
-        <div class="w-full md:w-[460px] lg:w-[500px] h-1/2 md:h-full overflow-y-auto p-4 space-y-4 bg-obsidian border-r border-white/10 flex-shrink-0" id="property-list">
+        <div class="w-full md:w-[460px] lg:w-[500px] h-full overflow-y-auto p-4 space-y-4 bg-obsidian border-r border-white/10 flex-shrink-0" id="property-list">
             <!-- Cards dos Imóveis injetados dinamicamente -->
         </div>
 
         <!-- MAPA FULLSCREEN DIREITA -->
-        <div class="w-full md:flex-grow h-1/2 md:h-full relative">
+        <div class="hidden md:block w-full md:flex-grow h-full relative" id="map-container">
             <div id="map" class="w-full h-full"></div>
 
             <!-- Card flutuante sobreposto com pré-visualização rápida -->
@@ -144,13 +144,43 @@
                 </div>
             </div>
         </div>
+
+        <!-- BOTÃO FLUTUANTE TOGGLE MOBILE: MAPA / LISTA -->
+        <button id="mobile-toggle-btn" onclick="toggleMobileView()" class="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-5 py-3 rounded-full bg-bronze text-obsidian font-bold text-xs shadow-2xl flex items-center space-x-2 border border-white/20 active:scale-95 transition">
+            <span id="mobile-toggle-icon">🗺️</span>
+            <span id="mobile-toggle-label">Ver Mapa</span>
+        </button>
     </main>
 
     <script src="assets/data.js"></script>
+    <script src="assets/ui-helpers.js"></script>
     <script>
         let map;
         let markers = [];
         let currentBairro = 'todos';
+        let mobileView = 'list'; // 'list' | 'map'
+
+        function toggleMobileView() {
+            const listEl = document.getElementById('property-list');
+            const mapEl = document.getElementById('map-container');
+            const iconEl = document.getElementById('mobile-toggle-icon');
+            const labelEl = document.getElementById('mobile-toggle-label');
+
+            if (mobileView === 'list') {
+                mobileView = 'map';
+                listEl.classList.add('hidden');
+                mapEl.classList.remove('hidden');
+                iconEl.innerText = '📋';
+                labelEl.innerText = 'Ver Lista';
+                setTimeout(() => map.invalidateSize(), 200);
+            } else {
+                mobileView = 'list';
+                mapEl.classList.add('hidden');
+                listEl.classList.remove('hidden');
+                iconEl.innerText = '🗺️';
+                labelEl.innerText = 'Ver Mapa';
+            }
+        }
 
         document.addEventListener('DOMContentLoaded', () => {
             initMap();
@@ -260,6 +290,11 @@
         function focusProperty(id) {
             const p = getPropertyById(id);
             if (!p) return;
+
+            // Se estiver no mobile e na lista, alterna para o mapa
+            if (window.innerWidth < 768 && mobileView === 'list') {
+                toggleMobileView();
+            }
 
             map.flyTo([p.lat, p.lng], 16, { duration: 1 });
 

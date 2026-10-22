@@ -1,17 +1,18 @@
-// Base de dados central compartilhada com suporte a APIs em tempo real e LocalStorage
+// Base de dados enriquecida com detalhes arquitetônicos de alto padrão
 const defaultProperties = [
     {
         id: 'villa-imperial',
         title: 'Mansão Villa Imperial',
+        tagline: 'Obra-prima brutalista com pé-direito duplo e raia de borda infinita',
         price: 'R$ 2.450.000',
         priceNum: 2450000,
         condo: 'R$ 850 / mês',
         iptu: 'R$ 3.200 / ano',
         bairro: 'Condomínio Jardins',
         bairroKey: 'jardins',
-        address: 'Av. Roberto Santos, Condomínio Jardins, Santo Antônio de Jesus - BA',
+        address: 'Avenida Roberto Santos, Condomínio Fechado Jardins, Santo Antônio de Jesus - BA',
         tipo: 'mansao',
-        tipoLabel: 'Mansão Contemporânea',
+        tipoLabel: 'Mansão Brutalista Contemporânea',
         area: '520 m²',
         terreno: '850 m²',
         suites: 4,
@@ -19,27 +20,38 @@ const defaultProperties = [
         vagas: 4,
         hasVR: true,
         destaque: true,
+        ano: 2024,
+        posicaoSolar: 'Nascente Total',
         lat: -12.9694,
         lng: -39.2619,
-        image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80',
+        image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1400&q=85',
         gallery: [
-            'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80',
-            'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
-            'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80',
-            'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80'
+            'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1400&q=85',
+            'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=85',
+            'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=85',
+            'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1400&q=85',
+            'https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1400&q=85'
         ],
-        desc: 'Residência brutalista contemporânea em concreto aparente e travertino romano. Living com pé-direito duplo de 6,20m integrado à varanda gourmet climatizada e piscina com borda infinita aquecida por energia solar fotovoltaica.',
-        features: ['Pé-direito duplo (6,20m)', 'Piscina borda infinita', 'Automação residencial Lutron', 'Energia solar instalada', 'Portaria armada 24h', 'Poço artesiano privativo'],
+        desc: 'Projetada para valorizar a ventilação cruzada e a iluminação natural típica do Recôncavo Baiano. Estruturada em concreto aparente ripado e blocos de travertino romano bruto. O living imponente de 120m² possui pé-direito duplo de 6,20m e se integra totalmente à varanda gourmet através de esquadrias minimalistas embutidas no piso.',
+        architecturalHighlights: [
+            { icon: '🏛️', title: 'Pé-Direito Duplo', desc: '6,20m de vão livre com fachada envidraçada estrutural structural glazing.' },
+            { icon: '🏊', title: 'Piscina & Raia de 18m', desc: 'Revestimento hijau vulcânico importado com borda infinita e prainha aquecida.' },
+            { icon: '⚡', title: 'Sustentabilidade Plena', desc: 'Usina solar fotovoltaica 1.200 kWh/mês com microinversores e poço artesiano.' },
+            { icon: '🛋️', title: 'Living & Espaço Gourmet', desc: 'Ilha em mármore Calacatta Michelangelo de 4,20m com churrasqueira a gás oculta.' },
+            { icon: '🛏️', title: 'Master Suíte SPA', desc: '82m² privativos, banheira freestanding de imersão e closet duplo com iluminação LED.' },
+            { icon: '🛡️', title: 'Segurança & Privacidade', desc: 'Portaria blindada 24h com controle de acesso biométrico e ronda motorizada armada.' }
+        ],
         broker: {
             name: 'Carlos Eduardo Mendes',
             creci: 'CRECI-BA 24.890',
             phone: '5575998124500',
-            avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=200&q=80',
-            email: 'carlos.mendes@reconcavoprime.com.br'
+            avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=250&q=80',
+            email: 'carlos.mendes@reconcavoprime.com.br',
+            experience: '12 anos especializado no mercado de altíssimo padrão em SAJ'
         },
         panoramas: {
             living: {
-                title: 'Living & Pé-Direito Duplo',
+                title: 'Living Principal & Pé-Direito',
                 url: 'assets/panoramas/living_360.jpg',
                 hotspots: [
                     { pitch: -5, yaw: 35, text: 'Ir para Varanda Gourmet & Piscina', target: 'gourmet' },
@@ -66,6 +78,7 @@ const defaultProperties = [
     {
         id: 'reserva-busca-vida',
         title: 'Residência Busca Vida Master',
+        tagline: 'Refúgio de luxo privativo com adega climatizada e quadra de beach tennis',
         price: 'R$ 3.850.000',
         priceNum: 3850000,
         condo: 'R$ 980 / mês',
@@ -82,39 +95,48 @@ const defaultProperties = [
         vagas: 6,
         hasVR: true,
         destaque: true,
+        ano: 2023,
+        posicaoSolar: 'Nascente / Norte',
         lat: -12.9730,
         lng: -39.2680,
-        image: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1200&q=80',
+        image: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1400&q=85',
         gallery: [
-            'https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1200&q=80',
-            'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=80'
+            'https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1400&q=85',
+            'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1400&q=85',
+            'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1400&q=85'
         ],
-        desc: 'Espetacular propriedade em condomínio fechado com heliponto nas proximidades, acabamentos nobres em mármore calacatta ouro e projeto luminotécnico assinado.',
-        features: ['Heliponto próximo', 'Quadra de Beach Tennis privativa', '5 Suítes com closet', 'Adega climatizada para 800 rótulos', 'Gerador de energia 100%'],
+        desc: 'Localizada no condomínio fechado mais reservado de Santo Antônio de Jesus. Residência pensada para grandes recepções e convívio familiar, com living imerso em espelho dágua, home cinema acústico com projetor 4K e adega climatizada em vidro piso-teto para 800 garrafas.',
+        architecturalHighlights: [
+            { icon: '🎾', title: 'Beach Tennis & SPA', desc: 'Quadra esportiva privativa em areia tratada e deck com sauna seca e úmida.' },
+            { icon: '🍷', title: 'Adega Climatizada 800 Rótulos', desc: 'Controle de umidade constante e iluminação UV-free em marcenaria nobre de nogueira.' },
+            { icon: '🚁', title: 'Acesso VIP & Heliponto', desc: 'Proximidade imediata ao ponto de pouso executivo homologado da região.' },
+            { icon: '🔋', title: 'Gerador Total 100%', desc: 'Autonomia completa sem interrupção de energia para climatização e elevador.' }
+        ],
         broker: {
             name: 'Carlos Eduardo Mendes',
             creci: 'CRECI-BA 24.890',
             phone: '5575998124500',
-            avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=200&q=80',
-            email: 'carlos.mendes@reconcavoprime.com.br'
+            avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=250&q=80',
+            email: 'carlos.mendes@reconcavoprime.com.br',
+            experience: '12 anos especializado no mercado de altíssimo padrão em SAJ'
         },
         panoramas: {
             living: {
-                title: 'Living Hall Principal',
+                title: 'Living Hall & Espelho d’Água',
                 url: 'assets/panoramas/gourmet_360.jpg',
                 hotspots: [
                     { pitch: 0, yaw: 45, text: 'Área de Lazer Externa', target: 'gourmet' }
                 ]
             },
             gourmet: {
-                title: 'Deck Panorâmico & Raia',
+                title: 'Deck Gourmet & Piscina',
                 url: 'assets/panoramas/living_360.jpg',
                 hotspots: [
                     { pitch: 0, yaw: -90, text: 'Voltar ao Hall', target: 'living' }
                 ]
             },
             suite: {
-                title: 'Suíte Presidencial',
+                title: 'Suíte Presidencial com Terraço',
                 url: 'assets/panoramas/suite_360.jpg',
                 hotspots: []
             }
@@ -123,15 +145,16 @@ const defaultProperties = [
     {
         id: 'penthouse-horizon',
         title: 'Penthouse Horizon Centro',
+        tagline: 'Vista 360º para as serras e skyline de Santo Antônio de Jesus',
         price: 'R$ 1.890.000',
         priceNum: 1890000,
         condo: 'R$ 1.250 / mês',
         iptu: 'R$ 2.900 / ano',
         bairro: 'Centro Nobre',
         bairroKey: 'centro',
-        address: 'Rua Gorgônio José de Araújo, Centro, Santo Antônio de Jesus - BA',
+        address: 'Rua Gorgônio José de Araújo, Centro Nobre, Santo Antônio de Jesus - BA',
         tipo: 'cobertura',
-        tipoLabel: 'Cobertura Duplex',
+        tipoLabel: 'Cobertura Duplex Exclusiva',
         area: '340 m²',
         terreno: '340 m²',
         suites: 3,
@@ -139,21 +162,28 @@ const defaultProperties = [
         vagas: 3,
         hasVR: true,
         destaque: false,
+        ano: 2024,
+        posicaoSolar: 'Poente Panorâmico',
         lat: -12.9660,
         lng: -39.2590,
-        image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80',
+        image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1400&q=85',
         gallery: [
-            'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80',
-            'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80'
+            'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1400&q=85',
+            'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1400&q=85'
         ],
-        desc: 'Cobertura duplex no ponto mais alto de Santo Antônio de Jesus. Jacuzzi aquecida no terraço panorâmico com vista 360º para toda a cidade e montanhas.',
-        features: ['Vista 360º para SAJ', 'Jacuzzi no terraço', 'Elevador com acesso biométrico direto', '3 Vagas livres de garagem'],
+        desc: 'Cobertura duplex única que ocupa o último pavimento do edifício mais alto e sofisticado do Centro Nobre de SAJ. Conta com elevador privativo com chave biométrica e terraço superior aberto com deck e jacuzzi para 8 pessoas com vista para o pôr do sol.',
+        architecturalHighlights: [
+            { icon: '🌇', title: 'Skyline Panorâmico 360º', desc: 'Visão desimpedida para toda a cidade e a serra do Jiquiriçá.' },
+            { icon: '🛁', title: 'Jacuzzi & Rooftop Lounge', desc: 'Espaço gourmet a céu aberto com hidro aquecida e som ambiente embutido.' },
+            { icon: '🛗', title: 'Elevador com Acesso Biométrico', desc: 'O elevador se abre diretamente no hall social do apartamento.' }
+        ],
         broker: {
             name: 'Carlos Eduardo Mendes',
             creci: 'CRECI-BA 24.890',
             phone: '5575998124500',
-            avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=200&q=80',
-            email: 'carlos.mendes@reconcavoprime.com.br'
+            avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=250&q=80',
+            email: 'carlos.mendes@reconcavoprime.com.br',
+            experience: '12 anos especializado no mercado de altíssimo padrão em SAJ'
         },
         panoramas: {
             living: {
@@ -176,6 +206,7 @@ const defaultProperties = [
     {
         id: 'casa-terrea-maria-preta',
         title: 'Residência Serena Maria Preta',
+        tagline: 'Linhas horizontais contemporâneas com jardim de inverno e privacidade total',
         price: 'R$ 1.650.000',
         priceNum: 1650000,
         condo: 'Isento',
@@ -192,20 +223,26 @@ const defaultProperties = [
         vagas: 3,
         hasVR: false,
         destaque: false,
+        ano: 2023,
+        posicaoSolar: 'Nascente',
         lat: -12.9640,
         lng: -39.2640,
-        image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
+        image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=85',
         gallery: [
-            'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80'
+            'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=85'
         ],
-        desc: 'Projeto térreo em linhas minimalistas no bairro nobre Maria Preta. Jardim interno de inverno, esquadrias pretas do chão ao teto e espaço gourmet integrado.',
-        features: ['Projeto 100% térreo', 'Jardim de inverno', 'Piscina com cascata', 'Acabamento em porcelanato 120x120'],
+        desc: 'Construída sem desníveis ou escadas, perfeita para quem busca conforto, acessibilidade e elegância. O jardim interno de inverno separa a ala social da ala íntima com esquadrias acústicas pretas do chão ao teto.',
+        architecturalHighlights: [
+            { icon: '🌿', title: 'Jardim de Inverno Zen', desc: 'Pátio central com vegetação tropical nativa e iluminação zenital.' },
+            { icon: '🏊', title: 'Piscina com Cascata', desc: 'Área externa ajardinada com deck e chuveirão em pedra natural.' }
+        ],
         broker: {
             name: 'Carlos Eduardo Mendes',
             creci: 'CRECI-BA 24.890',
             phone: '5575998124500',
-            avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=200&q=80',
-            email: 'carlos.mendes@reconcavoprime.com.br'
+            avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=250&q=80',
+            email: 'carlos.mendes@reconcavoprime.com.br',
+            experience: '12 anos especializado no mercado de altíssimo padrão em SAJ'
         },
         panoramas: {
             living: {
@@ -235,41 +272,12 @@ function getPropertyById(id) {
     return props.find(p => p.id === id) || props[0];
 }
 
-// INTEGRAÇÃO 1: API OFICIAL DO WHATSAPP (com link inteligente e mensagem pré-formatada)
 function generateWhatsAppUrl(property, customMsg) {
     const phone = property?.broker?.phone || '5575998124500';
-    const text = customMsg || `Olá ${property.broker.name}! Vi a *${property.title}* (${property.price}) em Santo Antônio de Jesus no portal Recôncavo Prime e gostaria de agendar uma visita presencial!`;
+    const text = customMsg || `Olá ${property.broker.name}! Gostaria de agendar uma visita presencial exclusiva na *${property.title}* (${property.price}) em Santo Antônio de Jesus, que conheci através do Tour Virtual 360º.`;
     return `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
 }
 
-// INTEGRAÇÃO 2: API OPEN-METEO (Clima ao vivo em Santo Antônio de Jesus)
-async function fetchSAJWeather() {
-    try {
-        const resp = await fetch('https://api.open-meteo.com/v1/forecast?latitude=-12.9694&longitude=-39.2619&current_weather=true');
-        const data = await resp.json();
-        return data.current_weather; // { temperature: 28.8, windspeed: 19.7, weathercode: 1 }
-    } catch (e) {
-        console.warn('Erro ao carregar Open-Meteo:', e);
-        return { temperature: 28, windspeed: 15 };
-    }
-}
-
-// INTEGRAÇÃO 3: API AWESOMEAPI (Cotação de Moedas em Tempo Real para Investidores Internacionais)
-async function fetchCurrencies() {
-    try {
-        const resp = await fetch('https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL');
-        const data = await resp.json();
-        return {
-            usd: parseFloat(data.USDBRL.bid),
-            eur: parseFloat(data.EURBRL.bid)
-        };
-    } catch (e) {
-        console.warn('Erro ao carregar cotações:', e);
-        return { usd: 5.05, eur: 5.65 };
-    }
-}
-
-// INTEGRAÇÃO 4: API NOMINATIM OPENSTREETMAP (Geocodificação Automática de Endereço em SAJ)
 async function geocodeSAJAddress(address) {
     try {
         const query = encodeURIComponent(`${address}, Santo Antônio de Jesus, Bahia, Brasil`);
@@ -283,12 +291,11 @@ async function geocodeSAJAddress(address) {
             };
         }
     } catch (e) {
-        console.warn('Erro no geocoding Nominatim:', e);
+        console.warn('Erro no geocoding:', e);
     }
     return null;
 }
 
-// INTEGRAÇÃO 5: API VIACEP (Busca Automática de Endereço via CEP em SAJ)
 async function fetchViaCEP(cep) {
     const cleanCEP = cep.replace(/\D/g, '');
     if (cleanCEP.length !== 8) return null;
@@ -297,7 +304,7 @@ async function fetchViaCEP(cep) {
         const data = await resp.json();
         if (!data.erro) return data;
     } catch (e) {
-        console.warn('Erro na consulta ViaCEP:', e);
+        console.warn('Erro ViaCEP:', e);
     }
     return null;
 }

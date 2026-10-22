@@ -341,7 +341,7 @@
 <h5 class="font-headline-md text-headline-md font-medium text-primary">Private Consultation</h5>
 <p class="font-body-sm text-on-surface-variant mt-1">Submit your credentials for verified client onboarding.</p>
 </div>
-<form class="space-y-4" onsubmit="event.preventDefault(); alert('Dossier inquiry transmitted securely.');">
+<form class="space-y-4" onsubmit="event.preventDefault(); this.querySelector('button[type=submit]').innerText = 'Enviado com Sucesso ✓';">
 <div>
 <input class="w-full bg-transparent border-b border-primary/30 py-3 text-on-surface placeholder:text-on-surface-variant/50 focus:border-primary focus:ring-0 font-body-sm" placeholder="Full Legal Name / Entity" required="" type="text"/>
 </div>

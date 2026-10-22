@@ -134,6 +134,7 @@
     </main>
 
     <script src="assets/data.js"></script>
+    <script src="assets/ui-helpers.js"></script>
     <script>
         let currentProp;
         let currentRoomKey = 'living';
@@ -225,17 +226,20 @@
                         .then(res => {
                             if (res === 'granted') {
                                 if (pannellumInstance) pannellumInstance.startOrientation();
-                                alert('🧭 Giroscópio ativado! Mova o celular para olhar ao redor.');
+                                showToast('🧭 Giroscópio ativado! Mova o celular para olhar ao redor.', 'success');
                             } else {
-                                alert('Permissão de giroscópio negada.');
+                                showToast('Permissão de giroscópio negada pelo navegador.', 'warning');
                             }
-                        }).catch(console.error);
+                        }).catch(err => {
+                            console.error(err);
+                            showToast('Erro ao solicitar acesso aos sensores de orientação.', 'warning');
+                        });
                 } else {
                     if (pannellumInstance) pannellumInstance.startOrientation();
-                    alert('🧭 Giroscópio ativado! Gire o smartphone para explorar.');
+                    showToast('🧭 Giroscópio ativado! Gire o smartphone para explorar o ambiente.', 'success');
                 }
             } else {
-                alert('Sensor de giroscópio não suportado neste navegador.');
+                showToast('Sensor de giroscópio não suportado ou indisponível neste navegador.', 'warning');
             }
         }
 
@@ -250,11 +254,13 @@
                 stereo.classList.remove('hidden');
                 btn.innerHTML = '<span>✕</span><span>Sair do Modo VR Box</span>';
                 initStereoViewers(currentProp.panoramas[currentRoomKey].url);
+                showToast('🥽 Modo VR Estereoscópico ativado! Encaixe no óculos.', 'success');
             } else {
                 stereo.classList.add('hidden');
                 standard.classList.remove('hidden');
                 btn.innerHTML = '<span>🥽</span><span>Modo VR Box (Estéreo)</span>';
                 initStandardViewer(currentProp.panoramas[currentRoomKey]);
+                showToast('Retornado à visão 360º monocular.', 'info');
             }
         }
 

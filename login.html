@@ -85,7 +85,7 @@
                             <input type="checkbox" checked class="rounded bg-white/10 border-white/20 text-bronze accent-bronze">
                             <span>Manter conectado</span>
                         </label>
-                        <a href="#" onclick="alert('Instruções de recuperação enviadas ao e-mail corporativo cadastrado no CRECI-BA.')" class="text-bronze hover:underline">Esqueceu a senha?</a>
+                        <button type="button" onclick="handleForgotPass()" class="text-bronze hover:underline">Esqueceu a senha?</button>
                     </div>
 
                     <button type="submit" class="w-full mt-4 py-4 bg-bronze hover:bg-bronze-hover text-obsidian font-bold text-xs uppercase tracking-widest rounded-2xl shadow-xl transition flex items-center justify-center space-x-2">
@@ -101,11 +101,28 @@
         </div>
     </div>
 
+    <script src="assets/ui-helpers.js"></script>
     <script>
+        function handleForgotPass() {
+            showModal({
+                title: 'Recuperação de Acesso',
+                subtitle: 'Portal Corporativo CRECI-BA',
+                contentHtml: `
+                    <p>Enviamos um token de verificação em duas etapas para o e-mail corporativo cadastrado junto ao <strong>CRECI-BA</strong> do corretor <strong>Carlos Eduardo Mendes</strong>.</p>
+                    <p class="text-white/60">Caso não tenha mais acesso a esta caixa postal, procure a gerência de compliance da Recôncavo Prime em Santo Antônio de Jesus.</p>
+                `,
+                confirmText: 'Entendido',
+                onConfirm: () => showToast('Solicitação registrada no sistema de segurança.', 'success')
+            });
+        }
+
         function handleLogin(e) {
             e.preventDefault();
             sessionStorage.setItem('broker_logged', 'true');
-            window.location.href = 'admin.html';
+            showToast('Autenticação confirmada! Redirecionando...', 'success');
+            setTimeout(() => {
+                window.location.href = 'admin.html';
+            }, 600);
         }
     </script>
 </body>

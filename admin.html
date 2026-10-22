@@ -212,6 +212,7 @@
     </main>
 
     <script src="assets/data.js"></script>
+    <script src="assets/ui-helpers.js"></script>
     <script>
         let map;
         let pinMarker;
@@ -263,7 +264,10 @@
         // INTEGRAÇÃO NOMINATIM OPENSTREETMAP GEOCODING
         async function handleGeocodeAddress() {
             const addr = document.getElementById('form-address').value;
-            if (!addr) return alert('Digite um endereço ou busque o CEP primeiro.');
+            if (!addr) {
+                showToast('Digite um endereço ou busque o CEP primeiro.', 'warning');
+                return;
+            }
 
             const status = document.getElementById('cep-status');
             status.innerText = 'Geocodificando com OpenStreetMap...';
@@ -363,7 +367,24 @@
             props.unshift(newProp);
             saveProperties(props);
 
-            alert('🎉 Imóvel publicado com sucesso! O Tour 360º e o novo pino no mapa de Santo Antônio de Jesus já estão ao vivo.');
+            showModal({
+                title: 'Imóvel Publicado!',
+                subtitle: 'Sincronização em tempo real concluída',
+                contentHtml: `
+                    <p class="text-white">A propriedade <strong>${title}</strong> (${price}) foi cadastrada e publicada no catálogo oficial da Recôncavo Prime.</p>
+                    <div class="p-3 bg-surface rounded-xl border border-white/10 text-xs text-white/70 space-y-1">
+                        <div>📍 Coordenadas: <code>${lat.toFixed(4)}, ${lng.toFixed(4)}</code></div>
+                        <div>🥽 Tour WebXR 360º: 3 cômodos equiretangulares ativos</div>
+                        <div>📲 WhatsApp do corretor: Sincronizado para novos leads</div>
+                    </div>
+                `,
+                confirmText: 'Ver no Mapa de SAJ',
+                onConfirm: () => {
+                    window.location.href = 'mapa.html';
+                }
+            });
+
+            showToast('✓ Imóvel publicado com sucesso!', 'success');
             e.target.reset();
             renderAdminProps();
         }
