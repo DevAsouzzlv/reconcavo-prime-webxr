@@ -43,11 +43,11 @@
 <body class="bg-obsidian text-travertine font-sans antialiased min-h-screen flex flex-col">
 
     <!-- TOP BAR -->
-    <header class="h-20 bg-card border-b border-white/10 px-6 flex items-center justify-between sticky top-0 z-30">
-        <div class="flex items-center space-x-6">
+    <header class="h-20 bg-card border-b border-white/10 px-4 sm:px-6 flex items-center justify-between sticky top-0 z-30">
+        <div class="flex items-center space-x-4 sm:space-x-6">
             <a href="index.html" class="flex flex-col">
-                <span class="font-serif text-2xl tracking-[0.2em] font-bold text-white">RECÔNCAVO PRIME</span>
-                <span class="text-[9px] tracking-[0.3em] uppercase text-bronze -mt-1 font-sans">Broker Studio • Painel do Corretor</span>
+                <span class="font-serif text-xl sm:text-2xl tracking-[0.2em] font-bold text-white">RECÔNCAVO PRIME</span>
+                <span class="text-[8px] sm:text-[9px] tracking-[0.3em] uppercase text-bronze -mt-1 font-sans">Broker Studio • Painel do Corretor</span>
             </a>
             <span class="text-white/20 hidden md:inline">|</span>
             <span class="text-xs text-emerald-400 hidden md:flex items-center space-x-1.5">
@@ -56,10 +56,10 @@
             </span>
         </div>
 
-        <div class="flex items-center space-x-4">
-            <a href="index.html" class="text-xs text-white/70 hover:text-white">Ver Portal Público</a>
-            <a href="mapa.html" class="text-xs text-white/70 hover:text-white">Ver Mapa de SAJ</a>
-            <button onclick="logout()" class="px-4 py-2 bg-white/5 border border-white/15 rounded-full text-xs text-red-400 hover:bg-red-500/20 transition">
+        <div class="flex items-center space-x-3 sm:space-x-4">
+            <a href="index.html" class="text-xs text-stone-300 hover:text-white hidden sm:inline">Ver Portal</a>
+            <a href="mapa.html" class="text-xs text-stone-300 hover:text-white">Mapa</a>
+            <button onclick="logout()" class="px-3.5 py-1.5 bg-red-500/10 border border-red-500/30 rounded-full text-xs text-red-300 hover:bg-red-500 hover:text-white transition">
                 Sair
             </button>
         </div>
@@ -81,29 +81,33 @@
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
             <!-- FORMULÁRIO DE CADASTRO (8 colunas) -->
-            <div class="lg:col-span-8 bg-card p-8 rounded-3xl border border-white/10 shadow-2xl">
-                <h2 class="font-serif text-2xl text-white font-bold mb-6 flex items-center space-x-2">
+            <div class="lg:col-span-8 bg-card p-5 sm:p-8 rounded-3xl border border-white/10 shadow-2xl">
+                <h2 class="font-serif text-2xl sm:text-3xl text-white font-bold mb-6 flex items-center space-x-2">
                     <span class="text-bronze">➕</span><span>Cadastrar Imóvel com Geocodificação Automática</span>
                 </h2>
 
                 <form onsubmit="saveNewProperty(event)" class="space-y-6">
-                    <!-- BUSCA AUTOMÁTICA POR CEP (API VIACEP) -->
-                    <div class="p-4 bg-obsidian/70 border border-bronze/30 rounded-2xl">
-                        <div class="flex justify-between items-center mb-2">
+                    <!-- BUSCA AUTOMÁTICA POR CEP (API VIACEP - Responsivo) -->
+                    <div class="p-4 sm:p-5 bg-obsidian/70 border border-bronze/30 rounded-2xl">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-3">
                             <label class="text-xs uppercase tracking-wider text-bronze font-bold flex items-center space-x-1.5">
                                 <span>⚡</span><span>Localização Inteligente via CEP (API ViaCEP)</span>
                             </label>
-                            <span id="cep-status" class="text-[10px] text-white/50">Digite o CEP para preencher o endereço</span>
+                            <span id="cep-status" class="text-[10px] text-stone-300">Digite o CEP para preencher o endereço</span>
                         </div>
-                        <div class="flex gap-3">
-                            <input type="text" id="form-cep" maxlength="9" placeholder="44572-000" class="w-36 bg-obsidian border border-white/15 rounded-xl px-3 py-2 text-xs text-white font-mono focus:border-bronze">
-                            <button type="button" onclick="handleSearchCEP()" class="px-4 py-2 bg-bronze hover:bg-bronze-hover text-obsidian text-xs font-bold rounded-xl transition">
-                                Buscar CEP
-                            </button>
-                            <input type="text" id="form-address" placeholder="Endereço / Condomínio em SAJ" class="flex-grow bg-obsidian border border-white/15 rounded-xl px-3 py-2 text-xs text-white focus:border-bronze">
-                            <button type="button" onclick="handleGeocodeAddress()" class="px-4 py-2 bg-white/10 hover:bg-white/20 text-white text-xs font-semibold rounded-xl transition flex items-center space-x-1">
-                                <span>📍</span><span>Geocodificar</span>
-                            </button>
+                        <div class="grid grid-cols-1 sm:grid-cols-12 gap-2.5">
+                            <div class="sm:col-span-5 flex gap-2">
+                                <input type="text" id="form-cep" maxlength="9" placeholder="44572-000" class="w-full bg-obsidian border border-white/15 rounded-xl px-3 py-2.5 text-xs text-white font-mono focus:border-bronze outline-none">
+                                <button type="button" onclick="handleSearchCEP()" class="px-4 py-2.5 bg-bronze hover:bg-bronze-hover text-obsidian text-xs font-bold rounded-xl transition whitespace-nowrap shadow flex-shrink-0">
+                                    Buscar CEP
+                                </button>
+                            </div>
+                            <div class="sm:col-span-7 flex gap-2">
+                                <input type="text" id="form-address" placeholder="Endereço / Condomínio em SAJ" class="w-full bg-obsidian border border-white/15 rounded-xl px-3 py-2.5 text-xs text-white focus:border-bronze outline-none">
+                                <button type="button" onclick="handleGeocodeAddress()" class="px-3.5 py-2.5 bg-white/10 hover:bg-white/20 text-white text-xs font-semibold rounded-xl transition flex items-center space-x-1 whitespace-nowrap flex-shrink-0">
+                                    <span>📍</span><span class="hidden sm:inline">Geocodificar</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
 

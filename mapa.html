@@ -63,48 +63,48 @@
 <body class="bg-obsidian text-travertine font-sans antialiased h-screen flex flex-col overflow-hidden">
 
     <!-- HEADER -->
-    <header class="h-16 bg-obsidian border-b border-white/10 px-6 flex items-center justify-between flex-shrink-0 z-30">
-        <div class="flex items-center space-x-6">
+    <header class="h-16 bg-obsidian border-b border-white/10 px-4 sm:px-6 flex items-center justify-between flex-shrink-0 z-30">
+        <div class="flex items-center space-x-3 sm:space-x-6">
             <a href="index.html" class="flex flex-col">
-                <span class="font-serif text-xl tracking-[0.2em] font-bold text-white">RECÔNCAVO PRIME</span>
+                <span class="font-serif text-lg sm:text-xl tracking-[0.2em] font-bold text-white">RECÔNCAVO PRIME</span>
                 <span class="text-[8px] tracking-[0.3em] uppercase text-bronze font-sans -mt-1">Mapa Interativo • SAJ</span>
             </a>
             <span class="text-white/20 hidden sm:inline">|</span>
-            <span class="text-xs text-white/60 hidden sm:inline">Navegação estilo Airbnb em Santo Antônio de Jesus</span>
+            <span class="text-xs text-stone-300 hidden sm:inline">Navegação estilo Airbnb em Santo Antônio de Jesus</span>
         </div>
 
-        <div class="flex items-center space-x-4">
-            <a href="index.html" class="text-xs text-white/70 hover:text-white">← Voltar ao Início</a>
-            <a href="admin.html" class="text-xs bg-white/5 border border-white/15 px-3 py-1.5 rounded-full text-bronze hover:bg-bronze hover:text-obsidian transition">
+        <div class="flex items-center space-x-2 sm:space-x-4">
+            <a href="index.html" class="text-xs text-stone-300 hover:text-white px-2 py-1">← Início</a>
+            <a href="admin.html" class="text-xs bg-white/10 border border-white/15 px-3 py-1.5 rounded-full text-bronze hover:bg-bronze hover:text-obsidian font-semibold transition">
                 Área do Corretor
             </a>
         </div>
     </header>
 
-    <!-- BARRA DE FILTROS SUPERIOR -->
-    <div class="bg-card border-b border-white/10 px-6 py-3 flex flex-wrap gap-4 items-center justify-between flex-shrink-0 z-20">
-        <div class="flex flex-wrap items-center gap-3">
-            <button onclick="filterByBairro('todos')" id="btn-fil-todos" class="filter-pill px-4 py-1.5 rounded-full text-xs font-semibold bg-bronze text-obsidian transition">
-                Todos em SAJ (<span id="count-all">0</span>)
+    <!-- BARRA DE FILTROS SUPERIOR (Horizontal scroll compacto em mobile) -->
+    <div class="bg-card border-b border-white/10 px-4 sm:px-6 py-2.5 flex items-center justify-between gap-3 flex-shrink-0 z-20 overflow-x-auto scrollbar-none">
+        <div class="flex items-center gap-2 flex-nowrap">
+            <button onclick="filterByBairro('todos')" id="btn-fil-todos" class="filter-pill px-3.5 py-1.5 rounded-full text-xs font-semibold bg-bronze text-obsidian transition whitespace-nowrap">
+                Todos (<span id="count-all">0</span>)
             </button>
-            <button onclick="filterByBairro('busca-vida')" id="btn-fil-busca-vida" class="filter-pill px-4 py-1.5 rounded-full text-xs font-semibold bg-white/5 border border-white/10 text-white/80 hover:border-bronze transition">
-                Cond. Busca Vida
+            <button onclick="filterByBairro('busca-vida')" id="btn-fil-busca-vida" class="filter-pill px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white/5 border border-white/10 text-stone-200 hover:border-bronze transition whitespace-nowrap">
+                Busca Vida
             </button>
-            <button onclick="filterByBairro('jardins')" id="btn-fil-jardins" class="filter-pill px-4 py-1.5 rounded-full text-xs font-semibold bg-white/5 border border-white/10 text-white/80 hover:border-bronze transition">
-                Cond. Jardins
+            <button onclick="filterByBairro('jardins')" id="btn-fil-jardins" class="filter-pill px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white/5 border border-white/10 text-stone-200 hover:border-bronze transition whitespace-nowrap">
+                Jardins
             </button>
-            <button onclick="filterByBairro('centro')" id="btn-fil-centro" class="filter-pill px-4 py-1.5 rounded-full text-xs font-semibold bg-white/5 border border-white/10 text-white/80 hover:border-bronze transition">
+            <button onclick="filterByBairro('centro')" id="btn-fil-centro" class="filter-pill px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white/5 border border-white/10 text-stone-200 hover:border-bronze transition whitespace-nowrap">
                 Centro Nobre
             </button>
-            <button onclick="filterByBairro('maria-preta')" id="btn-fil-maria-preta" class="filter-pill px-4 py-1.5 rounded-full text-xs font-semibold bg-white/5 border border-white/10 text-white/80 hover:border-bronze transition">
+            <button onclick="filterByBairro('maria-preta')" id="btn-fil-maria-preta" class="filter-pill px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white/5 border border-white/10 text-stone-200 hover:border-bronze transition whitespace-nowrap">
                 Maria Preta
             </button>
         </div>
 
-        <div class="flex items-center space-x-3">
-            <label class="inline-flex items-center space-x-2 text-xs text-white/80 cursor-pointer">
+        <div class="flex items-center space-x-2 flex-shrink-0 pl-2 border-l border-white/10">
+            <label class="inline-flex items-center space-x-2 text-xs text-stone-200 cursor-pointer whitespace-nowrap">
                 <input type="checkbox" id="check-vr" onchange="applyFilters()" class="rounded bg-white/10 border-white/20 text-bronze focus:ring-bronze accent-bronze">
-                <span>Somente com Tour 360º WebXR 🥽</span>
+                <span class="font-medium">Apenas VR 🥽</span>
             </label>
         </div>
     </div>
@@ -113,7 +113,7 @@
     <main class="flex-grow flex flex-col md:flex-row overflow-hidden relative">
         
         <!-- LISTA LATERAL ESQUERDA -->
-        <div class="w-full md:w-[460px] lg:w-[500px] h-full overflow-y-auto p-4 space-y-4 bg-obsidian border-r border-white/10 flex-shrink-0" id="property-list">
+        <div class="w-full md:w-[460px] lg:w-[500px] h-full overflow-y-auto p-3 sm:p-4 space-y-3 sm:space-y-4 bg-obsidian border-r border-white/10 flex-shrink-0" id="property-list">
             <!-- Cards dos Imóveis injetados dinamicamente -->
         </div>
 
@@ -121,22 +121,22 @@
         <div class="hidden md:block w-full md:flex-grow h-full relative" id="map-container">
             <div id="map" class="w-full h-full"></div>
 
-            <!-- Card flutuante sobreposto com pré-visualização rápida -->
-            <div id="floating-preview" class="hidden absolute bottom-6 left-6 right-6 md:left-auto md:right-6 md:w-96 z-[600] bg-card/95 backdrop-blur-xl border border-bronze/40 p-4 rounded-3xl shadow-2xl transition-all duration-300">
-                <button onclick="closePreview()" aria-label="Fechar pré-visualização rápida" class="absolute top-3 right-3 text-white/40 hover:text-white text-xs">✕</button>
-                <div class="flex space-x-3">
-                    <img id="prev-img" src="" class="w-28 h-24 rounded-2xl object-cover">
+            <!-- Card flutuante sobreposto com pré-visualização rápida (Acima do botão mobile) -->
+            <div id="floating-preview" class="hidden absolute bottom-24 md:bottom-6 left-3 right-3 md:left-auto md:right-6 md:w-96 z-[600] bg-card/95 backdrop-blur-xl border border-bronze/50 p-4 rounded-3xl shadow-2xl transition-all duration-300">
+                <button onclick="closePreview()" aria-label="Fechar pré-visualização rápida" class="absolute top-3 right-3 w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white text-xs transition">✕</button>
+                <div class="flex space-x-3.5">
+                    <img id="prev-img" src="" class="w-24 sm:w-28 h-24 sm:h-28 rounded-2xl object-cover flex-shrink-0">
                     <div class="flex-grow flex flex-col justify-between">
                         <div>
-                            <span id="prev-bairro" class="text-[10px] text-bronze uppercase tracking-wider font-semibold block"></span>
-                            <h4 id="prev-title" class="font-serif text-lg text-white font-bold leading-snug"></h4>
-                            <span id="prev-price" class="text-sm font-extrabold text-white"></span>
+                            <span id="prev-bairro" class="text-[10px] text-bronze uppercase tracking-wider font-bold block"></span>
+                            <h4 id="prev-title" class="font-serif text-base sm:text-lg text-white font-bold leading-snug"></h4>
+                            <span id="prev-price" class="text-sm font-extrabold text-white block mt-0.5"></span>
                         </div>
-                        <div class="flex space-x-2 mt-2">
-                            <a id="prev-btn-dossier" href="#" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white rounded-xl text-xs font-semibold text-center flex-grow">
+                        <div class="flex space-x-2 mt-2 pt-2 border-t border-white/10">
+                            <a id="prev-btn-dossier" href="#" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white rounded-xl text-xs font-semibold text-center flex-grow transition">
                                 Ver Ficha
                             </a>
-                            <a id="prev-btn-vr" href="#" class="px-3 py-1.5 bg-bronze hover:bg-bronze-hover text-obsidian rounded-xl text-xs font-bold text-center flex-grow">
+                            <a id="prev-btn-vr" href="#" class="px-3 py-1.5 bg-bronze hover:bg-bronze-hover text-obsidian rounded-xl text-xs font-bold text-center flex-grow shadow transition">
                                 🥽 Tour 360º
                             </a>
                         </div>
@@ -146,7 +146,7 @@
         </div>
 
         <!-- BOTÃO FLUTUANTE TOGGLE MOBILE: MAPA / LISTA -->
-        <button id="mobile-toggle-btn" onclick="toggleMobileView()" aria-label="Alternar entre lista e mapa no celular" class="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-5 py-3 rounded-full bg-bronze text-obsidian font-bold text-xs shadow-2xl flex items-center space-x-2 border border-white/20 active:scale-95 transition">
+        <button id="mobile-toggle-btn" onclick="toggleMobileView()" aria-label="Alternar entre lista e mapa no celular" class="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-6 py-3 rounded-full bg-bronze hover:bg-bronze-hover text-obsidian font-bold text-xs shadow-2xl flex items-center space-x-2 border border-white/20 active:scale-95 transition">
             <span id="mobile-toggle-icon">🗺️</span>
             <span id="mobile-toggle-label">Ver Mapa</span>
         </button>
@@ -248,24 +248,26 @@
 
                 const card = document.createElement('div');
                 card.id = `card-${safeId}`;
-                card.className = 'p-4 rounded-3xl bg-card border border-white/10 hover:border-bronze transition cursor-pointer flex gap-4';
+                card.className = 'p-3.5 sm:p-4 rounded-3xl bg-card border border-white/10 hover:border-bronze transition cursor-pointer flex gap-3.5 items-center shadow-lg group';
                 card.onclick = () => focusProperty(p.id);
 
                 card.innerHTML = `
-                    <img src="${escapeHTML(p.image)}" alt="${safeTitle}" class="w-32 h-28 object-cover rounded-2xl flex-shrink-0">
-                    <div class="flex flex-col justify-between flex-grow">
+                    <img src="${escapeHTML(p.image)}" alt="${safeTitle}" class="w-24 sm:w-28 h-24 sm:h-28 object-cover rounded-2xl flex-shrink-0 group-hover:scale-105 transition duration-500">
+                    <div class="flex flex-col justify-between flex-grow min-w-0">
                         <div>
-                            <div class="flex justify-between items-start">
-                                <span class="text-[10px] text-bronze uppercase tracking-wider font-semibold">${safeBairro}</span>
-                                <span class="text-xs font-bold text-white">${safePrice}</span>
+                            <div class="flex justify-between items-start gap-1">
+                                <span class="text-[10px] text-bronze uppercase tracking-wider font-bold truncate">${safeBairro}</span>
+                                <span class="text-xs sm:text-sm font-extrabold text-white whitespace-nowrap">${safePrice}</span>
                             </div>
-                            <h4 class="font-serif text-base text-white font-bold leading-snug mt-1">${safeTitle}</h4>
-                            <p class="text-[11px] text-white/50 mt-1">${safeArea} • ${Number(p.suites) || 0} Suítes • ${Number(p.vagas) || 0} Vagas</p>
+                            <h4 class="font-serif text-base text-white font-bold leading-snug mt-0.5 truncate group-hover:text-bronze transition">${safeTitle}</h4>
+                            <p class="text-xs text-stone-300 mt-1">${safeArea} • ${Number(p.suites) || 0} Suítes • ${Number(p.vagas) || 0} Vagas</p>
                         </div>
-                        <div class="flex space-x-2 mt-2 pt-2 border-t border-white/5">
-                            <a href="detalhes.html?id=${safeId}" class="text-xs text-white/70 hover:text-white underline">Ficha Técnica</a>
+                        <div class="flex items-center space-x-3 mt-2 pt-2 border-t border-white/10 text-xs">
+                            <a href="detalhes.html?id=${safeId}" class="text-stone-300 hover:text-white font-medium underline">Ficha Técnica</a>
                             <span class="text-white/20">|</span>
-                            <a href="tour360.html?id=${safeId}" class="text-xs text-bronze font-semibold hover:underline">🥽 Tour 360º</a>
+                            <a href="tour360.html?id=${safeId}" class="text-bronze font-bold hover:underline flex items-center space-x-1">
+                                <span>🥽</span><span>Tour 360º</span>
+                            </a>
                         </div>
                     </div>
                 `;

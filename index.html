@@ -34,18 +34,21 @@
 <body class="bg-obsidian text-travertine font-sans antialiased selection:bg-bronze selection:text-obsidian flex flex-col min-h-screen">
 
     <!-- TOP BAR -->
-    <aside aria-label="Informações do portal" class="bg-card border-b border-white/5 py-2 px-4 sm:px-6 text-xs text-white/60 flex justify-between items-center">
+    <aside aria-label="Informações do portal" class="bg-card border-b border-white/10 py-2.5 px-4 sm:px-6 text-xs text-stone-300 flex justify-between items-center">
         <div class="flex items-center space-x-3">
-            <span class="flex items-center space-x-1.5">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="flex items-center space-x-1.5 font-medium">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                 <span class="hidden sm:inline">Plataforma Oficial</span><span>WebXR & Imersão 360º</span>
             </span>
             <span class="text-white/20">•</span>
-            <span class="text-white/70">Santo Antônio de Jesus - BA</span>
+            <span class="text-stone-300">Santo Antônio de Jesus - BA</span>
         </div>
         <div class="flex items-center space-x-4">
-            <span class="hidden sm:inline">Atendimento VIP: <strong class="text-white/80">(75) 99812-4500</strong></span>
-            <a href="login.html" class="text-bronze hover:underline font-semibold">Área do Corretor</a>
+            <span class="hidden sm:inline text-stone-300">Atendimento VIP: <strong class="text-white font-semibold">(75) 99812-4500</strong></span>
+            <a href="login.html" class="text-bronze hover:underline font-bold flex items-center space-x-1">
+                <span>Área do Corretor</span>
+                <span>→</span>
+            </a>
         </div>
     </aside>
 
@@ -58,10 +61,10 @@
             </a>
 
             <!-- Menu Desktop -->
-            <nav class="hidden md:flex items-center space-x-8 text-sm text-white/80 font-medium">
-                <a href="index.html" class="text-bronze font-semibold">Início</a>
+            <nav class="hidden md:flex items-center space-x-8 text-sm text-stone-200 font-medium">
+                <a href="index.html" class="text-bronze font-bold relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-bronze">Início</a>
                 <a href="mapa.html" class="hover:text-bronze transition">Explorar no Mapa</a>
-                <a href="tour360.html?id=villa-imperial" class="hover:text-bronze transition flex items-center space-x-1.5 text-white/90">
+                <a href="tour360.html?id=villa-imperial" class="hover:text-bronze transition flex items-center space-x-1.5 text-white/95">
                     <span>🥽</span><span>Tour 360º VR</span>
                 </a>
                 <a href="admin.html" class="hover:text-bronze transition">Painel Corretor</a>
@@ -75,47 +78,51 @@
                     <span>🥽</span><span>Tour 360º</span>
                 </a>
                 <!-- Botão Menu Mobile -->
-                <button id="btn-mobile-menu" onclick="toggleMobileMenu()" aria-label="Abrir menu de navegação" aria-expanded="false" class="md:hidden p-2 text-white/80 hover:text-white text-xl">
+                <button id="btn-mobile-menu" onclick="toggleMobileMenu()" aria-label="Abrir menu de navegação" aria-expanded="false" class="md:hidden p-2.5 rounded-xl bg-white/5 border border-white/10 text-white hover:text-bronze text-xl transition">
                     ☰
                 </button>
             </div>
         </div>
 
-        <!-- Gaveta Menu Mobile -->
-        <div id="mobile-menu" class="hidden md:hidden bg-card border-b border-white/10 px-6 py-4 space-y-3 text-sm">
-            <a href="index.html" class="block text-bronze font-bold">Início</a>
-            <a href="mapa.html" class="block text-white/80 hover:text-white">Explorar no Mapa (Airbnb Style)</a>
-            <a href="tour360.html?id=villa-imperial" class="block text-white/80 hover:text-white">🥽 Experiência 360º VR</a>
-            <a href="admin.html" class="block text-white/80 hover:text-white">Painel do Corretor (Broker Studio)</a>
-            <a href="login.html" class="block text-xs text-white/50 pt-2 border-t border-white/10">Fazer Login CRECI</a>
+        <!-- Gaveta Menu Mobile com Backdrop Overlay -->
+        <div id="mobile-menu-overlay" onclick="toggleMobileMenu()" class="hidden md:hidden fixed inset-0 z-40 bg-black/70 backdrop-blur-sm transition-opacity"></div>
+        <div id="mobile-menu" class="hidden md:hidden fixed top-20 left-0 right-0 z-50 bg-card/95 backdrop-blur-xl border-b border-bronze/30 px-6 py-6 space-y-4 shadow-2xl">
+            <a href="index.html" onclick="toggleMobileMenu()" class="block text-bronze font-bold text-base py-1">🏛️ Início</a>
+            <a href="mapa.html" onclick="toggleMobileMenu()" class="block text-white/90 hover:text-bronze font-medium text-base py-1">🗺️ Explorar no Mapa (Airbnb Style)</a>
+            <a href="tour360.html?id=villa-imperial" onclick="toggleMobileMenu()" class="block text-white/90 hover:text-bronze font-medium text-base py-1">🥽 Experiência 360º VR (WebXR)</a>
+            <a href="admin.html" onclick="toggleMobileMenu()" class="block text-white/90 hover:text-bronze font-medium text-base py-1">💼 Painel do Corretor (Broker Studio)</a>
+            <div class="pt-3 border-t border-white/10 flex items-center justify-between">
+                <a href="login.html" onclick="toggleMobileMenu()" class="text-xs text-stone-400 hover:text-white">Acessar Login CRECI</a>
+                <span class="text-[10px] text-bronze font-mono">SAJ • Bahia</span>
+            </div>
         </div>
     </header>
 
     <!-- HERO SECTION -->
     <section class="relative min-h-[80vh] sm:min-h-[85vh] flex items-center justify-center overflow-hidden">
         <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=2400&q=85" alt="Mansão de Alto Padrão" class="w-full h-full object-cover filter brightness-[0.40] scale-105 duration-1000">
-            <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/50 to-transparent"></div>
+            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=2400&q=85" alt="Mansão de Alto Padrão em Santo Antônio de Jesus" class="w-full h-full object-cover filter brightness-[0.38] scale-105 duration-1000">
+            <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/40 to-black/30"></div>
         </div>
 
         <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center pt-8 pb-16 sm:pb-20">
-            <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-6">
+            <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/15 backdrop-blur-md mb-6 shadow-lg">
                 <span class="w-2 h-2 rounded-full bg-bronze animate-ping"></span>
-                <span class="text-[11px] sm:text-xs tracking-widest uppercase text-white/80">Santo Antônio de Jesus • Bahia</span>
+                <span class="text-[11px] sm:text-xs tracking-widest uppercase text-stone-200 font-semibold">Santo Antônio de Jesus • Bahia</span>
             </div>
 
-            <h1 class="font-serif text-3xl sm:text-5xl md:text-7xl font-normal leading-tight text-white mb-6">
+            <h1 class="font-serif text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-normal leading-tight text-white mb-6">
                 A Nova Dimensão da Arquitetura Baiana.
             </h1>
-            <p class="text-base sm:text-lg md:text-xl text-white/70 max-w-2xl mx-auto font-light leading-relaxed mb-8 sm:mb-10">
-                Uma curadoria exclusiva de residências e condomínios fechados em SAJ com tecnologia <strong>WebXR 360º</strong>, giroscópio mobile e óculos VR.
+            <p class="text-sm sm:text-lg md:text-xl text-stone-200 max-w-2xl mx-auto font-light leading-relaxed mb-8 sm:mb-10">
+                Uma curadoria exclusiva de residências e condomínios fechados em SAJ com tecnologia <strong class="text-white font-semibold">WebXR 360º</strong>, giroscópio mobile e óculos VR.
             </p>
 
-            <!-- BARRA DE BUSCA RÁPIDA -->
-            <div class="bg-card/95 backdrop-blur-xl border border-white/15 rounded-3xl p-3 sm:p-4 max-w-4xl mx-auto shadow-2xl text-left">
-                <form action="mapa.html" method="GET" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 items-center">
-                    <div class="px-3 py-2 border-b sm:border-b-0 sm:border-r border-white/10">
-                        <label class="block text-[10px] uppercase tracking-wider text-bronze font-semibold">Localização em SAJ</label>
+            <!-- BARRA DE BUSCA RÁPIDA (Responsiva em todas as resoluções) -->
+            <div class="bg-card/95 backdrop-blur-xl border border-bronze/30 rounded-3xl p-3 sm:p-5 max-w-4xl mx-auto shadow-2xl text-left">
+                <form action="mapa.html" method="GET" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 items-center">
+                    <div class="bg-surface/80 border border-white/10 rounded-2xl p-3 hover:border-bronze/40 transition">
+                        <label class="block text-[10px] uppercase tracking-wider text-bronze font-bold">Localização em SAJ</label>
                         <select name="bairro" class="w-full bg-transparent text-xs sm:text-sm text-white focus:outline-none cursor-pointer mt-1 font-medium">
                             <option value="todos" class="bg-card">Todos os Bairros</option>
                             <option value="busca-vida" class="bg-card">Condomínio Busca Vida</option>
@@ -125,8 +132,8 @@
                         </select>
                     </div>
 
-                    <div class="px-3 py-2 border-b sm:border-b-0 sm:border-r border-white/10">
-                        <label class="block text-[10px] uppercase tracking-wider text-bronze font-semibold">Tipologia</label>
+                    <div class="bg-surface/80 border border-white/10 rounded-2xl p-3 hover:border-bronze/40 transition">
+                        <label class="block text-[10px] uppercase tracking-wider text-bronze font-bold">Tipologia</label>
                         <select name="tipo" class="w-full bg-transparent text-xs sm:text-sm text-white focus:outline-none cursor-pointer mt-1 font-medium">
                             <option value="todos" class="bg-card">Todas as Tipologias</option>
                             <option value="mansao" class="bg-card">Mansão em Condomínio</option>
@@ -135,16 +142,16 @@
                         </select>
                     </div>
 
-                    <div class="px-3 py-2 border-b sm:border-b-0 sm:border-r border-white/10 flex flex-col justify-center">
-                        <label class="block text-[10px] uppercase tracking-wider text-bronze font-semibold">Tecnologia</label>
+                    <div class="bg-surface/80 border border-white/10 rounded-2xl p-3 hover:border-bronze/40 transition flex flex-col justify-center">
+                        <label class="block text-[10px] uppercase tracking-wider text-bronze font-bold">Tecnologia</label>
                         <label class="inline-flex items-center space-x-2 mt-1 cursor-pointer">
                             <input type="checkbox" name="vr" value="1" checked class="rounded bg-white/10 border-white/20 text-bronze focus:ring-bronze accent-bronze">
-                            <span class="text-xs text-white/90">Apenas com Tour VR 🥽</span>
+                            <span class="text-xs text-stone-200 font-medium">Apenas com Tour VR 🥽</span>
                         </label>
                     </div>
 
                     <div>
-                        <button type="submit" class="w-full py-3.5 bg-bronze hover:bg-bronze-hover text-obsidian font-bold text-xs uppercase tracking-widest rounded-2xl flex items-center justify-center space-x-2 transition shadow-lg">
+                        <button type="submit" class="w-full py-4 bg-bronze hover:bg-bronze-hover text-obsidian font-bold text-xs uppercase tracking-widest rounded-2xl flex items-center justify-center space-x-2 transition shadow-xl hover:shadow-bronze/20 active:scale-[0.98]">
                             <span>Buscar no Mapa</span>
                             <span>→</span>
                         </button>
@@ -155,40 +162,40 @@
     </section>
 
     <!-- DIFERENCIAIS -->
-    <section class="py-12 sm:py-16 bg-surface/40 border-y border-white/10">
+    <section class="py-14 sm:py-20 bg-surface/50 border-y border-white/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-            <div class="p-6 rounded-2xl bg-card border border-white/5">
-                <span class="text-3xl block mb-3">🥽</span>
-                <h3 class="font-serif text-xl text-white mb-2">WebXR & Realidade Virtual</h3>
-                <p class="text-xs text-white/60 leading-relaxed">Imersão completa com visualizador panorâmico 360º compatível com óculos VR Box simples e headsets.</p>
+            <div class="p-6 sm:p-7 rounded-3xl bg-card border border-white/10 hover:border-bronze/40 transition shadow-xl group">
+                <span class="text-4xl block mb-4 group-hover:scale-110 transition duration-300">🥽</span>
+                <h3 class="font-serif text-2xl text-white mb-2">WebXR & Realidade Virtual</h3>
+                <p class="text-xs sm:text-sm text-stone-300 leading-relaxed">Imersão completa com visualizador panorâmico 360º compatível com óculos VR Box simples e headsets.</p>
             </div>
-            <div class="p-6 rounded-2xl bg-card border border-white/5">
-                <span class="text-3xl block mb-3">📱</span>
-                <h3 class="font-serif text-xl text-white mb-2">Sensor de Giroscópio</h3>
-                <p class="text-xs text-white/60 leading-relaxed">No celular, movimente fisicamente o aparelho para olhar por todo o ambiente sem tocar na tela.</p>
+            <div class="p-6 sm:p-7 rounded-3xl bg-card border border-white/10 hover:border-bronze/40 transition shadow-xl group">
+                <span class="text-4xl block mb-4 group-hover:scale-110 transition duration-300">📱</span>
+                <h3 class="font-serif text-2xl text-white mb-2">Sensor de Giroscópio</h3>
+                <p class="text-xs sm:text-sm text-stone-300 leading-relaxed">No celular, movimente fisicamente o aparelho para olhar por todo o ambiente sem tocar na tela.</p>
             </div>
-            <div class="p-6 rounded-2xl bg-card border border-white/5">
-                <span class="text-3xl block mb-3">🗺️</span>
-                <h3 class="font-serif text-xl text-white mb-2">Busca Georreferenciada</h3>
-                <p class="text-xs text-white/60 leading-relaxed">Navegação estilo Airbnb sobre mapa cartográfico de Santo Antônio de Jesus e seus condomínios.</p>
+            <div class="p-6 sm:p-7 rounded-3xl bg-card border border-white/10 hover:border-bronze/40 transition shadow-xl group">
+                <span class="text-4xl block mb-4 group-hover:scale-110 transition duration-300">🗺️</span>
+                <h3 class="font-serif text-2xl text-white mb-2">Busca Georreferenciada</h3>
+                <p class="text-xs sm:text-sm text-stone-300 leading-relaxed">Navegação estilo Airbnb sobre mapa cartográfico de Santo Antônio de Jesus e seus condomínios.</p>
             </div>
-            <div class="p-6 rounded-2xl bg-card border border-white/5">
-                <span class="text-3xl block mb-3">💬</span>
-                <h3 class="font-serif text-xl text-white mb-2">WhatsApp Dinâmico</h3>
-                <p class="text-xs text-white/60 leading-relaxed">Conexão direta com o corretor responsável pelo imóvel através de mensagem personalizada instantânea.</p>
+            <div class="p-6 sm:p-7 rounded-3xl bg-card border border-white/10 hover:border-bronze/40 transition shadow-xl group">
+                <span class="text-4xl block mb-4 group-hover:scale-110 transition duration-300">💬</span>
+                <h3 class="font-serif text-2xl text-white mb-2">WhatsApp Dinâmico</h3>
+                <p class="text-xs sm:text-sm text-stone-300 leading-relaxed">Conexão direta com o corretor responsável pelo imóvel através de mensagem personalizada instantânea.</p>
             </div>
         </div>
     </section>
 
     <!-- VITRINE DE IMÓVEIS (EDITORIAL GRID COM MAIS DETALHES) -->
-    <section class="py-16 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 flex-grow">
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-12">
+    <section class="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 flex-grow">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-14">
             <div>
-                <span class="text-bronze uppercase tracking-[0.2em] text-xs font-semibold">Residências em Destaque</span>
-                <h2 class="font-serif text-3xl sm:text-5xl text-white mt-2">Coleção Exclusiva SAJ</h2>
+                <span class="text-bronze uppercase tracking-[0.25em] text-xs font-bold block mb-1">Residências em Destaque</span>
+                <h2 class="font-serif text-3xl sm:text-5xl md:text-6xl text-white">Coleção Exclusiva SAJ</h2>
             </div>
-            <a href="mapa.html" class="mt-4 md:mt-0 text-xs sm:text-sm text-bronze hover:underline flex items-center space-x-1.5 font-medium">
-                <span>Ver todas as propriedades no mapa de SAJ</span><span>→</span>
+            <a href="mapa.html" class="mt-4 md:mt-0 text-xs sm:text-sm text-bronze hover:underline flex items-center space-x-1.5 font-bold group">
+                <span>Ver todas as propriedades no mapa de SAJ</span><span class="group-hover:translate-x-1 transition">→</span>
             </a>
         </div>
 
@@ -199,16 +206,16 @@
 
     <!-- FOOTER -->
     <footer class="bg-card border-t border-white/10 py-12 px-6 mt-auto">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-xs text-white/50 space-y-4 md:space-y-0">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-xs text-stone-400 space-y-4 md:space-y-0">
             <div>
-                <span class="font-serif text-lg font-bold text-white tracking-widest">RECÔNCAVO PRIME</span>
-                <p class="mt-1">Santo Antônio de Jesus - Bahia • CRECI-BA Jurídico J-2890</p>
+                <span class="font-serif text-xl font-bold text-white tracking-widest block">RECÔNCAVO PRIME</span>
+                <p class="mt-1 text-stone-400">Santo Antônio de Jesus - Bahia • CRECI-BA Jurídico J-2890</p>
             </div>
-            <div class="flex space-x-6">
-                <a href="index.html" class="hover:text-bronze">Início</a>
-                <a href="mapa.html" class="hover:text-bronze">Mapa Interativo</a>
-                <a href="tour360.html?id=villa-imperial" class="hover:text-bronze">Tour 360º VR</a>
-                <a href="admin.html" class="hover:text-bronze">Área do Corretor</a>
+            <div class="flex flex-wrap gap-6 items-center">
+                <a href="index.html" class="hover:text-bronze font-medium transition">Início</a>
+                <a href="mapa.html" class="hover:text-bronze font-medium transition">Mapa Interativo</a>
+                <a href="tour360.html?id=villa-imperial" class="hover:text-bronze font-medium transition">Tour 360º VR</a>
+                <a href="admin.html" class="hover:text-bronze font-medium transition">Área do Corretor</a>
             </div>
         </div>
     </footer>
@@ -218,8 +225,10 @@
     <script>
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
+            const overlay = document.getElementById('mobile-menu-overlay');
             const btn = document.getElementById('btn-mobile-menu');
             const isHidden = menu.classList.toggle('hidden');
+            if (overlay) overlay.classList.toggle('hidden');
             if (btn) btn.setAttribute('aria-expanded', !isHidden);
         }
 
@@ -237,49 +246,49 @@
                 const safeId = encodeURIComponent(p.id);
 
                 return `
-                <div class="bg-card rounded-3xl overflow-hidden border border-white/10 hover:border-bronze/60 transition group flex flex-col justify-between shadow-xl">
+                <div class="bg-card rounded-3xl overflow-hidden border border-white/10 hover:border-bronze/60 transition duration-300 group flex flex-col justify-between shadow-2xl hover:-translate-y-1">
                     <div class="relative h-64 sm:h-72 overflow-hidden">
                         <img src="${escapeHTML(p.image)}" alt="${safeTitle}" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
-                        <div class="absolute inset-0 bg-gradient-to-t from-obsidian/90 via-transparent to-black/20"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-obsidian/95 via-obsidian/40 to-black/20"></div>
                         
-                        <span class="absolute top-4 left-4 bg-obsidian/85 backdrop-blur-md text-white text-[10px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full border border-white/10">
+                        <span class="absolute top-4 left-4 bg-obsidian/90 backdrop-blur-md text-stone-200 text-[10px] font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full border border-white/15 shadow-md">
                             ${safeTipo}
                         </span>
 
                         ${p.hasVR ? `
-                            <a href="tour360.html?id=${safeId}" class="absolute top-4 right-4 bg-bronze text-obsidian text-[11px] font-bold px-3 py-1 rounded-full shadow-lg flex items-center space-x-1 hover:bg-white transition">
+                            <a href="tour360.html?id=${safeId}" aria-label="Abrir Tour 360 graus de ${safeTitle}" class="absolute top-4 right-4 bg-bronze hover:bg-bronze-hover text-obsidian text-[11px] font-bold px-3.5 py-1.5 rounded-full shadow-lg flex items-center space-x-1.5 transition active:scale-95">
                                 <span>🥽</span><span>Tour 360º</span>
                             </a>
                         ` : ''}
 
                         <div class="absolute bottom-4 left-4 right-4">
-                            <span class="text-[10px] text-bronze uppercase tracking-widest block font-bold">${safeBairro}</span>
-                            <h3 class="font-serif text-2xl text-white font-bold leading-tight">${safeTitle}</h3>
+                            <span class="text-[10px] text-bronze uppercase tracking-widest block font-bold mb-1">${safeBairro}</span>
+                            <h3 class="font-serif text-2xl text-white font-bold leading-tight group-hover:text-bronze transition duration-300">${safeTitle}</h3>
                         </div>
                     </div>
 
                     <div class="p-5 sm:p-6 flex-grow flex flex-col justify-between space-y-4">
-                        <p class="text-xs text-white/60 font-serif italic line-clamp-1">
+                        <p class="text-xs sm:text-sm text-stone-300 font-serif italic line-clamp-2">
                             "${safeDesc}"
                         </p>
 
                         <!-- Métricas Arquitetônicas -->
-                        <div class="grid grid-cols-3 gap-2 py-3 border-y border-white/5 text-center text-xs">
-                            <div><strong class="text-white block font-sans">${safeArea}</strong><span class="text-white/40 text-[10px]">Construída</span></div>
-                            <div><strong class="text-white block font-sans">${Number(p.suites) || 0} Suítes</strong><span class="text-white/40 text-[10px]">Dormitórios</span></div>
-                            <div><strong class="text-white block font-sans">${Number(p.vagas) || 0} Vagas</strong><span class="text-white/40 text-[10px]">Garagem</span></div>
+                        <div class="grid grid-cols-3 gap-2 py-3 border-y border-white/10 text-center text-xs">
+                            <div><strong class="text-white block font-sans text-sm">${safeArea}</strong><span class="text-stone-400 text-[10px] uppercase font-medium">Construída</span></div>
+                            <div><strong class="text-white block font-sans text-sm">${Number(p.suites) || 0} Suítes</strong><span class="text-stone-400 text-[10px] uppercase font-medium">Dormitórios</span></div>
+                            <div><strong class="text-white block font-sans text-sm">${Number(p.vagas) || 0} Vagas</strong><span class="text-stone-400 text-[10px] uppercase font-medium">Garagem</span></div>
                         </div>
 
-                        <div class="flex items-center justify-between pt-1">
+                        <div class="flex items-center justify-between pt-2">
                             <div>
-                                <span class="text-[10px] text-white/40 block uppercase">Investimento</span>
-                                <span class="text-xl font-bold text-white font-sans">${safePrice}</span>
+                                <span class="text-[10px] text-bronze uppercase tracking-wider block font-bold">Investimento</span>
+                                <span class="text-xl sm:text-2xl font-bold text-white font-sans">${safePrice}</span>
                             </div>
                             <div class="flex space-x-2">
-                                <a href="detalhes.html?id=${safeId}" class="px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/15 rounded-xl text-xs font-semibold text-white transition">
+                                <a href="detalhes.html?id=${safeId}" class="px-4 py-2.5 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl text-xs font-bold text-white transition text-center shadow">
                                     Dossier
                                 </a>
-                                <a href="tour360.html?id=${safeId}" class="px-4 py-2 bg-bronze hover:bg-bronze-hover text-obsidian rounded-xl text-xs font-bold transition flex items-center space-x-1 shadow-md">
+                                <a href="tour360.html?id=${safeId}" class="px-4 py-2.5 bg-bronze hover:bg-bronze-hover text-obsidian rounded-xl text-xs font-bold transition flex items-center space-x-1 shadow-lg active:scale-95 text-center">
                                     <span>🥽 360º</span>
                                 </a>
                             </div>

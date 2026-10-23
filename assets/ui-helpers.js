@@ -23,7 +23,7 @@ function showToast(message, type = 'success') {
     if (!container) {
         container = document.createElement('div');
         container.id = 'toast-container';
-        container.className = 'fixed bottom-6 right-6 z-[9999] flex flex-col space-y-3 pointer-events-none';
+        container.className = 'fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 z-[9999] flex flex-col space-y-2 pointer-events-none items-center sm:items-end';
         document.body.appendChild(container);
     }
 
@@ -31,13 +31,13 @@ function showToast(message, type = 'success') {
     const isSuccess = type === 'success';
     const isWarning = type === 'warning';
     
-    toast.className = `pointer-events-auto transform transition-all duration-300 translate-y-4 opacity-0 flex items-center space-x-3 px-5 py-3.5 rounded-2xl border shadow-2xl backdrop-blur-xl text-xs font-semibold max-w-sm ${
-        isSuccess ? 'bg-card/95 border-emerald-500/40 text-emerald-300' : 
-        (isWarning ? 'bg-card/95 border-amber-500/40 text-amber-300' : 'bg-card/95 border-bronze/40 text-white')
+    toast.className = `pointer-events-auto transform transition-all duration-300 translate-y-4 opacity-0 flex items-center space-x-3 px-5 py-3.5 rounded-2xl border shadow-2xl backdrop-blur-xl text-xs font-semibold w-full sm:w-auto sm:max-w-md ${
+        isSuccess ? 'bg-card/95 border-emerald-500/50 text-emerald-200' : 
+        (isWarning ? 'bg-card/95 border-amber-500/50 text-amber-200' : 'bg-card/95 border-bronze/50 text-stone-100')
     }`;
     
     const icon = isSuccess ? '✓' : (isWarning ? '⚠️' : 'ℹ️');
-    toast.innerHTML = `<span class="text-base">${icon}</span><span>${message}</span>`;
+    toast.innerHTML = `<span class="text-base flex-shrink-0">${icon}</span><span>${message}</span>`;
     
     container.appendChild(toast);
     
@@ -54,7 +54,7 @@ function showToast(message, type = 'success') {
     }, 3800);
 }
 
-// Modal Elegante Genérico
+// Modal Elegante Genérico com Backdrop Click e Scroll Mobile
 function showModal({ title, subtitle, contentHtml, onConfirm, confirmText = 'Confirmar' }) {
     let modalOverlay = document.getElementById('luxury-modal-overlay');
     if (modalOverlay) modalOverlay.remove();
@@ -64,21 +64,28 @@ function showModal({ title, subtitle, contentHtml, onConfirm, confirmText = 'Con
     modalOverlay.setAttribute('role', 'dialog');
     modalOverlay.setAttribute('aria-modal', 'true');
     modalOverlay.setAttribute('aria-label', title || 'Janela de Diálogo');
-    modalOverlay.className = 'fixed inset-0 z-[9999] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 opacity-0 transition-opacity duration-300';
+    modalOverlay.className = 'fixed inset-0 z-[9999] bg-black/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 opacity-0 transition-opacity duration-300 overflow-y-auto';
 
     modalOverlay.innerHTML = `
-        <div class="bg-card border border-bronze/40 rounded-3xl p-6 sm:p-8 max-w-lg w-full shadow-2xl transform scale-95 transition-transform duration-300 relative text-left">
-            <button onclick="closeLuxuryModal()" aria-label="Fechar janela" class="absolute top-5 right-5 text-white/40 hover:text-white text-lg">✕</button>
+        <div class="bg-card border border-bronze/40 rounded-3xl p-5 sm:p-8 max-w-lg w-full max-h-[92vh] overflow-y-auto shadow-2xl transform scale-95 transition-transform duration-300 relative text-left my-auto">
+            <button onclick="closeLuxuryModal()" aria-label="Fechar janela" class="absolute top-4 right-4 sm:top-5 sm:right-5 w-8 h-8 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 flex items-center justify-center text-white/70 hover:text-white text-sm transition">✕</button>
             <span class="text-[10px] uppercase tracking-widest text-bronze font-bold block mb-1">Recôncavo Prime Exclusive</span>
-            <h3 class="font-serif text-2xl sm:text-3xl font-bold text-white mb-1">${title}</h3>
-            ${subtitle ? `<p class="text-xs text-white/60 mb-6">${subtitle}</p>` : ''}
-            <div class="text-xs text-white/80 leading-relaxed mb-6 space-y-3">${contentHtml}</div>
-            <div class="flex justify-end space-x-3 pt-4 border-t border-white/10">
-                <button onclick="closeLuxuryModal()" class="px-5 py-2.5 rounded-full border border-white/15 text-white/70 hover:text-white text-xs font-semibold">Fechar</button>
-                ${onConfirm ? `<button id="modal-confirm-btn" class="px-6 py-2.5 bg-bronze hover:bg-bronze-hover text-obsidian rounded-full text-xs font-bold uppercase tracking-wider transition">${confirmText}</button>` : ''}
+            <h3 class="font-serif text-2xl sm:text-3xl font-bold text-white mb-1 pr-8">${title}</h3>
+            ${subtitle ? `<p class="text-xs text-stone-300 mb-5">${subtitle}</p>` : ''}
+            <div class="text-xs sm:text-sm text-stone-200 leading-relaxed mb-6 space-y-3">${contentHtml}</div>
+            <div class="flex flex-col-reverse sm:flex-row justify-end gap-2 sm:space-x-3 pt-4 border-t border-white/10">
+                <button onclick="closeLuxuryModal()" class="w-full sm:w-auto px-5 py-2.5 rounded-full border border-white/15 text-white/80 hover:text-white text-xs font-semibold text-center transition">Fechar</button>
+                ${onConfirm ? `<button id="modal-confirm-btn" class="w-full sm:w-auto px-6 py-2.5 bg-bronze hover:bg-bronze-hover text-obsidian rounded-full text-xs font-bold uppercase tracking-wider transition text-center shadow-lg">${confirmText}</button>` : ''}
             </div>
         </div>
     `;
+
+    // Fecha ao clicar fora do container do modal (backdrop click)
+    modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) {
+            closeLuxuryModal();
+        }
+    });
 
     document.body.appendChild(modalOverlay);
 
@@ -91,8 +98,11 @@ function showModal({ title, subtitle, contentHtml, onConfirm, confirmText = 'Con
 
     setTimeout(() => {
         modalOverlay.classList.remove('opacity-0');
-        modalOverlay.querySelector('div').classList.remove('scale-95');
-        modalOverlay.querySelector('div').classList.add('scale-100');
+        const cardEl = modalOverlay.querySelector('div');
+        if (cardEl) {
+            cardEl.classList.remove('scale-95');
+            cardEl.classList.add('scale-100');
+        }
     }, 10);
 }
 

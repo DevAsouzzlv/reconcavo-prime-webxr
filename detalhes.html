@@ -110,20 +110,20 @@
                 </div>
             </div>
 
-            <!-- Miniaturas Secundárias -->
-            <div class="md:col-span-4 grid grid-cols-2 md:grid-cols-1 gap-4 sm:gap-6">
-                <div class="relative h-44 sm:h-56 rounded-3xl overflow-hidden border border-white/10 cursor-pointer group" onclick="openPhotoModal(1)">
+            <!-- Miniaturas Secundárias (Responsivas: empilham em telas menores) -->
+            <div class="md:col-span-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-4 sm:gap-6">
+                <div class="relative h-44 sm:h-56 rounded-3xl overflow-hidden border border-white/10 cursor-pointer group shadow-lg" onclick="openPhotoModal(1)">
                     <img id="thumb-1" src="" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    <span class="absolute bottom-3 left-3 bg-black/70 px-2.5 py-1 rounded-xl text-[10px] text-white">Espaço Gourmet</span>
+                    <span class="absolute bottom-3 left-3 bg-black/80 backdrop-blur-md px-3 py-1 rounded-xl text-[11px] text-white font-medium border border-white/10">Espaço Gourmet</span>
                 </div>
-                <div class="relative h-44 sm:h-56 rounded-3xl overflow-hidden border border-white/10 bg-card p-5 sm:p-6 flex flex-col justify-between">
+                <div class="relative h-44 sm:h-56 rounded-3xl overflow-hidden border border-bronze/30 bg-card p-5 sm:p-6 flex flex-col justify-between shadow-xl">
                     <div>
-                        <span class="text-2xl block mb-2">📱</span>
+                        <span class="text-3xl block mb-2">📱</span>
                         <h4 class="text-sm font-bold text-white mb-1">Giroscópio & VR Box</h4>
-                        <p class="text-xs text-white/60 leading-relaxed">Gire o celular ou encaixe no seu óculos VR Box simples para caminhar pelos cômodos.</p>
+                        <p class="text-xs text-stone-300 leading-relaxed">Gire o celular ou encaixe no seu óculos VR Box simples para caminhar pelos cômodos.</p>
                     </div>
-                    <button onclick="openShareModal()" class="text-xs text-bronze font-bold hover:underline flex items-center space-x-1">
-                        <span>Enviar link para smartphone</span><span>→</span>
+                    <button onclick="openShareModal()" class="text-xs text-bronze font-bold hover:underline flex items-center space-x-1 group">
+                        <span>Enviar link para smartphone</span><span class="group-hover:translate-x-1 transition">→</span>
                     </button>
                 </div>
             </div>
@@ -136,22 +136,22 @@
             <div class="lg:col-span-8 space-y-8">
                 
                 <!-- Barra de Métricas -->
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 p-5 sm:p-6 bg-card rounded-3xl border border-white/10 text-center">
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 p-5 sm:p-6 bg-card rounded-3xl border border-white/10 text-center shadow-xl">
                     <div class="p-2">
                         <span class="block text-2xl sm:text-3xl font-serif text-white font-bold" id="spec-area"></span>
-                        <span class="text-[10px] uppercase tracking-wider text-white/50">Área Construída</span>
+                        <span class="text-[10px] uppercase tracking-wider text-stone-400 font-medium">Área Construída</span>
                     </div>
                     <div class="p-2">
                         <span class="block text-2xl sm:text-3xl font-serif text-white font-bold" id="spec-terreno"></span>
-                        <span class="text-[10px] uppercase tracking-wider text-white/50">Área do Lote</span>
+                        <span class="text-[10px] uppercase tracking-wider text-stone-400 font-medium">Área do Lote</span>
                     </div>
                     <div class="p-2">
                         <span class="block text-2xl sm:text-3xl font-serif text-white font-bold" id="spec-suites"></span>
-                        <span class="text-[10px] uppercase tracking-wider text-white/50">Suítes com Closet</span>
+                        <span class="text-[10px] uppercase tracking-wider text-stone-400 font-medium">Suítes com Closet</span>
                     </div>
                     <div class="p-2">
                         <span class="block text-2xl sm:text-3xl font-serif text-white font-bold" id="spec-vagas"></span>
-                        <span class="text-[10px] uppercase tracking-wider text-white/50">Garagem Coberta</span>
+                        <span class="text-[10px] uppercase tracking-wider text-stone-400 font-medium">Garagem Coberta</span>
                     </div>
                 </div>
 
@@ -302,7 +302,7 @@
             });
         }
 
-        // MODAL DE SOLICITAÇÃO DE DOSSIER (Sem prompt)
+        // MODAL DE SOLICITAÇÃO DE DOSSIER (Sem prompt e com validação)
         function openScheduleModal() {
             showModal({
                 title: 'Solicitar Dossier Confidencial',
@@ -321,39 +321,55 @@
                 `,
                 confirmText: 'Enviar Solicitação',
                 onConfirm: () => {
-                    const name = document.getElementById('lead-name')?.value || 'Cliente';
-                    showToast(`Obrigado, ${name}! O dossier foi solicitado e o consultor Carlos Mendes entrará em contato em instantes.`);
+                    const name = document.getElementById('lead-name')?.value?.trim();
+                    const phone = document.getElementById('lead-phone')?.value?.trim();
+                    if (!name || !phone) {
+                        showToast('Por favor, informe seu nome e WhatsApp para contato.', 'warning');
+                        return;
+                    }
+                    showToast(`Obrigado, ${name}! O dossier foi solicitado e o consultor entrará em contato em instantes.`);
                 }
             });
         }
 
-        // MODAL DE GALERIA AMPLIADA
+        // MODAL DE GALERIA AMPLIADA (Com suporte a setas do teclado e responsividade)
         function openPhotoModal(startIndex = 0) {
             const gallery = currentProp.gallery || [currentProp.image];
             let currentIdx = startIndex;
 
             const modalHtml = `
-                <div class="relative flex flex-col items-center">
-                    <img id="modal-active-img" src="${gallery[currentIdx]}" class="max-h-[70vh] w-auto rounded-2xl object-contain shadow-2xl">
-                    <div class="flex items-center justify-between w-full mt-4 px-2">
-                        <button onclick="prevPhoto()" class="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-full text-xs font-bold text-white">← Anterior</button>
-                        <span id="modal-photo-counter" class="text-xs text-bronze font-semibold">${currentIdx + 1} de ${gallery.length}</span>
-                        <button onclick="nextPhoto()" class="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-full text-xs font-bold text-white">Próxima →</button>
+                <div class="relative flex flex-col items-center select-none">
+                    <img id="modal-active-img" src="${gallery[currentIdx]}" class="max-h-[60vh] sm:max-h-[70vh] w-auto max-w-full rounded-2xl object-contain shadow-2xl transition-all duration-300">
+                    <div class="flex items-center justify-between w-full mt-4 px-1 gap-2">
+                        <button onclick="prevPhoto()" class="px-3.5 sm:px-4 py-2 bg-white/10 hover:bg-white/20 rounded-full text-xs font-bold text-white transition active:scale-95">← Anterior</button>
+                        <span id="modal-photo-counter" class="text-xs text-bronze font-bold">${currentIdx + 1} de ${gallery.length}</span>
+                        <button onclick="nextPhoto()" class="px-3.5 sm:px-4 py-2 bg-white/10 hover:bg-white/20 rounded-full text-xs font-bold text-white transition active:scale-95">Próxima →</button>
                     </div>
                 </div>
             `;
 
             window.prevPhoto = () => {
                 currentIdx = (currentIdx - 1 + gallery.length) % gallery.length;
-                document.getElementById('modal-active-img').src = gallery[currentIdx];
-                document.getElementById('modal-photo-counter').innerText = `${currentIdx + 1} de ${gallery.length}`;
+                const img = document.getElementById('modal-active-img');
+                const counter = document.getElementById('modal-photo-counter');
+                if (img) img.src = gallery[currentIdx];
+                if (counter) counter.innerText = `${currentIdx + 1} de ${gallery.length}`;
             };
 
             window.nextPhoto = () => {
                 currentIdx = (currentIdx + 1) % gallery.length;
-                document.getElementById('modal-active-img').src = gallery[currentIdx];
-                document.getElementById('modal-photo-counter').innerText = `${currentIdx + 1} de ${gallery.length}`;
+                const img = document.getElementById('modal-active-img');
+                const counter = document.getElementById('modal-photo-counter');
+                if (img) img.src = gallery[currentIdx];
+                if (counter) counter.innerText = `${currentIdx + 1} de ${gallery.length}`;
             };
+
+            // Suporte a setas esquerda e direita do teclado
+            const handleKeyNav = (e) => {
+                if (e.key === 'ArrowLeft') window.prevPhoto();
+                if (e.key === 'ArrowRight') window.nextPhoto();
+            };
+            window.addEventListener('keydown', handleKeyNav);
 
             showModal({
                 title: `${currentProp.title}`,

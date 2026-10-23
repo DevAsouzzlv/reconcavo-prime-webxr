@@ -30,12 +30,12 @@
         }
     </script>
 </head>
-<body class="bg-obsidian text-travertine font-sans antialiased min-h-screen flex items-center justify-center p-6 selection:bg-bronze selection:text-obsidian">
+<body class="bg-obsidian text-travertine font-sans antialiased min-h-screen flex items-center justify-center p-3 sm:p-6 selection:bg-bronze selection:text-obsidian">
 
-    <div class="max-w-4xl w-full bg-card rounded-3xl border border-white/10 shadow-2xl overflow-hidden grid grid-cols-1 md:grid-cols-2">
-        <!-- Lado Esquerdo Visual & Institucional -->
-        <div class="relative p-8 md:p-12 flex flex-col justify-between overflow-hidden bg-surface">
-            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1000&q=80" class="absolute inset-0 w-full h-full object-cover filter brightness-[0.25]">
+    <div class="max-w-4xl w-full bg-card rounded-3xl border border-white/10 shadow-2xl overflow-hidden grid grid-cols-1 md:grid-cols-2 my-auto">
+        <!-- Lado Esquerdo Visual & Institucional (Desktop) -->
+        <div class="hidden md:flex relative p-8 md:p-12 flex-col justify-between overflow-hidden bg-surface">
+            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1000&q=80" alt="Mansão Arquitetônica" class="absolute inset-0 w-full h-full object-cover filter brightness-[0.25]">
             
             <div class="relative z-10">
                 <a href="index.html" class="flex flex-col">
@@ -50,7 +50,7 @@
                     "Publique tours virtuais 360º e gerencie clientes de alto padrão com tecnologia WebXR."
                 </p>
                 <div class="mt-4 flex items-center space-x-3">
-                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=120&q=80" class="w-10 h-10 rounded-full object-cover border border-bronze">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=120&q=80" alt="Corretor Carlos Eduardo Mendes" class="w-10 h-10 rounded-full object-cover border border-bronze">
                     <div>
                         <strong class="text-xs text-white block">Carlos Eduardo Mendes</strong>
                         <span class="text-[10px] text-bronze">CRECI-BA 24.890</span>
@@ -58,45 +58,54 @@
                 </div>
             </div>
 
-            <div class="relative z-10 text-[10px] text-white/40">
+            <div class="relative z-10 text-[10px] text-stone-400">
                 🔒 Ambiente restrito e auditado • Criptografia de ponta a ponta
             </div>
         </div>
 
         <!-- Lado Direito: Formulário de Autenticação -->
-        <div class="p-8 md:p-12 flex flex-col justify-between">
+        <div class="p-6 sm:p-8 md:p-12 flex flex-col justify-between">
             <div>
+                <!-- Top Brand Mobile -->
+                <div class="md:hidden mb-6 pb-4 border-b border-white/10 flex items-center justify-between">
+                    <div>
+                        <a href="index.html" class="font-serif text-xl tracking-[0.15em] font-bold text-white block">RECÔNCAVO PRIME</a>
+                        <span class="text-[8px] uppercase tracking-widest text-bronze block">Broker Studio • SAJ</span>
+                    </div>
+                    <a href="index.html" class="text-xs text-stone-400 hover:text-white">← Início</a>
+                </div>
+
                 <span class="text-[10px] uppercase tracking-widest text-bronze font-bold block">Autenticação Segura</span>
-                <h2 class="font-serif text-3xl text-white font-bold mt-1 mb-2">Entrar no Studio</h2>
-                <p class="text-xs text-white/50 mb-8">Digite suas credenciais credenciadas no CRECI-BA.</p>
+                <h2 class="font-serif text-2xl sm:text-3xl text-white font-bold mt-1 mb-2">Entrar no Studio</h2>
+                <p class="text-xs sm:text-sm text-stone-300 mb-6 sm:mb-8">Digite suas credenciais credenciadas no CRECI-BA.</p>
 
                 <form onsubmit="handleLogin(event)" class="space-y-4">
                     <div>
-                        <label class="block text-xs uppercase tracking-wider text-white/70 mb-2 font-semibold">Registro CRECI ou E-mail</label>
+                        <label class="block text-xs uppercase tracking-wider text-stone-300 mb-2 font-semibold">Registro CRECI ou E-mail</label>
                         <input type="text" id="login-creci" value="CRECI-BA 24.890" required class="w-full bg-obsidian border border-white/15 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-bronze">
                     </div>
                     <div>
-                        <label class="block text-xs uppercase tracking-wider text-white/70 mb-2 font-semibold">Senha de Acesso</label>
+                        <label class="block text-xs uppercase tracking-wider text-stone-300 mb-2 font-semibold">Senha de Acesso</label>
                         <input type="password" id="login-pass" value="••••••••" required class="w-full bg-obsidian border border-white/15 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-bronze">
                     </div>
 
                     <div class="flex items-center justify-between text-xs pt-1">
-                        <label class="inline-flex items-center space-x-2 text-white/70 cursor-pointer">
+                        <label class="inline-flex items-center space-x-2 text-stone-300 cursor-pointer">
                             <input type="checkbox" checked class="rounded bg-white/10 border-white/20 text-bronze accent-bronze">
                             <span>Manter conectado</span>
                         </label>
-                        <button type="button" onclick="handleForgotPass()" class="text-bronze hover:underline">Esqueceu a senha?</button>
+                        <button type="button" onclick="handleForgotPass()" class="text-bronze hover:underline font-medium">Esqueceu a senha?</button>
                     </div>
 
-                    <button type="submit" class="w-full mt-4 py-4 bg-bronze hover:bg-bronze-hover text-obsidian font-bold text-xs uppercase tracking-widest rounded-2xl shadow-xl transition flex items-center justify-center space-x-2">
+                    <button type="submit" class="w-full mt-4 py-4 bg-bronze hover:bg-bronze-hover text-obsidian font-bold text-xs uppercase tracking-widest rounded-2xl shadow-xl transition flex items-center justify-center space-x-2 active:scale-[0.98]">
                         <span>Acessar Painel do Corretor</span>
                         <span>→</span>
                     </button>
                 </form>
             </div>
 
-            <div class="pt-6 border-t border-white/10 mt-6 text-center">
-                <a href="index.html" class="text-xs text-white/50 hover:text-white">← Voltar ao portal público</a>
+            <div class="pt-6 border-t border-white/10 mt-6 text-center hidden md:block">
+                <a href="index.html" class="text-xs text-stone-400 hover:text-white">← Voltar ao portal público</a>
             </div>
         </div>
     </div>

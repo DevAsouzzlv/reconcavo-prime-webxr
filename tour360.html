@@ -65,34 +65,34 @@
 </head>
 <body class="bg-obsidian text-travertine font-sans antialiased h-screen flex flex-col overflow-hidden">
 
-    <!-- HEADER DO TOUR VR -->
-    <header class="h-16 bg-obsidian/95 border-b border-white/10 px-6 flex items-center justify-between flex-shrink-0 z-30">
-        <div class="flex items-center space-x-4">
-            <a id="btn-back-dossier" href="mapa.html" class="text-xs text-white/60 hover:text-white flex items-center space-x-1">
-                <span>←</span><span>Voltar à Ficha</span>
+    <!-- HEADER DO TOUR VR (Responsivo para telas pequenas) -->
+    <header class="min-h-16 py-2 bg-obsidian/95 border-b border-white/10 px-3 sm:px-6 flex items-center justify-between gap-2 flex-shrink-0 z-30">
+        <div class="flex items-center space-x-2 sm:space-x-4 min-w-0">
+            <a id="btn-back-dossier" href="mapa.html" class="text-xs text-stone-300 hover:text-white flex items-center space-x-1 flex-shrink-0">
+                <span>←</span><span class="hidden xs:inline">Ficha</span>
             </a>
             <span class="text-white/20">|</span>
-            <div>
-                <h1 class="font-serif text-lg text-white font-bold leading-tight" id="header-prop-title">Mansão Villa Imperial</h1>
-                <span class="text-[10px] text-bronze uppercase tracking-widest block font-medium" id="header-room-title">Living Principal</span>
+            <div class="min-w-0">
+                <h1 class="font-serif text-sm sm:text-lg text-white font-bold leading-tight truncate max-w-[120px] sm:max-w-xs md:max-w-md" id="header-prop-title">Mansão Villa Imperial</h1>
+                <span class="text-[9px] sm:text-[10px] text-bronze uppercase tracking-widest block font-medium truncate" id="header-room-title">Living Principal</span>
             </div>
         </div>
 
         <!-- CONTROLES IMERSIVOS DE TOPO -->
-        <div class="flex items-center space-x-3">
+        <div class="flex items-center space-x-1.5 sm:space-x-3 flex-shrink-0">
             <!-- Botão Giroscópio (Mobile) -->
-            <button id="btn-gyro" onclick="toggleGyroscope()" aria-label="Ativar controle de orientação por giroscópio no celular" class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-bronze hover:text-obsidian text-white text-xs font-semibold flex items-center space-x-1.5 transition">
-                <span>🧭</span><span class="hidden sm:inline">Giroscópio Mobile</span>
+            <button id="btn-gyro" onclick="toggleGyroscope()" aria-label="Ativar controle de orientação por giroscópio no celular" class="px-2.5 sm:px-3 py-1.5 rounded-full bg-white/10 hover:bg-bronze hover:text-obsidian text-white text-xs font-semibold flex items-center space-x-1 transition active:scale-95">
+                <span>🧭</span><span class="hidden sm:inline">Giroscópio</span>
             </button>
 
             <!-- Botão VR Box (Lente Dupla Estereoscópica) -->
-            <button id="btn-vr-toggle" onclick="toggleVREyeMode()" aria-label="Alternar modo de lente dupla estereoscópica para óculos VR Box" class="px-4 py-1.5 rounded-full bg-bronze hover:bg-bronze-hover text-obsidian text-xs font-bold flex items-center space-x-1.5 shadow-lg transition">
-                <span>🥽</span><span>Modo VR Box (Estéreo)</span>
+            <button id="btn-vr-toggle" onclick="toggleVREyeMode()" aria-label="Alternar modo de lente dupla estereoscópica para óculos VR Box" class="px-3 sm:px-4 py-1.5 rounded-full bg-bronze hover:bg-bronze-hover text-obsidian text-xs font-bold flex items-center space-x-1 shadow-lg transition active:scale-95">
+                <span>🥽</span><span class="hidden xs:inline">VR Box</span><span class="xs:hidden">VR</span>
             </button>
 
             <!-- Contato Rápido WhatsApp -->
-            <a id="btn-header-wa" href="#" target="_blank" aria-label="Iniciar conversa com corretor responsável via WhatsApp" class="px-3 py-1.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold flex items-center space-x-1.5 transition">
-                <span>💬</span><span class="hidden sm:inline">WhatsApp</span>
+            <a id="btn-header-wa" href="#" target="_blank" aria-label="Iniciar conversa com corretor responsável via WhatsApp" class="px-2.5 sm:px-3 py-1.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold flex items-center space-x-1 transition shadow active:scale-95">
+                <span>💬</span><span class="hidden md:inline">WhatsApp</span>
             </a>
         </div>
     </header>
@@ -100,6 +100,11 @@
     <!-- ÁREA DO VISUALIZADOR 360 -->
     <main class="flex-grow relative bg-black">
         
+        <!-- Dica Flutuante de Onboarding UI/UX -->
+        <div id="vr-hint-badge" class="absolute top-4 left-1/2 -translate-x-1/2 bg-card/90 backdrop-blur-md border border-bronze/40 px-4 py-2 rounded-full text-xs text-white shadow-2xl z-20 pointer-events-none transition-opacity duration-1000 flex items-center space-x-2">
+            <span>🖐️</span><span>Arraste com o dedo ou mouse para olhar em 360º</span>
+        </div>
+
         <!-- MODO PADRÃO (PANNELLUM MONOCULAR) -->
         <div id="main-pano-viewer" class="w-full h-full"></div>
 
@@ -120,14 +125,14 @@
                 </div>
             </div>
             <!-- Dica para encaixe no óculos -->
-            <div class="absolute top-4 left-1/2 -translate-x-1/2 bg-black/80 border border-bronze/40 px-4 py-1.5 rounded-full text-xs text-white/90 z-50 text-center">
-                🎯 Encaixe o celular no seu óculos VR Box ou Google Cardboard
+            <div class="absolute top-4 left-1/2 -translate-x-1/2 bg-black/85 border border-bronze/50 px-4 py-2 rounded-full text-xs text-stone-100 z-50 text-center shadow-2xl">
+                🎯 Encaixe o celular no seu óculos VR Box na horizontal
             </div>
         </div>
 
-        <!-- DOCK INFERIOR FLUTUANTE DE TROCA DE CÔMODOS -->
-        <div class="absolute bottom-6 left-6 right-6 z-20 flex justify-center pointer-events-none">
-            <div class="pointer-events-auto bg-obsidian/90 backdrop-blur-xl border border-white/15 p-2 rounded-2xl flex items-center space-x-2 overflow-x-auto max-w-full shadow-2xl" id="room-buttons-container">
+        <!-- DOCK INFERIOR FLUTUANTE DE TROCA DE CÔMODOS (Scroll suave horizontal) -->
+        <div class="absolute bottom-4 sm:bottom-6 left-3 right-3 sm:left-6 sm:right-6 z-20 flex justify-center pointer-events-none">
+            <div class="pointer-events-auto bg-obsidian/95 backdrop-blur-xl border border-bronze/30 p-1.5 sm:p-2 rounded-2xl flex items-center space-x-1.5 sm:space-x-2 overflow-x-auto max-w-full shadow-2xl scrollbar-none" id="room-buttons-container">
                 <!-- Botões de cômodos injetados dinamicamente -->
             </div>
         </div>
@@ -155,6 +160,15 @@
 
             buildRoomDock();
             loadRoom(currentRoomKey);
+
+            // Desaparece com a dica de onboarding suavemente após 3.5s
+            setTimeout(() => {
+                const hint = document.getElementById('vr-hint-badge');
+                if (hint) {
+                    hint.style.opacity = '0';
+                    setTimeout(() => hint.remove(), 1000);
+                }
+            }, 3500);
         });
 
         function buildRoomDock() {
